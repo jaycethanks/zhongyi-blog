@@ -51,9 +51,10 @@ const NavBar = () => {
     h-12
     w-full
     justify-between
-    border-b px-2 text-sm font-medium
-    shadow-sm backdrop-blur-[20px]
-    backdrop-saturate-150
+    border-b
+    px-2 text-sm font-medium shadow-sm
+    backdrop-blur-[20px] backdrop-saturate-150
+    dark:border-gray-700
     "
       >
         <nav className="hidden sm:block">
@@ -74,7 +75,7 @@ const NavBar = () => {
 
       {/* mobile */}
 
-      <div className="fixed top-12 left-0 right-0 bottom-0">
+      <div className="fixed top-12 left-0 right-0 bottom-0 sm:hidden">
         <nav
           className={
             "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20 -translate-y-full bg-white pb-4 shadow-sm  transition-transform duration-300 dark:bg-gray-900 sm:hidden" +
