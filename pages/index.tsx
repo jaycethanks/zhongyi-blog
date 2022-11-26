@@ -6,13 +6,16 @@ import Banner from "@/components/Banner";
 import SpacerBar from "@/components/common/SpacerBar";
 export default function Home() {
   return (
-    <Layout>
-      <Container>
-        <Banner />
-        <SpacerBar gap={8} />
-        <Heading level={1}>最新发布文章</Heading>
-        <RecentPosts />
-      </Container>
-    </Layout>
+    // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
+    <div className="dark">
+      <Layout>
+        <Container>
+          <Banner />
+          <SpacerBar gap={8} />
+          <Heading level={1}>最新发布文章</Heading>
+          <RecentPosts />
+        </Container>
+      </Layout>
+    </div>
   );
 }
