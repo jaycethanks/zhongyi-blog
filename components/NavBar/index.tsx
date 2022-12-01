@@ -31,7 +31,7 @@ const NavItem = ({
   href,
   name,
 }: PropsWithChildren<{ href: string; name: string }>) => (
-  <li className="flex w-full items-center border-b sm:h-auto sm:w-auto sm:border-none">
+  <li className="flex w-full items-center border-b border-gray-200 dark:border-gray-700 sm:h-auto sm:w-auto sm:border-none">
     <Link href={href}>{name}</Link>
   </li>
 );
@@ -52,9 +52,16 @@ const NavBar = () => {
     w-full
     justify-between
     border-b
-    px-2 text-sm font-medium shadow-sm
-    backdrop-blur-[20px] backdrop-saturate-150
+    bg-white bg-opacity-50 px-2 text-sm
+    font-medium
+    shadow-sm
+    backdrop-blur-[10px]
+    backdrop-saturate-150
     dark:border-gray-700
+    dark:bg-gray-900
+    dark:bg-opacity-50
+    sm:backdrop-blur-[20px]
+
     "
       >
         <nav className="hidden sm:block">
@@ -75,11 +82,11 @@ const NavBar = () => {
 
       {/* mobile */}
 
-      <div className="fixed top-12 left-0 right-0 bottom-0 sm:hidden">
+      <div className="fixed top-12 left-0 right-0 bottom-0 ">
         <nav
           className={
-            "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20 -translate-y-full bg-white pb-4 shadow-sm  transition-transform duration-300 dark:bg-gray-900 sm:hidden" +
-            `${expanded ? " translate-y-0" : ""}`
+            "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20  bg-white/50 pb-4  shadow-sm  backdrop-blur-[10px] transition-transform duration-300 dark:bg-gray-900/50  sm:hidden" +
+            `${expanded ? " translate-y-0" : " -translate-y-[150%]"}`
           }
         >
           <ul className="flex h-full flex-col items-start gap-4 p-2 ">
