@@ -1,5 +1,5 @@
-import { PropsWithChildren, useState } from "react";
-import Link from "next/link";
+import Link from 'next/link';
+import { PropsWithChildren, useState } from 'react';
 
 const DarkModeSwitcher = () => {
   const [isDark, setIsDark] = useState(false);
@@ -22,9 +22,9 @@ const DarkModeSwitcher = () => {
 //   return <button onClick={clickHandler}>{menuFold.toString()}</button>;
 // };
 const DEFAULT_NAV_LIST = [
-  { path: "/blog", name: "文章" },
+  { path: "/post", name: "文章" },
   { path: "/archive", name: "归档" },
-  { path: "/guestbook", name: "留言" },
+  { path: "/messageboard", name: "留言" },
   { path: "/about", name: "关于" },
 ];
 const NavItem = ({
@@ -52,7 +52,7 @@ const NavBar = () => {
     w-full
     justify-between
     border-b
-    bg-white bg-opacity-50 px-2 text-sm
+    bg-white bg-opacity-50 px-4 text-sm
     font-medium
     shadow-sm
     backdrop-blur-[10px]
@@ -82,7 +82,7 @@ const NavBar = () => {
 
       {/* mobile */}
 
-      <div className="fixed top-12 left-0 right-0 bottom-0 ">
+      <div className="fixed top-12 left-0 right-0 bottom-0 sm:hidden">
         <nav
           className={
             "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20  bg-white/50 pb-4  shadow-sm  backdrop-blur-[10px] transition-transform duration-300 dark:bg-gray-900/50  sm:hidden" +

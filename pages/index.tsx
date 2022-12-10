@@ -1,13 +1,14 @@
-import Layout from "@/components/common/Layout";
-import Container from "@/components/common/Container";
-import RecentPosts from "@/components/HomePage/RecentPosts";
-import Heading from "@/components/common/Heading";
-import Banner from "@/components/Banner";
-import SpacerBar from "@/components/common/SpacerBar";
+import Banner from '@/components/Banner';
+import Container from '@/components/common/Container';
+import Heading from '@/components/common/Heading';
+import Layout from '@/components/common/Layout';
+import SpacerBar from '@/components/common/SpacerBar';
+import RecentPosts from '@/components/HomePage/RecentPosts';
+
 export default function Home() {
   return (
     // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
-    <div className="dark">
+    <div>
       <Layout>
         <Container>
           <Banner />
