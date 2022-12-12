@@ -30,7 +30,7 @@ const DEFAULT_NAV_LIST = [
 const NavItem = ({
   href,
   name,
-}: PropsWithChildren<{ href: string; name: string }>) => (
+}: PropsWithChildren<{ href: string; name: any }>) => (
   <li className="flex w-full items-center border-b border-gray-200 dark:border-gray-700 sm:h-auto sm:w-auto sm:border-none">
     <Link href={href}>{name}</Link>
   </li>
@@ -66,6 +66,9 @@ const NavBar = () => {
       >
         <nav className="hidden sm:block">
           <ul className="flex h-full items-center gap-4">
+            <div>
+              <NavItem href="/" name={<h1>Home</h1>} />
+            </div>
             {DEFAULT_NAV_LIST.map(({ path, name }) => {
               return <NavItem key={path} href={path} name={name} />;
             })}

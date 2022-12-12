@@ -1,0 +1,16 @@
+.info-col {
+  position: relative;
+  z-index: 1;
+}
+.info-col::before {
+  content: "";
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: rotate(45deg);
+  background-color: inherit;
+  left: -0.5rem;
+  top: 0.8rem;
+  /* z-index: 1; */
+  border: 1px solid red;
+}
