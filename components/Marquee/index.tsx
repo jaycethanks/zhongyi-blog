@@ -21,7 +21,7 @@ const Marquee: React.FC<{ items: Item[]; style?: React.CSSProperties }> = ({
         {items.map((item, index) => {
           return (
             <div
-              className="marquee-item  m-2 flex shrink-0 items-center gap-2  p-2"
+              className="marquee-item  m-2 flex shrink-0 items-center gap-2  p-2 text-lg font-semibold"
               key={item.id}
             >
               {item.content}

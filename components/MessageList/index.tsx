@@ -1,3 +1,5 @@
+import DotMenu from '../Icons/DotMenu';
+import LocationPin from '../Icons/LocationPin';
 import styles from './index.module.css';
 
 type Comment = {
@@ -156,10 +158,11 @@ const list: Comment[] = [
     comid: "8",
   },
 ];
+
 const MessageList = () => {
   return (
-    <div className="text-gray-600 dark:text-gray-200">
-      <p className=" mb-6 font-semibold text-gray-600 dark:text-gray-200">
+    <div className="text-gray-600 dark:text-gray-400">
+      <p className=" mb-6 font-semibold text-gray-600 dark:text-gray-300">
         评论 32 条
       </p>
       {list.map((comment) => {
@@ -174,20 +177,50 @@ const MessageList = () => {
           createdAt,
         } = comment;
         return (
-          <>
-            <div className="comment-raw mb-4 flex w-full items-start gap-6 ">
-              <div className="avatar-col shrink-0">
-                <img className="h-14 w-14  rounded-full" src={avatar} />
-              </div>
-              <div
-                className={`${styles["info-col"]} min-h-[6rem] w-full w-full shrink-0 rounded-lg  bg-slate-100 p-2 dark:bg-slate-800`}
+          <div
+            key={comid}
+            className="comment-raw mb-4 flex w-full items-start gap-6 text-xs"
+          >
+            {/* 头像列 */}
+            <div className="avatar-col flex w-14 shrink-0 flex-col items-center">
+              <img className="h-14 w-14  rounded-full" src={avatar} />
+              <span
+                title={nickname}
+                className="mt-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap text-center  text-gray-700 dark:text-gray-600"
               >
-                {nickname}发言于 :{createdAt}
-                {/* {content} */}
-                {/* comid nickname content avatar city province liking createdAt */}
-              </div>
+                {nickname}{" "}
+              </span>
             </div>
-          </>
+
+            {/* 右边列 */}
+            <div
+              className={`${styles["info-col"]} min-h-[6rem]  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
+            >
+              <div
+                className={`${styles["inner-wrapper"]} flex h-full w-full flex-col justify-between rounded-lg p-2`}
+              >
+                <div className="top-half ">
+                  <div className="header flex justify-between text-slate-400 dark:text-slate-600">
+                    <div className="time">{createdAt}</div>
+                    <div className="operation cursor-pointer">
+                      <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
+                    </div>
+                  </div>
+                  <div className="content text-sm">{content}</div>
+                </div>
+
+                {/* 底部操作条 */}
+                <div className="bottom-half flex justify-between text-slate-400 dark:text-slate-600">
+                  <div className="operation-bar">回复 {liking}</div>
+                  <div className="operation-bar flex ">
+                    {province} - {city}
+                    <LocationPin className="fill-blue-300 dark:fill-blue-800" />{" "}
+                  </div>
+                </div>
+              </div>
+              {/* comid nickname content avatar city province liking createdAt */}
+            </div>
+          </div>
         );
       })}
     </div>
