@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import moonFace from '@/components/Icons/animateIcon/moon-face.png';
 import moon from '@/components/Icons/animateIcon/moon.png';
@@ -10,9 +10,19 @@ const DarkModeSwitcher = () => {
   const [isDark, setIsDark] = useState(false);
   const handleClick = () => {
     const html = document.querySelector("html");
-    html?.classList.toggle("dark");
+    const state = html?.classList.toggle("dark");
+    window.localStorage.setItem("theme", state ? state?.toString() : "false");
     setIsDark(!isDark);
   };
+  useEffect(() => {
+    const savedTheme = window?.localStorage.getItem("theme");
+    if (savedTheme === "true") {
+      setIsDark(true);
+      document.querySelector("html")?.classList.add("dark");
+    } else {
+      setIsDark(false);
+    }
+  }, []);
   return (
     <div onClick={handleClick}>
       <span>
@@ -35,7 +45,7 @@ const DarkModeSwitcher = () => {
 // };
 const DEFAULT_NAV_LIST = [
   { path: "/post", name: "文章" },
-  { path: "/post", name: "专栏" },
+  { path: "/column", name: "专栏" },
   { path: "/archive", name: "归档" },
   { path: "/messageboard", name: "留言" },
   { path: "/about", name: "关于" },

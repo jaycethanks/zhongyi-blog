@@ -1,0 +1,33 @@
+.timeline-item {
+  position: relative;
+  padding-bottom: 12px;
+  .timeline-label {
+    position: absolute;
+    inset-block-start: 0px;
+    // inset-inline-start: 3%;
+
+    width: calc(18% - 8px);
+    text-align: end;
+  }
+  .timeline-tail {
+    position: absolute;
+    inset-inline-start: calc(18%);
+    inset-block-start: 4px;
+    height: calc(100% - 5px);
+    // border-inline-start: 2px solid;
+    // border: 1px solid;
+  }
+  .timeline-head {
+    position: absolute;
+    inset-inline-start: calc(18% - 3.5px);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .timeline-content {
+    position: relative;
+    inset-inline-start: calc(18% + 8px);
+    inset-block-start: 18%;
+    width: calc(100% - 18% - 8px);
+  }
+}
