@@ -4,7 +4,7 @@
 }
 
 .inner-wrapper {
-  position: absolute;
+  /* position: absolute; */
   background-color: inherit;
   z-index: 1;
 }

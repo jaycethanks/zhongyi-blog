@@ -1,5 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren, useState } from 'react';
+
+import moonFace from '@/components/Icons/animateIcon/moon-face.png';
+import moon from '@/components/Icons/animateIcon/moon.png';
+import sun from '@/components/Icons/animateIcon/sun.png';
 
 const DarkModeSwitcher = () => {
   const [isDark, setIsDark] = useState(false);
@@ -10,7 +15,14 @@ const DarkModeSwitcher = () => {
   };
   return (
     <div onClick={handleClick}>
-      <span>{isDark ? "Light" : "Dark"}</span>
+      <span>
+        {isDark ? (
+          <Image src={sun} className="h-6 w-6" alt="" />
+        ) : (
+          <Image src={moon} className="h-6 w-6" alt="" />
+          // <Image src={moonFace} className="h-6 w-6 -rotate-12" alt="" />
+        )}
+      </span>
     </div>
   );
 };
@@ -31,8 +43,10 @@ const NavItem = ({
   href,
   name,
 }: PropsWithChildren<{ href: string; name: any }>) => (
-  <li className="flex w-full items-center border-b border-gray-200 dark:border-gray-700 sm:h-auto sm:w-auto sm:border-none">
-    <Link href={href}>{name}</Link>
+  <li className="w-full items-center border-b border-slate-300 dark:border-gray-700 sm:h-auto sm:w-auto sm:border-none">
+    <Link className="block w-full leading-8" href={href}>
+      {name}
+    </Link>
   </li>
 );
 const NavBar = () => {
@@ -85,21 +99,22 @@ const NavBar = () => {
 
       {/* mobile */}
 
-      <div className="fixed top-12 left-0 right-0 bottom-0 sm:hidden">
+      <div className="fixed top-12 left-0 right-0  z-[49] sm:hidden">
         <nav
           className={
-            "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20  bg-white/50 pb-4  shadow-sm  backdrop-blur-[10px] transition-transform duration-300 dark:bg-gray-900/50  sm:hidden" +
+            "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20  bg-white/70 pb-4  shadow-sm  backdrop-blur-[10px] transition-transform duration-300 dark:bg-gray-900/50  sm:hidden" +
             `${expanded ? " translate-y-0" : " -translate-y-[150%]"}`
           }
         >
-          <ul className="flex h-full flex-col items-start gap-4 p-2 ">
+          <ul className="flex h-full flex-col items-start gap-4 p-4 ">
+            <NavItem key="/" href="/" name="HomePage" />
             {DEFAULT_NAV_LIST.map(({ path, name }) => {
               return <NavItem key={path} href={path} name={name} />;
             })}
           </ul>
         </nav>
         {!expanded ? null : (
-          <div className="mask fixed top-12 left-0 right-0 bottom-0 z-10 bg-black/5"></div>
+          <div className="mask fixed top-12 left-0 right-0 bottom-0 z-10 bg-black/25"></div>
         )}
       </div>
     </>

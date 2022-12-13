@@ -1,3 +1,7 @@
+import Image from 'next/image';
+
+import ladyBeetle from '@/components/Icons/animateIcon/lady-beetle.png';
+
 import DotMenu from '../Icons/DotMenu';
 import LocationPin from '../Icons/LocationPin';
 import styles from './index.module.css';
@@ -162,8 +166,8 @@ const list: Comment[] = [
 const MessageList = () => {
   return (
     <div className="text-gray-600 dark:text-gray-400">
-      <p className=" mb-6 font-semibold text-gray-600 dark:text-gray-300">
-        评论 32 条
+      <p className="mb-6 flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-300">
+        留言 32 条{/* <Image src={ladyBeetle} className="h-4 w-4" alt="" /> */}
       </p>
       {list.map((comment) => {
         const {
@@ -194,10 +198,10 @@ const MessageList = () => {
 
             {/* 右边列 */}
             <div
-              className={`${styles["info-col"]} min-h-[6rem]  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
+              className={`${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
             >
               <div
-                className={`${styles["inner-wrapper"]} flex h-full w-full flex-col justify-between rounded-lg p-2`}
+                className={`${styles["inner-wrapper"]} flex flex-col justify-between rounded-lg p-2`}
               >
                 <div className="top-half ">
                   <div className="header flex justify-between text-slate-400 dark:text-slate-600">
@@ -206,11 +210,14 @@ const MessageList = () => {
                       <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
                     </div>
                   </div>
-                  <div className="content text-sm">{content}</div>
+                  <div className="content break-all text-sm">
+                    {content +
+                      "assssssdadasfasddddddddddddddddddddddddddddddddd"}
+                  </div>
                 </div>
 
                 {/* 底部操作条 */}
-                <div className="bottom-half flex justify-between text-slate-400 dark:text-slate-600">
+                <div className="bottom-half mt-2 flex justify-between text-slate-400 dark:text-slate-600">
                   <div className="operation-bar">回复 {liking}</div>
                   <div className="operation-bar flex ">
                     {province} - {city}
