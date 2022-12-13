@@ -35,6 +35,7 @@ const DarkModeSwitcher = () => {
 // };
 const DEFAULT_NAV_LIST = [
   { path: "/post", name: "文章" },
+  { path: "/post", name: "专栏" },
   { path: "/archive", name: "归档" },
   { path: "/messageboard", name: "留言" },
   { path: "/about", name: "关于" },

@@ -4,8 +4,9 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import wavinghand from '@/components/Icons/animateIcon/waving-hand.png';
 import SendFullfilled from '@/components/Icons/SendFullfilled';
-import Marquee from '@/components/Marquee';
 import comments from '@/pages/api/mockmsg';
+
+import Marquee from './Marquee';
 
 // console.log("[comments]: ", comments);
 const items = comments.slice(0, 10);

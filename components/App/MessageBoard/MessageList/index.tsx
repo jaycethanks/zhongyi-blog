@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 import ladyBeetle from '@/components/Icons/animateIcon/lady-beetle.png';
+import DotMenu from '@/components/Icons/DotMenu';
+import LocationPin from '@/components/Icons/LocationPin';
 
-import DotMenu from '../Icons/DotMenu';
-import LocationPin from '../Icons/LocationPin';
 import styles from './index.module.css';
 
 type Comment = {

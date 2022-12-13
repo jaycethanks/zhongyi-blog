@@ -1,7 +1,7 @@
+import BulletChat from '@/components/App/MessageBoard/BulletChat';
+import MessageList from '@/components/App/MessageBoard/MessageList';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
-import BulletChat from '@/components/MessageBoard/BulletChat';
-import MessageList from '@/components/MessageList';
 
 export default () => {
   return (
