@@ -1,10 +1,25 @@
 import { PropsWithChildren } from 'react';
 
+import SpacerBar from '../SpacerBar';
 import styles from './timeline.module.scss';
 
-console.log("[styles]: ", styles);
-const Timeline: React.FC<PropsWithChildren> = ({ children }) => {
-  return <ul>{children}</ul>;
+type TimelineProps = {
+  title: any;
+  head?: any;
+};
+const Timeline: React.FC<PropsWithChildren & TimelineProps> = ({
+  children,
+  head,
+  title,
+}) => {
+  return (
+    <>
+      {head}
+      <SpacerBar gap={4} />
+      {title}
+      <ul>{children}</ul>
+    </>
+  );
 };
 
 const TimelineItem: React.FC<PropsWithChildren & { label: any }> = ({
@@ -19,19 +34,14 @@ const TimelineItem: React.FC<PropsWithChildren & { label: any }> = ({
         </div>
         <div
           className={`${styles["timeline-tail"]} border-r border-slate-100 dark:border-slate-600`}
-        >
-          {}
-        </div>
+        ></div>
         <div
           className={`${styles["timeline-head"]} bg-slate-200 dark:bg-slate-700`}
-        >
-          {}
-        </div>
+        ></div>
         <div className={`${styles["timeline-content"]}`}>{children}</div>
       </li>
     </>
   );
-  return <div>{children}</div>;
 };
 
 export { Timeline, TimelineItem };

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
 enum fontSize {
   "text-base" = 6,
@@ -10,10 +10,17 @@ enum fontSize {
 }
 interface HeadingLevel {
   level: 1 | 2 | 3 | 4 | 5 | 6;
+  className?: string;
 }
-export default ({ level, children }: PropsWithChildren<HeadingLevel>) => {
+export default ({
+  level,
+  children,
+  className,
+}: PropsWithChildren<HeadingLevel>) => {
   return (
-    <p className={`${fontSize[level]} font-medium leading-snug text-inherit`}>
+    <p
+      className={`${fontSize[level]} font-medium leading-snug text-inherit ${className}`}
+    >
       {children}
     </p>
   );

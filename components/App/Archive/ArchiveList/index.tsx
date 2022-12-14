@@ -1,73 +1,96 @@
+import { PropsWithChildren } from 'react';
+
 import Heading from '@/components/common/Heading';
 import SpacerBar from '@/components/common/SpacerBar';
 import { Timeline, TimelineItem } from '@/components/common/Timeline';
 
+import ArticleListItem from '../ArticleListItem';
 import styles from './archivelist.module.scss';
 
 const list = [
   {
     id: "123",
-    label: <Heading level={5}>12月13日</Heading>,
-    content: <div className="">"母猪的产后护理"</div>,
+    label: <span className="text-xs">12月13日</span>,
+    article: {
+      artid: "asldhaokahsgdiahsbdaisulhfa",
+      title: "母猪的产后护理",
+      description:
+        "Ab quo non dicta qui quae consectetur et. Adipisci vel id et est impedit ipsa nostrum. Pariatur necessitatibus beatae placeat non similique molestiae eum totam.",
+      createAt: "12月13日",
+      liking: 32,
+      comments: 3,
+      read: 986,
+    },
   },
   {
     id: "3",
-    label: <Heading level={5}>12月10日</Heading>,
-    content: <div className="">"养猪致富经验"</div>,
+    label: <span className="text-xs">12月06日</span>,
+    article: {
+      artid: "aslkdjbnlaishdiasbfkaslhdo",
+      title: "养猪致富经验",
+      description:
+        "Ab quo non dicta qui quae consectetur et. Adipisci vel id et est impedit ipsa nostrum. Pariatur necessitatibus beatae placeat non similique molestiae eum totam.",
+      createAt: "12月12日",
+      liking: 32,
+      comments: 3,
+      read: 986,
+    },
   },
 ];
-
+const Block: React.FC<PropsWithChildren> = ({ children }) => {
+  return <div className="p-4 ">{children}</div>;
+};
 const ArchiveList = () => {
   return (
     <div>
       <SpacerBar gap={16} />
-      <Heading level={1}>最近发布</Heading>
-      <Heading level={3}>12月</Heading>
-      <Timeline>
-        {list.map((it) => {
-          return (
-            <TimelineItem key={it.id} label={it.label}>
-              {it.content}
-            </TimelineItem>
-          );
-        })}
-      </Timeline>
-      <Heading level={3}>10月</Heading>
-      <Timeline>
-        {list.map((it) => {
-          return (
-            <TimelineItem key={it.id} label={it.label}>
-              {it.content}
-            </TimelineItem>
-          );
-        })}
-      </Timeline>
+      <Block>
+        <Heading level={2}>最近发布</Heading>
+        <Timeline title={<Heading level={4}>12月</Heading>}>
+          {list.map((it) => {
+            return (
+              <TimelineItem key={it.id} label={it.label}>
+                <ArticleListItem article={it.article} />
+              </TimelineItem>
+            );
+          })}
+        </Timeline>
+        <Timeline title={<Heading level={4}>10月</Heading>}>
+          {list.map((it) => {
+            return (
+              <TimelineItem key={it.id} label={it.label}>
+                <ArticleListItem article={it.article} />
+              </TimelineItem>
+            );
+          })}
+        </Timeline>
+      </Block>
+
       <SpacerBar gap={16} />
-      <Heading level={1}>历史文章</Heading>
-      <Heading level={2}>2022年</Heading>
-      <Heading level={3}>08月</Heading>
-      <Timeline>
-        {list.map((it) => {
-          return (
-            <TimelineItem key={it.id} label={it.label}>
-              {it.content}
-            </TimelineItem>
-          );
-        })}
-      </Timeline>
-      <Heading level={3}>07月</Heading>
-      <Timeline>
-        {list.map((it) => {
-          return (
-            <TimelineItem key={it.id} label={it.label}>
-              {it.content}
-            </TimelineItem>
-          );
-        })}
-      </Timeline>
-      <Heading level={2}>2021年</Heading>
-      <Heading level={3}>12月</Heading>
-      <Heading level={3}>11月</Heading>
+      <Block>
+        <Heading level={2}>历史文章</Heading>
+        <Timeline
+          head={<Heading level={3}>2022年</Heading>}
+          title={<Heading level={4}>08月</Heading>}
+        >
+          {list.map((it) => {
+            return (
+              <TimelineItem key={it.id} label={it.label}>
+                <ArticleListItem article={it.article} />
+              </TimelineItem>
+            );
+          })}
+        </Timeline>
+        <Timeline title={<Heading level={4}>07月</Heading>}>
+          {list.map((it) => {
+            return (
+              <TimelineItem key={it.id} label={it.label}>
+                <ArticleListItem article={it.article} />
+              </TimelineItem>
+            );
+          })}
+        </Timeline>
+      </Block>
     </div>
   );
 };
