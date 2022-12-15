@@ -16,11 +16,11 @@ const BannerImage: React.FC<BannerImageProps> = ({
   return (
     <>
       <LazyImage src={src} height={height} />
-      <div className="absolute inset-0 flex flex-col justify-center px-16">
-        <Heading className="font-bold text-slate-200" level={1}>
+      <div className="backdrop dark:backdrop-brightness-70 absolute inset-0 flex flex-col justify-center bg-white/20 px-16 text-slate-100 dark:bg-black/5 dark:text-slate-200">
+        <Heading className="font-bold " level={1}>
           {title}
         </Heading>
-        <Heading className="text-slate-200" level={3}>
+        <Heading className="" level={3}>
           {subTitle}
         </Heading>
       </div>

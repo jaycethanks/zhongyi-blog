@@ -6,7 +6,7 @@ type LazyImageType = {
   onError?(): void;
   src: string;
   classNames?: string;
-  height: string;
+  height?: string;
 } & ImgHTMLAttributes<HTMLImageElement>;
 
 const LazyImage: React.FC<LazyImageType> = ({
@@ -30,7 +30,7 @@ const LazyImage: React.FC<LazyImageType> = ({
   return (
     <div className={`lazyload-img relative ${height}`}>
       <div
-        className="backdrop h-full w-full bg-white/50"
+        className="h-full w-full bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${src})` }}
       ></div>
       <img

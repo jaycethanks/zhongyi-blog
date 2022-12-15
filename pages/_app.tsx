@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta charSet="UTF-8" />
       </Head>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </>
   );
 }

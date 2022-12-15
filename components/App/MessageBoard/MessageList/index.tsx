@@ -1,8 +1,13 @@
 import Image from 'next/image';
 
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
+import Popover from '@/components/common/Popover/index';
 import ladyBeetle from '@/components/Icons/animateIcon/lady-beetle.png';
+import wavinghand from '@/components/Icons/animateIcon/waving-hand.png';
 import DotMenu from '@/components/Icons/DotMenu';
 import LocationPin from '@/components/Icons/LocationPin';
+import SendFullfilled from '@/components/Icons/SendFullfilled';
 
 import styles from './index.module.css';
 
@@ -164,11 +169,34 @@ const list: Comment[] = [
 ];
 
 const MessageList = () => {
+  function handleSend(): void {
+    console.log("click handle");
+  }
+
   return (
     <div className="text-gray-600 dark:text-gray-400">
       <p className="mb-6 flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-300">
         留言 32 条{/* <Image src={ladyBeetle} className="h-4 w-4" alt="" /> */}
       </p>
+
+      {/* 发送留言 */}
+      <div className="my-6 flex justify-end ">
+        <div className="flex w-full justify-end gap-2">
+          <Image src={wavinghand} className="h-8 w-8 shrink-0" alt="" />
+          <Input
+            type="textarea"
+            maxLength={40}
+            placeholder="嗨嗨,你今天状态好吗?"
+            rows={3}
+            className="w-[calc(100%-7rem)] resize-none text-sm sm:w-[calc(100%-8rem)]"
+          />
+          <Button onClick={() => handleSend()} className="h-10 w-10 shrink-0">
+            <SendFullfilled className="shrink-0 fill-slate-400 dark:fill-slate-400" />
+          </Button>
+        </div>
+      </div>
+
+      {/* 留言列表 */}
       {list.map((comment) => {
         const {
           comid,
@@ -183,22 +211,25 @@ const MessageList = () => {
         return (
           <div
             key={comid}
-            className="comment-raw mb-4 flex w-full items-start gap-6 text-xs"
+            className="comment-raw mb-4 flex w-full items-start gap-2 text-xs  sm:gap-6"
           >
             {/* 头像列 */}
             <div className="avatar-col flex w-14 shrink-0 flex-col items-center">
-              <img className="h-14 w-14  rounded-full" src={avatar} />
+              <img
+                className="h-10 w-10 rounded-full sm:h-14  sm:w-14"
+                src={avatar}
+              />
               <span
                 title={nickname}
-                className="mt-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap text-center  text-gray-700 dark:text-gray-600"
+                className="mt-2 w-16 overflow-hidden text-ellipsis whitespace-nowrap text-center text-gray-700  dark:text-gray-600 sm:w-20"
               >
-                {nickname}{" "}
+                {nickname}
               </span>
             </div>
 
             {/* 右边列 */}
             <div
-              className={`${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
+              className={`mr-[3rem] ${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
             >
               <div
                 className={`${styles["inner-wrapper"]} flex flex-col justify-between rounded-lg p-2`}
@@ -207,7 +238,9 @@ const MessageList = () => {
                   <div className="header flex justify-between text-slate-400 dark:text-slate-600">
                     <div className="time">{createdAt}</div>
                     <div className="operation cursor-pointer">
-                      <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
+                      <Popover>
+                        <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
+                      <Popover/>
                     </div>
                   </div>
                   <div className="content break-all text-sm">
@@ -221,7 +254,7 @@ const MessageList = () => {
                   <div className="operation-bar">回复 {liking}</div>
                   <div className="operation-bar flex ">
                     {province} - {city}
-                    <LocationPin className="fill-blue-300 dark:fill-blue-800" />{" "}
+                    {/* <LocationPin className="fill-blue-300 dark:fill-blue-800" />{" "} */}
                   </div>
                 </div>
               </div>
