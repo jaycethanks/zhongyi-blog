@@ -237,11 +237,15 @@ const MessageList = () => {
                 <div className="top-half ">
                   <div className="header flex justify-between text-slate-400 dark:text-slate-600">
                     <div className="time">{createdAt}</div>
-                    <div className="operation cursor-pointer">
-                      <Popover>
-                        <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
+                    {/* <div className="operation cursor-pointer">
+                      <Popover
+                        triggerBtn={
+                          <DotMenu className=" fill-slate-400 dark:fill-slate-600" />
+                        }
+                      >
+                        Lorem ipsum dolor sit amet.
                       </Popover>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="content break-all text-sm">
                     {content +
