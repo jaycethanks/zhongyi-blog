@@ -114,32 +114,37 @@ export default (props) => {
         <title>ZY - 专栏</title>
       </Head>
       <Container>
-        {
-          <div className="xxl:columns-5 fill columns-1 gap-2 sm:columns-2 md:columns-3 lg:columns-4">
-            <div className="mt-2 h-36 bg-red-400">1</div>
-            <div className="mt-2 h-32 bg-red-400">2</div>
-            <div className="mt-2 h-28 bg-red-400">3</div>
-            <div className="mt-2 h-24 bg-red-400">4</div>
-            <div className="mt-2 h-20 bg-red-400">5</div>
-            <div className="mt-2 h-16 bg-red-400">6</div>
-            <div className="mt-2 h-14 bg-red-400">7</div>
-            <div className="mt-2 h-12 bg-red-400">8</div>
-            <div className="mt-2 h-11 bg-red-400">9</div>
-            <div className="mt-2 h-10 bg-red-400">10</div>
-            <div className="mt-2 h-10 bg-red-400">11</div>
-            <div className="mt-2 h-10 bg-red-400">12</div>
-            <div className="mt-2 h-10 bg-red-400">13</div>
-            {/* <img src="https://source.unsplash.com/random/1" alt="" />
-            <img src="https://source.unsplash.com/random/2" alt="" />
-            <img src="https://source.unsplash.com/random/3" alt="" />
-            <img src="https://source.unsplash.com/random/4" alt="" />
-            <img src="https://source.unsplash.com/random/5" alt="" />
-            <img src="https://source.unsplash.com/random/6" alt="" />
-            <img src="https://source.unsplash.com/random/7" alt="" />
-            <img src="https://source.unsplash.com/random/8" alt="" />
-            <img src="https://source.unsplash.com/random/9" alt="" /> */}
-          </div>
-        }
+        {list.map((it: any, index: number) => {
+          console.log("[it]: ", it);
+          const [
+            { percent: col1 } = { percent: undefined },
+            { percent: col2 } = { percent: undefined },
+            { percent: col3 } = { percent: undefined },
+          ] = it;
+          // const [
+          //   { percent: col1 = undefined },
+          //   { percent: col2 = undefined },
+          //   { percent: col3 = undefined },
+          // ] = it;
+
+          // console.log(`${col1}%  ${col2}% ${col3}% }`);
+          const _index = list.length - index;
+          return (
+            <div
+              className="grid h-48 gap-2 border border-red-700"
+              style={{
+                height: `${12 + _index * 4}rem`,
+                gridTemplateColumns: `${col1 ? col1 + "%" : ""}  ${
+                  col2 ? col2 + "%" : ""
+                } ${col3 ? col3 + "%" : ""}`,
+              }}
+            >
+              <div className="bg-blue-400"></div>
+              <div className="bg-blue-400"></div>
+              <div className="bg-blue-400"></div>
+            </div>
+          );
+        })}
       </Container>
     </Layout>
   );
