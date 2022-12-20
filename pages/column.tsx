@@ -1,21 +1,25 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 import ArchiveList from '@/components/App/Archive/ArchiveList';
 import HeadSummary from '@/components/App/Archive/HeadSummary';
 import Container from '@/components/common/Container';
 import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
+import Fonts from '@/fonts';
+
+import styles from './column.module.scss';
 
 let mockColumns: any = [
   {
     createdAt: "2022-12-16T03:55:24.420Z",
-    name: "placeat",
+    name: "ThreeJS",
     description: "aperiam-aliquid-necessitatibus",
     id: "1",
     count: 2,
     list: [
       {
-        title: "incubate Wyoming",
+        title: "字体非兼容性处理方案",
         subtitle: "sapiente-sunt-porro",
         artid: "e14b0cf1-6bec-4b71-92af-9af9f7770b35",
       },
@@ -23,13 +27,14 @@ let mockColumns: any = [
   },
   {
     createdAt: "2022-12-16T03:03:04.568Z",
-    name: "nemo",
-    description: "omnis-atque-distinctio",
+    name: "谱写新时代中国宪法实",
+    description:
+      "施行 40 周年这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
     id: "2",
     count: 5,
     list: [
       {
-        title: "Islands USB Northeast",
+        title: "[工具] Clash #Linux #Ubuntu 配置教程",
         subtitle: "unde-dolorum-non",
         artid: "c3470204-f65f-4050-80b1-ec49f7709920",
       },
@@ -37,13 +42,13 @@ let mockColumns: any = [
   },
   {
     createdAt: "2022-12-16T03:03:04.568Z",
-    name: "nemo",
-    description: "omnis-atque-distinctio",
+    name: "网格布局教程",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
     id: "3",
     count: 8,
     list: [
       {
-        title: "Islands USB Northeast",
+        title: "CSS Grid 网格布局教程",
         subtitle: "unde-dolorum-non",
         artid: "c3470204-f65f-4050-80b1-ec49f7709920",
       },
@@ -51,13 +56,13 @@ let mockColumns: any = [
   },
   {
     createdAt: "2022-12-16T03:03:04.568Z",
-    name: "nemo",
-    description: "omnis-atque-distinctio",
+    name: "React",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
     id: "4",
     count: 12,
     list: [
       {
-        title: "Islands USB Northeast",
+        title: "容器属性",
         subtitle: "unde-dolorum-non",
         artid: "c3470204-f65f-4050-80b1-ec49f7709920",
       },
@@ -65,9 +70,23 @@ let mockColumns: any = [
   },
   {
     createdAt: "2022-12-16T03:03:04.568Z",
-    name: "nemo",
-    description: "omnis-atque-distinctio",
+    name: "Vue",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
     id: "5",
+    count: 18,
+    list: [
+      {
+        title: "Nestjs-Authentication 文档翻译",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f7709920",
+      },
+    ],
+  },
+  {
+    createdAt: "2022-12-16T03:03:04.568Z",
+    name: "Vue3",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
+    id: "6",
     count: 18,
     list: [
       {
@@ -77,67 +96,110 @@ let mockColumns: any = [
       },
     ],
   },
+  {
+    createdAt: "2022-12-16T03:03:04.568Z",
+    name: "D3",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
+    id: "7",
+    count: 18,
+    list: [
+      {
+        title: "Islands USB Northeast",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f7709920",
+      },
+    ],
+  },
+  {
+    createdAt: "2022-12-16T03:03:04.568Z",
+    name: "GoLang",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
+    id: "8",
+    count: 18,
+    list: [
+      {
+        title:
+          "[跨域问题]：Response to preflight request doesn't pass access control check: It does not have HTTP ok status. 的解决",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f7709920",
+      },
+    ],
+  },
+  {
+    createdAt: "2022-12-16T03:03:04.568Z",
+    name: "Java",
+    description: "这是一段Lorem 专栏标题的子标题，也称之为专栏的描述",
+    id: "9",
+    count: 18,
+    list: [
+      {
+        title: "Jetbrains全家桶破解注册教程（含Intellij_IDEA）",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f7709920",
+      },
+      {
+        title: "[JS高程]语言基础，for循环中的var变量声明图解",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f7709920as",
+      },
+      {
+        title: "vite配置文件语法提示以及开发环境和生产环境区分",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-asec49f7709920as",
+      },
+      {
+        title: "浅了解 Service Worker",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-sf65f-4050-80b1-ec49f7709920as",
+      },
+      {
+        title: "如何写一个全局的 Notice 组件?",
+        subtitle: "unde-dolorum-non",
+        artid: "c3470204-f65f-4050-80b1-ec49f770s9920as",
+      },
+    ],
+  },
 ];
 
 mockColumns = mockColumns.sort((a: any, b: any) => b.count - a.count);
 
-const list: any = [];
-struct(mockColumns);
-function struct(mockColumns: any) {
-  list.push(mockColumns.splice(0, 3));
-  if (mockColumns.length != 0) {
-    struct(mockColumns);
-  }
-}
-
-list.map((its: any) => {
-  const total = its
-    .map((col: any) => col.count)
-    .reduce((pre: any, cur: any) => pre + cur);
-
-  const sortIts = its
-    .map((col: any) => {
-      col.percent = ((col.count / total) * 100).toFixed(0);
-      return col;
-    })
-    .sort((a: any, b: any) => b.percent - a.percent);
-
-  return sortIts;
-});
-
-console.log("[list]: ", list);
-
+console.log("[list]: ", mockColumns);
 export default (props) => {
   return (
     <Layout>
       <Head>
         <title>ZY - 专栏</title>
       </Head>
-      <Container>
+      <Container className={`${Fonts.SourceHanSerifCN}`}>
+        <Heading level={1} className={`font-extrabold`}>
+          专栏
+        </Heading>
         {
-          <div className="xxl:columns-5 fill columns-1 gap-2 sm:columns-2 md:columns-3 lg:columns-4">
-            <div className="mt-2 h-36 bg-red-400">1</div>
-            <div className="mt-2 h-32 bg-red-400">2</div>
-            <div className="mt-2 h-28 bg-red-400">3</div>
-            <div className="mt-2 h-24 bg-red-400">4</div>
-            <div className="mt-2 h-20 bg-red-400">5</div>
-            <div className="mt-2 h-16 bg-red-400">6</div>
-            <div className="mt-2 h-14 bg-red-400">7</div>
-            <div className="mt-2 h-12 bg-red-400">8</div>
-            <div className="mt-2 h-11 bg-red-400">9</div>
-            <div className="mt-2 h-10 bg-red-400">10</div>
-            <div className="mt-2 h-10 bg-red-400">11</div>
-            <div className="mt-2 h-10 bg-red-400">12</div>
-            <div className="mt-2 h-10 bg-red-400">13</div>
-            {/* <img src="https://source.unsplash.com/random/1" alt="" />
-            <img src="https://source.unsplash.com/random/2" alt="" />
-            <img src="https://source.unsplash.com/random/3" alt="" />
-            <img src="https://source.unsplash.com/random/4" alt="" />
-            <img src="https://source.unsplash.com/random/5" alt="" />
-            <img src="https://source.unsplash.com/random/6" alt="" />
-            <img src="https://source.unsplash.com/random/7" alt="" />
-            <img src="https://source.unsplash.com/random/8" alt="" />
-            <img src="https://source.unsplash.com/random/9" alt="" /> */}
+          // prettier-ignore
+          <div className={` columns-1 gap-x-6 sm:columns-2 md:columns-3 lg:columns-4 xxl:columns-5 ${styles['columns']}`} >
+
+            {
+              mockColumns.map((it:any,index:number)=>{
+                const _index = mockColumns.length - index
+                return (
+                  <div key={it.id} className={`mb-4 p-4 h-auto  break-inside-avoid bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP border-gray-800 `} 
+                  style={{minHeight:`${12+_index*2}rem`}}
+                  >
+                    <Heading level={2} className={`font-bold ${Fonts.SourceHanSansCNRegular} `}>{it.name} </Heading>
+                    <Heading level={4} >{it.description}</Heading>
+                    <ul className={`pl-8 list-disc mt-2 ${Fonts.KaiTi} font-mono  tracking-wider`}>
+                      {
+                        it.list.map((article:any)=>{
+                          return <li key={article.artid} className="mb-4">
+                            <Link href="#" className='transition-colors duration-100 hover:text-COLOR_MAIN dark:hover:to-DARK_COLOR_MAIN underline'>{article.title}</Link>
+                          </li>
+                        })
+                      }
+                    </ul>
+                  </div>
+                )
+              })
+            }
           </div>
         }
       </Container>

@@ -19,9 +19,9 @@ export default ({
 }: PropsWithChildren<HeadingLevel>) => {
   return (
     <p
-      className={`${fontSize[level]} font-medium leading-snug text-inherit ${className}`}
+      className={`${fontSize[level]} font-medium leading-snug tracking-wide text-inherit`}
     >
-      {children}
+      <span className={`${className}`}>{children}</span>
     </p>
   );
 };

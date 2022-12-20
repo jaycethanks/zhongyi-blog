@@ -1,0 +1,13 @@
+.columns {
+  column-rule-style: solid;
+  column-rule-width: 1px;
+  column-rule-color: #e5e7eb;
+}
+
+:global(.dark) {
+  .columns {
+    column-rule-style: solid;
+    column-rule-width: 1px;
+    column-rule-color: #374151;
+  }
+}

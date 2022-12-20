@@ -43,7 +43,7 @@ const HeadSummary = () => {
                 )}
                 <li>
                   <div className="flex flex-col items-center justify-center">
-                    <span className="text-lg text-blue-500 dark:text-blue-600">
+                    <span className="text-lg text-COLOR_MAIN dark:to-DARK_COLOR_MAIN">
                       {value}{" "}
                     </span>
                     <span className="whitespace-nowrap text-xs text-slate-500 ">

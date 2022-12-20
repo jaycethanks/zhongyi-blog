@@ -2,6 +2,8 @@ import '../styles/globals.css';
 
 import Head from 'next/head';
 
+import Fonts from '@/fonts';
+
 import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   const times: any = {
@@ -35,7 +37,10 @@ export default function App({ Component, pageProps }: AppProps) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <Component {...pageProps} />
+      <main>
+        {/* <main className={Fonts.SongJianTi}> */}
+        <Component {...pageProps} />
+      </main>
     </>
   );
 }

@@ -7,7 +7,7 @@ interface pageProps {}
 
 export default ({ children }: PropsWithChildren<pageProps>) => {
   return (
-    <div className="bg-main text-slate-800 transition-colors duration-300  dark:bg-gray-900 dark:text-slate-400">
+    <div className="bg-BG_MAIN text-TEXT_MAIN transition-colors duration-300  dark:bg-DARK_BG_MAIN dark:text-DARK_TEXT_MAIN">
       <NavBar />
       <main className="min-h-[calc(100vh-3rem)] dark:bg-gray-900">
         {children}
