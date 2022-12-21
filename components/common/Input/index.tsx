@@ -14,7 +14,7 @@ const Input: React.FC<InputProps & TextareaProps> = ({
     return (
       <textarea
         {...rest}
-        className={`bg-slate-100  font-semibold hover:brightness-90 dark:bg-slate-800 dark:hover:brightness-110 ${styles["input"]} ${className}`}
+        className={`bg-BG_MAIN_DEEP font-semibold transition-colors duration-TRANSITION_DURATION hover:brightness-90 dark:bg-DARK_BG_MAIN_DEEP  dark:hover:brightness-110 ${styles["input"]} ${className}`}
       ></textarea>
       // onInput={(e) => auto_grow(e.target)}
     );
@@ -23,7 +23,7 @@ const Input: React.FC<InputProps & TextareaProps> = ({
       <input
         type="text"
         {...rest}
-        className={`bg-slate-100  font-semibold hover:brightness-90 dark:bg-slate-800 dark:hover:brightness-110 ${styles["input"]} ${className}`}
+        className={`bg-BG_MAIN_DEEP font-semibold transition-colors duration-TRANSITION_DURATION hover:brightness-90 dark:bg-DARK_BG_MAIN_DEEP  dark:hover:brightness-110 ${styles["input"]} ${className}`}
       />
     );
   }

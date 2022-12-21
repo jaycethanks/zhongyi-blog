@@ -174,8 +174,8 @@ const MessageList = () => {
   }
 
   return (
-    <div className="text-gray-600 dark:text-gray-400">
-      <p className="mb-6 flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-300">
+    <div>
+      <p className="mb-6 flex items-center gap-2 font-semibold ">
         留言 32 条{/* <Image src={ladyBeetle} className="h-4 w-4" alt="" /> */}
       </p>
 
@@ -187,11 +187,11 @@ const MessageList = () => {
             type="textarea"
             maxLength={40}
             placeholder="嗨嗨,你今天状态好吗?"
-            rows={3}
+            rows={4}
             className="w-[calc(100%-7rem)] resize-none text-sm sm:w-[calc(100%-8rem)]"
           />
           <Button onClick={() => handleSend()} className="h-10 w-10 shrink-0">
-            <SendFullfilled className="shrink-0 fill-slate-400 dark:fill-slate-400" />
+            <SendFullfilled className="shrink-0 fill-REMARK_TEXT dark:fill-DARK_REMARK_TEXT" />
           </Button>
         </div>
       </div>
@@ -211,7 +211,7 @@ const MessageList = () => {
         return (
           <div
             key={comid}
-            className="comment-raw mb-4 flex w-full items-start gap-2 text-xs  sm:gap-6"
+            className="comment-raw mb-4 flex  w-full items-start gap-2   text-xs  sm:gap-6"
           >
             {/* 头像列 */}
             <div className="avatar-col flex w-14 shrink-0 flex-col items-center">
@@ -221,7 +221,7 @@ const MessageList = () => {
               />
               <span
                 title={nickname}
-                className="mt-2 w-16 overflow-hidden text-ellipsis whitespace-nowrap text-center text-gray-700  dark:text-gray-600 sm:w-20"
+                className="mt-2 w-16 overflow-hidden text-ellipsis whitespace-nowrap text-center  sm:w-20"
               >
                 {nickname}
               </span>
@@ -229,13 +229,13 @@ const MessageList = () => {
 
             {/* 右边列 */}
             <div
-              className={`mr-[3rem] ${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800`}
+              className={`mr-[3rem] transition-colors duration-TRANSITION_DURATION ${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP`}
             >
               <div
                 className={`${styles["inner-wrapper"]} flex flex-col justify-between rounded-lg p-2`}
               >
                 <div className="top-half ">
-                  <div className="header flex justify-between text-slate-400 dark:text-slate-600">
+                  <div className="header flex justify-between text-REMARK_TEXT dark:text-DARK_REMARK_TEXT">
                     <div className="time">{createdAt}</div>
                     {/* <div className="operation cursor-pointer">
                       <Popover
@@ -247,14 +247,13 @@ const MessageList = () => {
                       </Popover>
                     </div> */}
                   </div>
-                  <div className="content break-all text-sm">
-                    {content +
-                      "assssssdadasfasddddddddddddddddddddddddddddddddd"}
+                  <div className="content  min-h-[3rem] break-all text-sm">
+                    {content}
                   </div>
                 </div>
 
                 {/* 底部操作条 */}
-                <div className="bottom-half mt-2 flex justify-between text-slate-400 dark:text-slate-600">
+                <div className="bottom-half mt-2 flex justify-between text-REMARK_TEXT dark:text-DARK_REMARK_TEXT">
                   <div className="operation-bar">回复 {liking}</div>
                   <div className="operation-bar flex ">
                     {province} - {city}

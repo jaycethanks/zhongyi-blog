@@ -8,8 +8,6 @@ import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
 import Fonts from '@/fonts';
 
-import styles from './column.module.scss';
-
 let mockColumns: any = [
   {
     createdAt: "2022-12-16T03:55:24.420Z",
@@ -163,35 +161,31 @@ let mockColumns: any = [
 
 mockColumns = mockColumns.sort((a: any, b: any) => b.count - a.count);
 
-console.log("[list]: ", mockColumns);
 export default (props) => {
   return (
     <Layout>
       <Head>
         <title>ZY - 专栏</title>
       </Head>
-      <Container className={`${Fonts.SourceHanSerifCN}`}>
-        <Heading level={1} className={`font-extrabold`}>
-          专栏
-        </Heading>
+      <Container title="专栏" className={`${Fonts.SourceHanSerifCN}`}>
         {
           // prettier-ignore
-          <div className={` columns-1 gap-x-6 sm:columns-2 md:columns-3 lg:columns-4 xxl:columns-5 ${styles['columns']}`} >
+          <div className={`columns-1 gap-x-6 sm:columns-2 md:columns-3 lg:columns-4 xxl:columns-5 [column-rule-style:solid] [column-rule-width:1px] [column-rule-color:#e2e8f0] dark:[column-rule-color:#475569]  transition-colors duration-TRANSITION_DURATION`} >
 
             {
               mockColumns.map((it:any,index:number)=>{
                 const _index = mockColumns.length - index
                 return (
-                  <div key={it.id} className={`mb-4 p-4 h-auto  break-inside-avoid bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP border-gray-800 `} 
+                  <div key={it.id} className={`mb-4 p-4 h-auto  break-inside-avoid transition-colors duration-TRANSITION_DURATION bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP text-TEXT_MAIN  dark:text-DARK_TEXT_MAIN`} 
                   style={{minHeight:`${12+_index*2}rem`}}
                   >
-                    <Heading level={2} className={`font-bold ${Fonts.SourceHanSansCNRegular} `}>{it.name} </Heading>
-                    <Heading level={4} >{it.description}</Heading>
-                    <ul className={`pl-8 list-disc mt-2 ${Fonts.KaiTi} font-mono  tracking-wider`}>
+                    <Heading level={2} className={`font-bold ${Fonts.SourceHanSansCNRegular}`}>{it.name} </Heading>
+                    <Heading level={4} className="">{it.description}</Heading>
+                    <ul className={`pl-8 list-disc mt-2 font-mono tracking-wider text-REMARK_TEXT  dark:text-DARK_REMARK_TEXT`}>
                       {
                         it.list.map((article:any)=>{
                           return <li key={article.artid} className="mb-4">
-                            <Link href="#" className='transition-colors duration-100 hover:text-COLOR_MAIN dark:hover:to-DARK_COLOR_MAIN underline'>{article.title}</Link>
+                            <Link href="#" className='hover:text-COLOR_MAIN dark:hover:to-DARK_COLOR_MAIN underline'>{article.title}</Link>
                           </li>
                         })
                       }

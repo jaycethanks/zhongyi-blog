@@ -6,6 +6,11 @@ import moonFace from '@/components/Icons/animateIcon/moon-face.png';
 import moon from '@/components/Icons/animateIcon/moon.png';
 import sun from '@/components/Icons/animateIcon/sun.png';
 
+import type { LinkProps } from "next/link";
+declare const LinkProps: LinkProps & {
+  before: string;
+};
+
 const DarkModeSwitcher = () => {
   const [isDark, setIsDark] = useState(false);
   const handleClick = () => {
@@ -18,13 +23,12 @@ const DarkModeSwitcher = () => {
     const savedTheme = window?.localStorage.getItem("theme");
     if (savedTheme === "true") {
       setIsDark(true);
-      document.querySelector("html")?.classList.add("dark");
     } else {
       setIsDark(false);
     }
   }, []);
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className="cursor-pointer">
       <span>
         {isDark ? (
           <Image src={sun} className="h-6 w-6" alt="" />
@@ -54,9 +58,22 @@ const NavItem = ({
   href,
   name,
 }: PropsWithChildren<{ href: string; name: any }>) => (
-  <li className="w-full items-center border-b border-slate-300 dark:border-gray-700 sm:h-auto sm:w-auto sm:border-none">
-    <Link className="block w-full leading-8" href={href}>
-      {name}
+  <li className="w-full  sm:h-auto sm:w-auto sm:border-none">
+    <Link
+      className={`
+        flex 
+        h-12 
+        w-full 
+        items-center
+        justify-center
+        text-lg
+        leading-8
+        sm:border-none
+        sm:text-base
+      `}
+      href={href}
+    >
+      <span>{name}</span>
     </Link>
   </li>
 );
@@ -75,17 +92,17 @@ const NavBar = () => {
     flex 
     h-12
     w-full
+    items-center
     justify-between
-    border-b
-    bg-white bg-opacity-50 px-4 text-sm
-    font-medium
-    shadow-sm
+    px-4 
+    text-sm font-medium
+    shadow-md
     backdrop-blur-[10px]
-    backdrop-saturate-150
     dark:border-gray-700
-    dark:bg-gray-900
     dark:bg-opacity-50
+    sm:bg-opacity-50
     sm:backdrop-blur-[20px]
+    sm:backdrop-saturate-150
 
     "
       >
@@ -100,6 +117,13 @@ const NavBar = () => {
           </ul>
         </nav>
 
+        {/* date */}
+        {/* <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center">
+          <span>
+            {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}
+          </span>
+        </div> */}
+
         <div className="operator flex h-full w-full items-center justify-between sm:w-auto">
           <DarkModeSwitcher />
           <div onClick={menuClickHandler} className="sm:hidden">
@@ -113,19 +137,19 @@ const NavBar = () => {
       <div className="fixed top-12 left-0 right-0  z-[49] sm:hidden">
         <nav
           className={
-            "dark:shadow-white-50 fixed top-12 right-0 left-0 z-20  bg-white/70 pb-4  shadow-sm  backdrop-blur-[10px] transition-transform duration-300 dark:bg-gray-900/50  sm:hidden" +
+            "dark:shadow-white-50 slow-ease fixed top-12 right-0 left-0 z-20 pb-4 transition-transform duration-TRANSITION_DURATION  sm:hidden" +
             `${expanded ? " translate-y-0" : " -translate-y-[150%]"}`
           }
         >
           <ul className="flex h-full flex-col items-start gap-4 p-4 ">
-            <NavItem key="/" href="/" name="HomePage" />
+            <NavItem key="/" href="/" name="Home" />
             {DEFAULT_NAV_LIST.map(({ path, name }) => {
               return <NavItem key={path} href={path} name={name} />;
             })}
           </ul>
         </nav>
         {!expanded ? null : (
-          <div className="mask fixed top-12 left-0 right-0 bottom-0 z-10 bg-black/25"></div>
+          <div className="mask fixed top-12 left-0 right-0 bottom-0 z-10  backdrop-blur-[10px]"></div>
         )}
       </div>
     </>

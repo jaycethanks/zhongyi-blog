@@ -1,3 +1,5 @@
+import Fonts from '@/fonts';
+
 import styles from './headsummary.module.scss';
 
 const list = [
@@ -37,7 +39,7 @@ const HeadSummary = () => {
             return (
               <>
                 {index != 0 ? (
-                  <div className="hidden sm:block sm:h-6 sm:w-[1px] sm:bg-slate-200 sm:dark:bg-slate-600"></div>
+                  <div className="hidden transition-colors duration-TRANSITION_DURATION sm:block sm:h-6 sm:w-[1px] sm:bg-DIVIDER_LINE sm:dark:bg-DARK_DIVIDER_LINE"></div>
                 ) : (
                   ""
                 )}
@@ -46,7 +48,9 @@ const HeadSummary = () => {
                     <span className="text-lg text-COLOR_MAIN dark:to-DARK_COLOR_MAIN">
                       {value}{" "}
                     </span>
-                    <span className="whitespace-nowrap text-xs text-slate-500 ">
+                    <span
+                      className={`${Fonts.SourceHanSerifCN} whitespace-nowrap text-xs text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT`}
+                    >
                       {label}
                     </span>
                   </div>

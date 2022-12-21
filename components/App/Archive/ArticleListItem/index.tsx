@@ -17,30 +17,36 @@ type ArticleListItemProps = {
     read: number;
   };
 };
-const ArticleListItem: React.FC<ArticleListItemProps> = ({ article }) => {
+const ArticleListItem: React.FC<ArticleListItemProps & StandardProps> = ({
+  article,
+  ...rest
+}) => {
   const { artid, title, description, createAt, liking, comments, read } =
     article;
   return (
-    <div className="bg-slate-100 px-4 py-2 dark:bg-slate-700">
-      <div className="title">
+    <div
+      className="bg-BG_MAIN_DEEP px-4 py-2  transition-colors duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN_DEEP"
+      {...rest}
+    >
+      <div className="title text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:text-DARK_TEXT_MAIN">
         <Link
           href="/post/"
-          className="transition-colors duration-100 hover:text-blue-500 dark:hover:text-blue-600"
+          className=" hover:text-blue-500 dark:hover:text-blue-600"
         >
           {title}
         </Link>
       </div>
-      <div className="description text-sm text-slate-500 ">{description}</div>
+      <div className="description text-sm text-REMARK_TEXT">{description}</div>
       <div className="summary-bar pt-2">
-        <ul className="summary-start flex gap-6 text-slate-500">
+        <ul className="summary-start flex gap-6 text-REMARK_TEXT">
           <li className="flex items-center gap-2">
-            <ReadOutlined className="fill-slate-500" /> {read}
+            <ReadOutlined className="fill-REMARK_TEXT" /> {read}
           </li>
           <li className="flex items-center gap-2">
-            <HeartOutlined className="fill-slate-500" /> {liking}
+            <HeartOutlined className="fill-REMARK_TEXT" /> {liking}
           </li>
           <li className="flex items-center gap-2">
-            <MsgOutlined className="fill-slate-500" /> {comments}
+            <MsgOutlined className="fill-REMARK_TEXT" /> {comments}
           </li>
         </ul>
       </div>

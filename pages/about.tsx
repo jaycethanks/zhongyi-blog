@@ -64,7 +64,7 @@ export default (props) => {
 
   return (
     <Layout>
-      <Container>
+      <Container title="About Me.">
         <Head>
           <title>ZY - 关于</title>
         </Head>
@@ -78,68 +78,66 @@ export default (props) => {
           />
         </div> */}
 
-        <div className="p-4">
+        <div className="p-2 sm:p-0">
           <div className="basic-info card">
-            <div>
-              <Heading level={2}>About Me.</Heading>
-              <Heading level={4}>一个博客好像都需要自我介绍</Heading>
-              <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
-                <div className="inline-block w-48 shrink-0">
-                  <LazyImage
-                    height="h-48"
-                    src="http://placeimg.com/480/480/nature"
-                  />
-                  <ul className="link-group mt-4 flex justify-center gap-2 sm:justify-start">
-                    {findMe.list.map((it) => {
-                      const { id, icon, bgColor, name, url } = it;
-                      return (
-                        <li key={id}>
-                          <a
-                            title={name}
-                            href={url}
-                            target="_blank"
-                            key={id}
-                            className={`flex items-center justify-center bg-slate-100 p-2 dark:bg-slate-700`}
-                          >
-                            <svg viewBox="0 0 1024 1024" width="16" height="16">
-                              {icon.map((path, index) => (
-                                <path
-                                  key={index}
-                                  d={path}
-                                  className="fill-slate-600 dark:fill-slate-300"
-                                ></path>
-                              ))}
-                            </svg>
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                <div className="leading-7">
-                  <span className="inline-block  w-[2rem] tracking-wider"></span>
-                  "非真洪到能人我关倒身受赐冈苟位，接郭欲助，就更下秦关非因身付价冇养把是生今啊死身，够不介的国国韩不程游啊韩，九只反向并承人宋整希活觉的快己案，仍使办必内流县二德躲极间明，俭勉穿事将艳挟，得上杨，法。"
-                  你可能会好奇: "你这写的是什么玩意?" ,
-                  实际上,我不相信有人会真的把这段话读一遍, 就拿我自己来说,
-                  我一次也没有读过, 所以如果你要问我这写的是什么? 我也不知道,
-                  因为它是一段 Lorem 。
-                  <p>
-                    <span className="inline-block  w-[2rem] tracking-wider"></span>
-                    如果需要，你可以通过页面中提供的一些方式找到我，或者,
-                    你也可以在本博客
-                    <Link
-                      className=" text-blue-500  dark:text-blue-700"
-                      href={"/messageboard"}
-                    >
-                      留言板
-                    </Link>
-                    和我说点什么, 我将会收到邮件通知。
-                  </p>
-                </div>
+            {/* <Heading level={2}>About Me.</Heading> */}
+            {/* <Heading level={4}>一个博客好像都需要自我介绍</Heading> */}
+            <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+              <div className="inline-block w-48 shrink-0">
+                <LazyImage
+                  height="h-48"
+                  src="http://placeimg.com/480/480/nature"
+                />
+                <ul className="link-group mt-4 flex justify-center gap-2 sm:justify-start">
+                  {findMe.list.map((it) => {
+                    const { id, icon, bgColor, name, url } = it;
+                    return (
+                      <li key={id}>
+                        <a
+                          title={name}
+                          href={url}
+                          target="_blank"
+                          key={id}
+                          className={`flex items-center justify-center bg-BG_MAIN_DEEP p-2 transition-colors duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN_DEEP`}
+                        >
+                          <svg viewBox="0 0 1024 1024" width="16" height="16">
+                            {icon.map((path, index) => (
+                              <path
+                                key={index}
+                                d={path}
+                                className="fill-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:fill-DARK_TEXT_MAIN"
+                              ></path>
+                            ))}
+                          </svg>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <SpacerBar gap={16} />
+
+              <div className="leading-7">
+                <span className="inline-block  w-[2rem] tracking-wider"></span>
+                "非真洪到能人我关倒身受赐冈苟位，接郭欲助，就更下秦关非因身付价冇养把是生今啊死身，够不介的国国韩不程游啊韩，九只反向并承人宋整希活觉的快己案，仍使办必内流县二德躲极间明，俭勉穿事将艳挟，得上杨，法。"
+                你可能会好奇: "你这写的是什么玩意?" ,
+                实际上,我不相信有人会真的把这段话读一遍, 就拿我自己来说,
+                我一次也没有读过, 所以如果你要问我这写的是什么? 我也不知道,
+                因为它是一段 Lorem 。
+                <p>
+                  <span className="inline-block  w-[2rem] tracking-wider"></span>
+                  如果需要，你可以通过页面中提供的一些方式找到我，或者,
+                  你也可以在本博客
+                  <Link
+                    className=" text-blue-500  dark:text-blue-700"
+                    href={"/messageboard"}
+                  >
+                    留言板
+                  </Link>
+                  和我说点什么, 我将会收到邮件通知。
+                </p>
+              </div>
             </div>
+            <SpacerBar gap={16} />
           </div>
 
           {/* {abouts.map((about) => {

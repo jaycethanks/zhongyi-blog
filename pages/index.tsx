@@ -4,6 +4,7 @@ import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
 import SpacerBar from '@/components/common/SpacerBar';
 import RecentPosts from '@/components/HomePage/RecentPosts';
+import Fonts from '@/fonts';
 
 export default function Home() {
   return (
@@ -13,7 +14,11 @@ export default function Home() {
         <Container>
           <Banner />
           <SpacerBar gap={8} />
-          <Heading level={1}>最新发布文章</Heading>
+          <Heading level={1} className={Fonts.SourceHanSerifCN}>
+            最新发布文章
+          </Heading>
+          <SpacerBar gap={8} />
+
           <RecentPosts />
         </Container>
       </Layout>
