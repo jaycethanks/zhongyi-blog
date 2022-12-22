@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bytemd/react": "^1.18.0",
     "@multiavatar/multiavatar": "^1.0.7",
     "@next/font": "^13.0.7",
     "@types/node": "18.11.9",
