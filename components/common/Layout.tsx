@@ -18,7 +18,7 @@ export default ({ children }: PropsWithChildren<pageProps>) => {
   if (loading) return <></>;
   return (
     <div
-      className={`bg-BG_MAIN tracking-wide  text-TEXT_MAIN transition-colors  duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN  dark:text-DARK_TEXT_MAIN ${Fonts.SourceHanSansCNRegular}`}
+      className={`bg-BG_MAIN tracking-wide  text-TEXT_MAIN transition-colors  duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN  dark:text-DARK_TEXT_MAIN ${Fonts.SourceHanSerifCN}`}
     >
       <NavBar />
       <main className="min-h-[calc(100vh-3rem)]">{children}</main>

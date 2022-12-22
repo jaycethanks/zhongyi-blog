@@ -1,9 +1,9 @@
+import RecentPosts from '@/components/App/Post/RecentPosts';
 import Banner from '@/components/Banner';
 import Container from '@/components/common/Container';
 import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
 import SpacerBar from '@/components/common/SpacerBar';
-import RecentPosts from '@/components/HomePage/RecentPosts';
 import Fonts from '@/fonts';
 
 export default function Home() {
@@ -13,13 +13,12 @@ export default function Home() {
       <Layout>
         <Container>
           <Banner />
-          <SpacerBar gap={8} />
-          <Heading level={1} className={Fonts.SourceHanSerifCN}>
-            最新发布文章
-          </Heading>
-          <SpacerBar gap={8} />
-
-          <RecentPosts />
+          <SpacerBar gap={4} />
+          <div className="columns-2 gap-2">
+            <div className="mb-2 h-[48rem] break-inside-avoid bg-red-400"></div>
+            <div className="mb-2 aspect-video h-96 break-inside-avoid bg-blue-400"></div>
+            <div className="mb-2 aspect-square h-96 break-inside-avoid bg-red-400"></div>
+          </div>
         </Container>
       </Layout>
     </div>

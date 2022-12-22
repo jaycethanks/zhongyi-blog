@@ -86,12 +86,13 @@ const NavBar = () => {
     <>
       <header
         className="
-    sticky 
-    inset-x-0
-    top-0 z-50 
-    flex 
-    h-12
+        sticky
+    inset-x-0 
+    top-0
+    z-50 flex 
+    h-12 
     w-full
+    select-none
     items-center
     justify-between
     px-4 

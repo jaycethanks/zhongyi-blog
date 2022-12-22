@@ -49,7 +49,7 @@ const HeadSummary = () => {
                       {value}{" "}
                     </span>
                     <span
-                      className={`${Fonts.SourceHanSerifCN} whitespace-nowrap text-xs text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT`}
+                      className={`whitespace-nowrap text-xs text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT`}
                     >
                       {label}
                     </span>

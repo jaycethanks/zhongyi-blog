@@ -16,7 +16,7 @@ module.exports = {
         DARK_BG_MAIN_DEEP: "#1b2332",
         TEXT_MAIN: "rgb(30, 41, 59)",
         REMARK_TEXT: "#475569",
-        DARK_REMARK_TEXT: "#475569",
+        DARK_REMARK_TEXT: "#8898af",
         DARK_TEXT_MAIN: "rgb(148, 163, 184)",
         COLOR_MAIN: "rgb(59, 130, 246)",
         DARK_COLOR_MAIN: "rgb(37, 99, 235)",

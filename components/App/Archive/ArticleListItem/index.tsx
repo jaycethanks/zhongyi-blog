@@ -28,15 +28,17 @@ const ArticleListItem: React.FC<ArticleListItemProps & StandardProps> = ({
       className="bg-BG_MAIN_DEEP px-4 py-2  transition-colors duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN_DEEP"
       {...rest}
     >
-      <div className="title text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:text-DARK_TEXT_MAIN">
+      <div className="title  text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:text-DARK_TEXT_MAIN">
         <Link
           href="/post/"
-          className=" hover:text-blue-500 dark:hover:text-blue-600"
+          className=" select-text hover:text-blue-500 dark:hover:text-blue-600"
         >
           {title}
         </Link>
       </div>
-      <div className="description text-sm text-REMARK_TEXT">{description}</div>
+      <div className="description select-text text-sm text-REMARK_TEXT">
+        {description}
+      </div>
       <div className="summary-bar pt-2">
         <ul className="summary-start flex gap-6 text-REMARK_TEXT">
           <li className="flex items-center gap-2">

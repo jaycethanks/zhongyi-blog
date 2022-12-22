@@ -12,7 +12,7 @@ export default () => {
         <title>ZY - 留言板</title>
       </Head>
       {/* <BulletChat /> */}
-      <Container>
+      <Container title="留言">
         <div className="min-h-[20rem] w-full p-2 sm:p-6">
           <MessageList />
         </div>

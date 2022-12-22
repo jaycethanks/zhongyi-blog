@@ -229,10 +229,10 @@ const MessageList = () => {
 
             {/* 右边列 */}
             <div
-              className={`mr-[3rem] transition-colors duration-TRANSITION_DURATION ${styles["info-col"]}  flex-1 shrink-0 rounded-lg bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP`}
+              className={`mr-[3rem] transition-colors duration-TRANSITION_DURATION ${styles["info-col"]}  flex-1 shrink-0  bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP`}
             >
               <div
-                className={`${styles["inner-wrapper"]} flex flex-col justify-between rounded-lg p-2`}
+                className={`${styles["inner-wrapper"]} flex flex-col justify-between  p-2`}
               >
                 <div className="top-half ">
                   <div className="header flex justify-between text-REMARK_TEXT dark:text-DARK_REMARK_TEXT">

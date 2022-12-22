@@ -11,7 +11,7 @@ export default (props) => {
       <Head>
         <title>ZY - 归档</title>
       </Head>
-      <Container>
+      <Container title="归档">
         <HeadSummary />
         <ArchiveList />
       </Container>

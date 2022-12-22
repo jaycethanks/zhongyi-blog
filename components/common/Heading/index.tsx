@@ -8,20 +8,29 @@ enum fontSize {
   "text-[1.795rem]" = 2,
   "text-[1.986rem]" = 1,
 }
-interface HeadingLevel {
+type HeadingProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  className?: string;
-}
-export default ({
+  rightSlot?: any;
+} & StandardProps;
+
+const Heading: React.FC<PropsWithChildren & HeadingProps> = ({
   level,
   children,
   className,
-}: PropsWithChildren<HeadingLevel>) => {
+  rightSlot,
+}) => {
   return (
     <p
-      className={`${fontSize[level]} font-medium leading-snug tracking-wide text-inherit`}
+      className={`${fontSize[level]} flex items-center justify-between font-medium leading-snug tracking-wide text-inherit`}
     >
-      <span className={`${className}`}>{children}</span>
+      <span
+        className={`select-none text-TEXT_MAIN dark:text-DARK_TEXT_MAIN ${className}`}
+      >
+        {children}
+      </span>
+      {rightSlot && <div>{rightSlot}</div>}
     </p>
   );
 };
+
+export default Heading;

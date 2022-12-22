@@ -49,10 +49,7 @@ const ArchiveList = () => {
     <div>
       <SpacerBar gap={16} />
       <Block>
-        <Heading
-          level={2}
-          className={`${Fonts.SourceHanSerifCN} font-semibold`}
-        >
+        <Heading level={2} className={`font-semibold`}>
           最近发布
         </Heading>
         <Timeline title={<Heading level={4}>12月</Heading>}>
@@ -64,13 +61,7 @@ const ArchiveList = () => {
             );
           })}
         </Timeline>
-        <Timeline
-          title={
-            <Heading className={Fonts.SourceHanSerifCN} level={4}>
-              10月
-            </Heading>
-          }
-        >
+        <Timeline title={<Heading level={4}>10月</Heading>}>
           {list.map((it) => {
             return (
               <TimelineItem key={it.id} label={it.label}>
@@ -83,10 +74,7 @@ const ArchiveList = () => {
 
       <SpacerBar gap={16} />
       <Block>
-        <Heading
-          level={2}
-          className={`${Fonts.SourceHanSerifCN} font-semibold`}
-        >
+        <Heading level={2} className={` font-semibold`}>
           历史文章
         </Heading>
         <Timeline
