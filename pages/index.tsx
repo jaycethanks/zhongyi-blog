@@ -37,6 +37,7 @@ export default function Home() {
                   setValue(v);
                 }}
               /> */}
+              <Viewer value="# Hello world > 不是吧 `搞笑 world space`"></Viewer>
             </div>
             <div className="mb-2 aspect-video h-96 break-inside-avoid bg-blue-400"></div>
             <div className="mb-2 aspect-square h-96 break-inside-avoid bg-red-400"></div>
