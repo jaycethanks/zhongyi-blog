@@ -105,7 +105,7 @@ export default (props) => {
                               <path
                                 key={index}
                                 d={path}
-                                className="fill-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:fill-DARK_TEXT_MAIN"
+                                className=" fill-TEXT_MAIN transition-colors duration-TRANSITION_DURATION dark:fill-DARK_TEXT_MAIN"
                               ></path>
                             ))}
                           </svg>

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 enum fontSize {
-  "text-base" = 6,
+  "text-base " = 6,
   "text-lg" = 5,
   "text-xl" = 4,
   "text-2xl" = 3,
@@ -21,7 +21,7 @@ const Heading: React.FC<PropsWithChildren & HeadingProps> = ({
 }) => {
   return (
     <p
-      className={`${fontSize[level]} flex items-center justify-between font-medium leading-snug tracking-wide text-inherit`}
+      className={`${fontSize[level]} flex items-center justify-between font-medium leading-snug  tracking-wide text-inherit`}
     >
       <span
         className={`select-none text-TEXT_MAIN dark:text-DARK_TEXT_MAIN ${className}`}
