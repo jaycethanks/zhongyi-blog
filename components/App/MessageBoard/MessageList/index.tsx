@@ -215,10 +215,7 @@ const MessageList = () => {
           >
             {/* 头像列 */}
             <div className="avatar-col flex w-14 shrink-0 flex-col items-center">
-              <img
-                className="h-10 w-10 rounded-full sm:h-14  sm:w-14"
-                src={avatar}
-              />
+              <img className="h-10 w-10  sm:h-14  sm:w-14" src={avatar} />
               <span
                 title={nickname}
                 className="mt-2 w-16 overflow-hidden text-ellipsis whitespace-nowrap text-center  sm:w-20"

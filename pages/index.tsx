@@ -30,9 +30,9 @@ export default function Home(props: any) {
       <Layout>
         <Container>
           <Banner whetherData={whetherData} />
-
           <SpacerBar gap={4} />
           {/* break-inside-avoid */}
+
           <HomeRecentPosts />
         </Container>
       </Layout>

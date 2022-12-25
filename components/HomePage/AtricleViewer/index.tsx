@@ -33,11 +33,11 @@ const AtricleViewer: React.FC<AtricleCardProps & StandardProps> = ({
         </Button>
       </div>
       <p
-        className={`${Fonts.SourceHanSerifCN} text-[1.986rem] font-semibold leading-10 tracking-wide [margin-bottom:1rem!important]`}
+        className={`${Fonts.SourceHanSerifCN} text-[1.986rem] font-semibold leading-10 tracking-wide text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION [margin-bottom:1rem!important] dark:text-DARK_TEXT_MAIN`}
       >
         {title}
       </p>
-      <Heading level={4} className={`${Fonts.KaiTi} font-semibold`}>
+      <Heading level={4} className={`${Fonts.KaiTi} font-semibold `}>
         —— {description}
       </Heading>
       <Viewer value={content}></Viewer>
