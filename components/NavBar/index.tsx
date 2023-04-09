@@ -41,9 +41,6 @@ const DarkModeSwitcher = () => {
   );
 };
 
-
-
-
 // const [menuFold, setMenuFold] = useState(false);
 // const MobileMenu = () => {
 //   const clickHandler = () => {
@@ -88,49 +85,49 @@ const NavBar = () => {
   };
 
   // 收缩展开header
-  const headerRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null);
   const [shrink, setShrink] = useState(false);
-  useEffect(()=>{
-  window.addEventListener("scroll", fixNav);
-  function fixNav() {
-    if (!headerRef.current) return;
-    if (window.scrollY > headerRef.current.offsetHeight + 150) {
-      // header.classList.add('active');
-      setShrink(true);
-    } else {
-      // header.classList.remove('active');
-      setShrink(false);
+  useEffect(() => {
+    window.addEventListener("scroll", fixNav);
+    function fixNav() {
+      if (!headerRef.current) return;
+      if (window.scrollY > headerRef.current.offsetHeight + 150) {
+        // header.classList.add('active');
+        setShrink(true);
+      } else {
+        // header.classList.remove('active');
+        setShrink(false);
+      }
     }
-  }
-  },[])
-
+  }, []);
 
   return (
     <>
       <header
-      ref={headerRef}
+        ref={headerRef}
         className={`
-        ${shrink && styles.active}
-        transition-transform
-        duration-200
-        sticky
-    inset-x-0 
-    top-0
-    z-50 flex 
-    h-12 
-    w-full
-    select-none
-    items-center
-    justify-between
-    px-4 
-    text-sm font-medium
-    shadow-md
-    backdrop-blur-[10px]
-    dark:border-gray-700
-    dark:bg-opacity-50
-    sm:bg-opacity-50
-    sm:backdrop-blur-[20px]
-    sm:backdrop-saturate-150`}
+          ${shrink && 'sm:-translate-y-full'}
+          
+          sticky
+          inset-x-0
+          top-0
+          z-50 
+          flex
+          h-12 w-full 
+          select-none 
+          items-center
+          justify-between
+          px-4
+          text-sm
+          font-medium 
+          shadow-md backdrop-blur-[10px]
+          transition-transform
+          duration-200
+          dark:border-gray-700
+          dark:bg-opacity-50
+          sm:bg-opacity-50
+          sm:backdrop-blur-[20px]
+          sm:backdrop-saturate-150`}
       >
         <nav className="hidden sm:block">
           <ul className="flex h-full items-center gap-4">
@@ -163,7 +160,7 @@ const NavBar = () => {
       <div className="fixed top-12 left-0 right-0  z-[49] sm:hidden">
         <nav
           className={
-            "dark:shadow-white-50 slow-ease fixed top-12 right-0 left-0 z-20 pb-4 transition-transform duration-TRANSITION_DURATION  sm:hidden" +
+            `dark:shadow-white-50 slow-ease fixed top-12  right-0 left-0 z-20 pb-4 transition-transform duration-TRANSITION_DURATION  sm:hidden` +
             `${expanded ? " translate-y-0" : " -translate-y-[150%]"}`
           }
         >
