@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { PropsWithChildren, useEffect, useState } from 'react';
-
-import moonFace from '@/components/Icons/animateIcon/moon-face.png';
-import moon from '@/components/Icons/animateIcon/moon.png';
-import sun from '@/components/Icons/animateIcon/sun.png';
+import Image from "next/image";
+import Link from "next/link";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import styles from "./navbar.module.scss";
+import moonFace from "@/components/Icons/animateIcon/moon-face.png";
+import moon from "@/components/Icons/animateIcon/moon.png";
+import sun from "@/components/Icons/animateIcon/sun.png";
 
 import type { LinkProps } from "next/link";
 declare const LinkProps: LinkProps & {
@@ -40,6 +40,10 @@ const DarkModeSwitcher = () => {
     </div>
   );
 };
+
+
+
+
 // const [menuFold, setMenuFold] = useState(false);
 // const MobileMenu = () => {
 //   const clickHandler = () => {
@@ -58,7 +62,7 @@ const NavItem = ({
   href,
   name,
 }: PropsWithChildren<{ href: string; name: any }>) => (
-  <li className="w-full  sm:h-auto sm:w-auto sm:border-none">
+  <li className="w-full sm:h-auto sm:w-auto sm:border-none">
     <Link
       className={`
         flex 
@@ -82,10 +86,33 @@ const NavBar = () => {
   const menuClickHandler = () => {
     setExpanded(!expanded);
   };
+
+  // 收缩展开header
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [shrink, setShrink] = useState(false);
+  useEffect(()=>{
+  window.addEventListener("scroll", fixNav);
+  function fixNav() {
+    if (!headerRef.current) return;
+    if (window.scrollY > headerRef.current.offsetHeight + 150) {
+      // header.classList.add('active');
+      setShrink(true);
+    } else {
+      // header.classList.remove('active');
+      setShrink(false);
+    }
+  }
+  },[])
+
+
   return (
     <>
       <header
-        className="
+      ref={headerRef}
+        className={`
+        ${shrink && styles.active}
+        transition-transform
+        duration-200
         sticky
     inset-x-0 
     top-0
@@ -103,9 +130,7 @@ const NavBar = () => {
     dark:bg-opacity-50
     sm:bg-opacity-50
     sm:backdrop-blur-[20px]
-    sm:backdrop-saturate-150
-
-    "
+    sm:backdrop-saturate-150`}
       >
         <nav className="hidden sm:block">
           <ul className="flex h-full items-center gap-4">

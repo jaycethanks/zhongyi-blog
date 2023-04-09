@@ -1,7 +1,10 @@
-import Heading from '@/components/common/Heading';
-import styles from "./banner.module.css" 
-import JaycesBlog from "./jaycesblog"
-import SpacerBar from '../common/SpacerBar';
+import Heading from "@/components/common/Heading";
+import styles from "./banner.module.css";
+import JaycesBlog from "./jaycesblog";
+import SpacerBar from "../common/SpacerBar";
+import getDateString from "@/utils/getDateString";
+import Fonts from '@/fonts';
+
 type BannerProps = {
   whetherData: any;
 };
@@ -11,16 +14,31 @@ const Banner: React.FC<StandardProps & BannerProps> = ({
 }) => {
   const { city, data } = whetherData;
   return (
-    <div className={styles.fontancient}>
+    <>
       <div
-        className="flex flex-col h-14 sm:h-24 justify-center items-center border-b border-dashed dark:border-gray-600 text-6xl"
+        className="flex h-14 flex-col items-center justify-center border-b border-dashed text-6xl dark:border-gray-600 sm:h-24"
         {...rest}
       >
-        <JaycesBlog
-          size="w-auto h-full"
-          className="fill-TEXT_MAIN dark:fill-DARK_TEXT_MAIN"
-        ></JaycesBlog>
-        <SpacerBar gap={6}/>
+        <div className="w-full flex sm:justify-between justify-center text-sm ">
+          <div className={`w-1/3 font-semibold hidden sm:flex sm:flex-col justify-end items-start ${Fonts.HeiTi}`}>
+            <p >
+            {getDateString()}
+            </p>
+            <p className="font-thin">You deserve better thing!</p>
+          </div>
+          {/* 通过调整jaycesBlog 的w值以调整其大小 */}
+          <JaycesBlog
+            svgClassName="h-full sm:w-1/4 w-1/3"
+            pathClassName={`fill-TEXT_MAIN dark:fill-DARK_TEXT_MAIN ${styles.fontancient}`}
+          ></JaycesBlog>
+          <div className="w-1/3 font-semibold hidden sm:flex sm:flex-col justify-end items-end ${Fonts.HeiTi}`}">
+            <p>wether</p>
+            <p>Sunday , about 26 degree, in HangZhou</p>
+          </div>
+        </div>
+
+        <SpacerBar gap={6} />
+
         {/* whether */}
         {/* <div className="flex flex-col items-end">
           <ul className="flex flex-col flex-nowrap items-center justify-between gap-1 whitespace-nowrap  sm:flex-row">
@@ -62,7 +80,7 @@ const Banner: React.FC<StandardProps & BannerProps> = ({
           </span>
         </div> */}
       </div>
-    </div>
+    </>
   );
 };
 

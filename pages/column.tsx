@@ -185,7 +185,7 @@ export default (props) => {
                       {
                         it.list.map((article:any)=>{
                           return <li key={article.artid} className="mb-4">
-                            <Link href="#" className='hover:text-COLOR_MAIN dark:hover:to-DARK_COLOR_MAIN underline'>{article.title}</Link>
+                            <Link href="#" className='cursor-pointer hover:underline hover:[-webkit-text-stroke:thin]'>{article.title}</Link>
                           </li>
                         })
                       }
