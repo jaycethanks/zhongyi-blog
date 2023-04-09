@@ -4,7 +4,7 @@ specifiers:
   '@bytemd/react': ^1.18.0
   '@giscus/react': ^2.2.6
   '@multiavatar/multiavatar': ^1.0.7
-  '@next/font': ^13.0.7
+  '@next/font': ^13.0.3
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
