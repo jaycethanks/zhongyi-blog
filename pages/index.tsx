@@ -8,6 +8,7 @@ import Banner from '@/components/Banner';
 import Container from '@/components/common/Container';
 import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
+// import TagLine from 
 import SpacerBar from '@/components/common/SpacerBar';
 import AtricleViewer from '@/components/HomePage/AtricleViewer';
 import Fonts from '@/fonts';
@@ -15,6 +16,7 @@ import Fonts from '@/fonts';
 import { Editor, Viewer } from '@bytemd/react';
 
 import HomeRecentPosts from '../components/HomePage/HomeRecentPosts/index';
+import TagLine from '@/components/Tagline';
 
 const plugins = [
   // gfm(),
@@ -30,6 +32,7 @@ export default function Home(props: any) {
       <Layout>
         <Container>
           <Banner whetherData={whetherData} />
+          <TagLine/>
           <SpacerBar gap={4} />
           {/* break-inside-avoid */}
 

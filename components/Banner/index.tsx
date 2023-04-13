@@ -16,7 +16,7 @@ const Banner: React.FC<StandardProps & BannerProps> = ({
   return (
     <>
       <div
-        className="flex h-14 flex-col items-center justify-center border-b border-dashed text-6xl dark:border-gray-600 sm:h-24"
+        className="flex h-14 flex-col items-center justify-center  text-6xl border-b border-dashed dark:border-gray-600 sm:h-24"
         {...rest}
       >
         <div className="w-full flex sm:justify-between justify-center text-sm ">
