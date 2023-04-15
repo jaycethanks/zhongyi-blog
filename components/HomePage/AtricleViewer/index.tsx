@@ -23,7 +23,7 @@ const AtricleViewer: React.FC<AtricleCardProps & StandardProps> = ({
   return (
     <div
       {...rest}
-      className={`${className} ${style["markdown-body"]}  relative  overflow-hidden  bg-BG_MAIN_DEEP p-6 pt-12 transition-colors duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN_DEEP`}
+      className={`${className} ${style["markdown-body"]}  relative  overflow-hidden  bg-BG_MAIN_DEEP sm:p-6 sm:pt-12 p-2 pt-4 transition-colors duration-TRANSITION_DURATION dark:bg-DARK_BG_MAIN_DEEP`}
     >
       {/* 阅读更多操作文本 */}
       <div className="absolute inset-0 bottom-[unset] flex select-none justify-end">
@@ -33,17 +33,20 @@ const AtricleViewer: React.FC<AtricleCardProps & StandardProps> = ({
         </Button>
       </div>
       <p
-        className={`${Fonts.SourceHanSerifCN} text-[1.986rem] font-semibold leading-10 tracking-wide text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION [margin-bottom:1rem!important] dark:text-DARK_TEXT_MAIN`}
+        className={`${Fonts.SourceHanSerifCN} text-xl sm:text-3xl font-semibold leading-10 tracking-wide text-TEXT_MAIN transition-colors duration-TRANSITION_DURATION  dark:text-DARK_TEXT_MAIN`}
       >
         {title}
       </p>
-      <Heading level={4} className={`${Fonts.KaiTi} font-semibold `}>
+        <p className={`${Fonts.KaiTi}  font-thin text-base`}>
         —— {description}
-      </Heading>
-      <Viewer value={content}></Viewer>
+        </p>
+
+      <div className="hidden sm:block">
+        <Viewer  value={content}></Viewer>
+      </div>
 
       {/* 遮罩 */}
-      <div className="absolute inset-0 top-[unset] h-12  bg-gradient-to-b from-transparent to-BG_MAIN_DEEP transition-colors duration-TRANSITION_DURATION dark:to-DARK_BG_MAIN_DEEP"></div>
+      <div className="hidden sm:block absolute inset-0 top-[unset] h-12  bg-gradient-to-b from-transparent to-BG_MAIN_DEEP transition-colors duration-TRANSITION_DURATION dark:to-DARK_BG_MAIN_DEEP"></div>
     </div>
   );
 };

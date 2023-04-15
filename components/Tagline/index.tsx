@@ -60,7 +60,7 @@ const TagLine = () => {
     // taglineRef.current && taglineRef.current.scrollBy(direction * 50,0)
   }
   return (
-    <div className="flex h-12 flex-nowrap items-center  border-b border-dashed dark:border-gray-600 select-none">
+    <div className="flex h-6 sm:h-12 flex-nowrap items-center  border-b border-dashed dark:border-gray-600 select-none">
     <span className="hover:[-webkit-text-stroke:thin] cursor-pointer inline-block w-4" onClick={()=>handleClick(-1)}>&lt;</span>
     <ul ref={taglineRef} id="tagline" className={`transition-all overflow-x-auto w-full flex flex-nowrap   ${styles.hidden_scrollbar}`}>
       {TAGS.map(({path,name})=>{

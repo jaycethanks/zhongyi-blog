@@ -11,9 +11,9 @@ module.exports = {
     extend: {
       colors: {
         BG_MAIN: "rgb(249 247 241)",
-        BG_MAIN_DEEP: "rgb(240, 237, 230)",
-        DARK_BG_MAIN: "rgb(17,24,39)",
-        DARK_BG_MAIN_DEEP: "#1b2332",
+        BG_MAIN_DEEP: "rgb(244 242 236)",
+        DARK_BG_MAIN: "rgb(14, 20, 31)",
+        DARK_BG_MAIN_DEEP: "rgb(19, 24, 36)",
         TEXT_MAIN: "rgb(30, 41, 59)",
         REMARK_TEXT: "#475569",
         DARK_REMARK_TEXT: "#8898af",

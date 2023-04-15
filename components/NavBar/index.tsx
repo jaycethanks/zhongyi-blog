@@ -127,7 +127,7 @@ const NavBar = () => {
           dark:bg-opacity-50
           sm:bg-opacity-50
           sm:backdrop-blur-[20px]
-          sm:backdrop-saturate-150`}
+          `}
       >
         <nav className="hidden sm:block">
           <ul className="flex h-full items-center gap-4">

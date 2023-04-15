@@ -1,4 +1,4 @@
-import AtricleViewer from '@/components/HomePage/AtricleViewer';
+import AtricleViewer from "@/components/HomePage/AtricleViewer";
 
 const str = `
 
@@ -159,7 +159,7 @@ const HomeRecentPosts: React.FC<StandardProps> = (props) => {
   return (
     <div
       {...props}
-      className="grid grid-rows-[repeat(8,12rem)] gap-2 whitespace-pre-line sm:grid-rows-[repeat(12,12rem)]   md:grid-cols-6 lg:grid-cols-12"
+      className="grid  gap-2 whitespace-pre-line sm:grid-rows-[repeat(7,12rem)]   md:grid-cols-6 lg:grid-cols-12"
     >
       {/* 1 版 */}
       <AtricleViewer
@@ -169,7 +169,7 @@ const HomeRecentPosts: React.FC<StandardProps> = (props) => {
         elit. Quisquam, soluta!"
         content={str}
         className="
-      [column-rule-style:solid] [grid-row:1/3]  [column-rule-width:1px] [column-rule-color:#e2e8f0]
+      [column-rule-style:solid]   [column-rule-width:1px] [column-rule-color:#e2e8f0]
       dark:[column-rule-color:#475569]
       sm:columns-2
       md:[grid-column:1/5]
@@ -184,58 +184,23 @@ const HomeRecentPosts: React.FC<StandardProps> = (props) => {
         elit. Quisquam, soluta!"
         content={str1}
         className="  
-      [grid-row:3/5]
       md:[grid-row:1/5]
       md:[grid-column:5/7]
       lg:[grid-row:1/5] 
       lg:[grid-column:9/13]
     "
       />
-      {/* 2 版 */}
       <AtricleViewer
         title="这是一个标题"
         description="这是一段描述文本，Lorem ipsum dolor sit amet consectetur adipisicing
         elit. Quisquam, soluta!"
         content={str1}
         className=" 
-      [column-rule-style:solid] [column-rule-width:1px]  [column-rule-color:#e2e8f0] [grid-row:5/7]
-      dark:[column-rule-color:#475569]
-      sm:columns-4
-      md:[grid-column:1/7]
-      md:[grid-row:5/8]
-      lg:[grid-row:5/8] 
-      lg:[grid-column:1/13]
-    "
-      />
-      {/* 3 版 */}
-      <AtricleViewer
-        title="这是一个标题"
-        description="这是一段描述文本，Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Quisquam, soluta!"
-        content={str1}
-        className="
-      [column-rule-style:solid] [column-rule-width:1px]  [column-rule-color:#e2e8f0] [grid-row:7/9]
-      dark:[column-rule-color:#475569]
-      sm:columns-4
-      md:[grid-column:1/7]
-      md:[grid-row:8/10]
-      lg:[grid-column:1/13] 
-      lg:[grid-row:8/10]
-    "
-      />
-      {/* 4 版 */}
-      <AtricleViewer
-        title="这是一个标题"
-        description="这是一段描述文本，Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Quisquam, soluta!"
-        content={str1}
-        className=" 
-      hidden
       sm:block
       md:[grid-column:1/3]
-      md:[grid-row:10/13]              
+      md:[grid-row:5/8]              
       lg:[grid-column:1/5] 
-      lg:[grid-row:10/13]
+      lg:[grid-row:5/8]
     "
       />
       <AtricleViewer
@@ -244,11 +209,10 @@ const HomeRecentPosts: React.FC<StandardProps> = (props) => {
         elit. Quisquam, soluta!"
         content={str1}
         className="
-      hidden
       sm:block
-      md:[grid-row:10/13]
+      md:[grid-row:5/8]
       md:[grid-column:3/5]
-      lg:[grid-row:10/13] 
+      lg:[grid-row:5/8] 
       lg:[grid-column:5/9]
     "
       />
@@ -258,12 +222,11 @@ const HomeRecentPosts: React.FC<StandardProps> = (props) => {
         elit. Quisquam, soluta!"
         content={str1}
         className=" 
-      hidden
       sm:block
       md:[grid-column:5/7]
-      md:[grid-row:10/13]
+      md:[grid-row:5/8]
       lg:[grid-column:9/13] 
-      lg:[grid-row:10/13]
+      lg:[grid-row:5/8]
     "
       />
     </div>
