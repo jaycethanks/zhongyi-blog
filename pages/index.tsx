@@ -2,6 +2,7 @@ import 'bytemd/dist/index.css';
 
 import { useState } from 'react';
 
+import About from '@/components/About';
 import ArticleCard from '@/components/App/Post/ArticleCard';
 import RecentPosts from '@/components/App/Post/RecentPosts';
 import Banner from '@/components/Banner';
@@ -31,12 +32,9 @@ export default function Home(props: any) {
     <div>
       <Layout>
         <Container>
-          <Banner whetherData={whetherData} />
-          <TagLine/>
           <SpacerBar gap={4} />
-          {/* break-inside-avoid */}
-
-          <HomeRecentPosts />
+          {/* <HomeRecentPosts /> */}
+          <About />
         </Container>
       </Layout>
     </div>
