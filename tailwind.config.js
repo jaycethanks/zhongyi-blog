@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        BG_MAIN: "rgb(249 247 241)",
-        BG_MAIN_DEEP: "rgb(244 242 236)",
+        BG_MAIN: "rgb(255, 255, 255)",
+        BG_MAIN_DEEP: "rgb(237, 236, 232)",
         DARK_BG_MAIN: "rgb(14, 20, 31)",
         DARK_BG_MAIN_DEEP: "rgb(19, 24, 36)",
         TEXT_MAIN: "rgb(30, 41, 59)",

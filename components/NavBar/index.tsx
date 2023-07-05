@@ -1,17 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import styles from "./navbar.module.scss";
-import moonFace from "@/components/Icons/animateIcon/moon-face.png";
-import moon from "@/components/Icons/animateIcon/moon.png";
-import sun from "@/components/Icons/animateIcon/sun.png";
+import Image from 'next/image';
+import Link from 'next/link';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+
+import moonFace from '@/components/Icons/animateIcon/moon-face.png';
+import moon from '@/components/Icons/animateIcon/moon.png';
+import sun from '@/components/Icons/animateIcon/sun.png';
+
+import styles from './navbar.module.scss';
 
 import type { LinkProps } from "next/link";
 declare const LinkProps: LinkProps & {
   before: string;
 };
 
-const DarkModeSwitcher = () => {
+const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
+  children,
+  className,
+}) => {
   const [isDark, setIsDark] = useState(false);
   const handleClick = () => {
     const html = document.querySelector("html");
@@ -28,7 +33,7 @@ const DarkModeSwitcher = () => {
     }
   }, []);
   return (
-    <div onClick={handleClick} className="cursor-pointer">
+    <div onClick={handleClick} className={`cursor-pointer  ${className}`}>
       <span>
         {isDark ? (
           <Image src={sun} className="h-6 w-6" alt="" />
@@ -49,29 +54,27 @@ const DarkModeSwitcher = () => {
 //   return <button onClick={clickHandler}>{menuFold.toString()}</button>;
 // };
 const DEFAULT_NAV_LIST = [
-  { path: "/post", name: "文章" },
-  { path: "/column", name: "专栏" },
-  { path: "/archive", name: "归档" },
-  { path: "/messageboard", name: "留言" },
-  { path: "/about", name: "关于" },
+  { path: "/post", name: "P", title: 'Posts' },
+  { path: "/archive", name: "A", title: "Archieve" },
+  { path: "/messageboard", name: "B", title: "Board" },
 ];
 const NavItem = ({
   href,
+  title,
   name,
-}: PropsWithChildren<{ href: string; name: any }>) => (
-  <li className="w-full sm:h-auto sm:w-auto sm:border-none">
+}: PropsWithChildren<{ href: string; title: string, name: any }>) => (
+  <li className="shrink-0 h-auto">
     <Link
       className={`
         flex 
-        h-12 
         w-full 
         items-center
         justify-center
-        text-lg
         leading-8
-        sm:border-none
-        sm:text-base
+        text-base
+        min-w-[50px]
       `}
+      title={title}
       href={href}
     >
       <span>{name}</span>
@@ -106,75 +109,33 @@ const NavBar = () => {
       <header
         ref={headerRef}
         className={`
-          ${shrink && 'sm:-translate-y-full'}
-          
+          ${shrink && '-translate-y-full'}
           sticky
           inset-x-0
           top-0
           z-50 
-          flex
-          h-12 w-full 
           select-none 
-          items-center
-          justify-between
-          px-4
           text-sm
-          font-medium 
-          shadow-md backdrop-blur-[10px]
-          transition-transform
+          transition-all
           duration-200
           dark:border-gray-700
-          dark:bg-opacity-50
-          sm:bg-opacity-50
-          sm:backdrop-blur-[20px]
+          bg-BG_MAIN
+          dark:bg-DARK_BG_MAIN
           `}
       >
-        <nav className="hidden sm:block">
-          <ul className="flex h-full items-center gap-4">
+        <nav className='h-12 w-full px-4'>
+          <ul className="flex justify-end h-full  items-center gap-1 sm:gap-4">
             <div>
-              <NavItem href="/" name={<h1>Home</h1>} />
+              <NavItem href="/" name={<h1>/</h1>} title="Home Page" />
             </div>
-            {DEFAULT_NAV_LIST.map(({ path, name }) => {
-              return <NavItem key={path} href={path} name={name} />;
+            {DEFAULT_NAV_LIST.map(({ path, name, title }) => {
+              return <NavItem key={path} href={path} name={name} title={title} />;
             })}
+            <DarkModeSwitcher className="shrink-0" />
           </ul>
         </nav>
-
-        {/* date */}
-        {/* <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center">
-          <span>
-            {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}
-          </span>
-        </div> */}
-
-        <div className="operator flex h-full w-full items-center justify-between sm:w-auto">
-          <DarkModeSwitcher />
-          <div onClick={menuClickHandler} className="sm:hidden">
-            {expanded ? "FOLD" : "UNFOLD"}
-          </div>
-        </div>
       </header>
 
-      {/* mobile */}
-
-      <div className="fixed top-12 left-0 right-0  z-[49] sm:hidden">
-        <nav
-          className={
-            `dark:shadow-white-50 slow-ease fixed top-12  right-0 left-0 z-20 pb-4 transition-transform duration-TRANSITION_DURATION  sm:hidden` +
-            `${expanded ? " translate-y-0" : " -translate-y-[150%]"}`
-          }
-        >
-          <ul className="flex h-full flex-col items-start gap-4 p-4 ">
-            <NavItem key="/" href="/" name="Home" />
-            {DEFAULT_NAV_LIST.map(({ path, name }) => {
-              return <NavItem key={path} href={path} name={name} />;
-            })}
-          </ul>
-        </nav>
-        {!expanded ? null : (
-          <div className="mask fixed top-12 left-0 right-0 bottom-0 z-10  backdrop-blur-[10px]"></div>
-        )}
-      </div>
     </>
   );
 };

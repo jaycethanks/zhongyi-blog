@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar';
 import Fonts from '@/fonts';
 
-interface pageProps {}
+interface pageProps { }
 
 export default ({ children }: PropsWithChildren<pageProps>) => {
   const [loading, setLoading] = useState(true);

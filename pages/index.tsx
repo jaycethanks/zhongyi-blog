@@ -11,12 +11,12 @@ import Layout from '@/components/common/Layout';
 // import TagLine from 
 import SpacerBar from '@/components/common/SpacerBar';
 import AtricleViewer from '@/components/HomePage/AtricleViewer';
+import TagLine from '@/components/Tagline';
 import Fonts from '@/fonts';
 // import gfm from '@bytemd/plugin-gfm'
 import { Editor, Viewer } from '@bytemd/react';
 
 import HomeRecentPosts from '../components/HomePage/HomeRecentPosts/index';
-import TagLine from '@/components/Tagline';
 
 const plugins = [
   // gfm(),
