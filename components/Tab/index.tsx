@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
@@ -16,9 +17,9 @@ type TabItemType = {
 }
 
 
-const TabTitle = ({ title, onClick }: { title: string, onClick: () => void }) => {
+const TabTitle = ({ title, onClick, id, current }: { title: string, current: number, id: number, onClick: () => void }) => {
   return (<>
-    <span className='text-3xl mr-6' onClick={onClick}> {title} </span>
+    <span className={`text-3xl mr-6 cursor-pointer ${id === current ? 'text-REMARK_TEXT dark:DARK_REMARK_TEXT' : 'text-TEXT_MAIN dark:DARK_TEXT_MAIN'}`} onClick={onClick}> {title} </span>
   </>)
 }
 
@@ -35,11 +36,17 @@ const Tab = ({
   return (<>
     {
       tabItems.map(tab => (
-        <TabTitle title={tab.title} onClick={() => handleClick(tab.id)} />
+        <TabTitle key={tab.id} current={current} id={tab.id} title={tab.title} onClick={() => handleClick(tab.id)} />
       ))
     }
     <div>
-      {activeItem?.content}
+      <motion.div
+        key={activeItem?.id}
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+      >
+        {activeItem?.content}
+      </motion.div>
     </div>
   </>)
 };
