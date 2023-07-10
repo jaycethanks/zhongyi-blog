@@ -15,7 +15,7 @@ export default function Home() {
     // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
     <div>
       <Layout>
-        <Container title="文章">
+        <Container title="/文章">
           {/* <Banner /> */}
           {/* <div className="flex flex-col gap-6 sm:flex-row">
             <RightColumn />
