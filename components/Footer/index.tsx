@@ -14,10 +14,10 @@ const more = [
   { path: "/", name: "Github" },
   { path: "/", name: "Git Page" }
 ];
-export default () => (
-  <div className="w-full bg-BG_MAIN_DEEP dark:bg-DARK_BG_MAIN_DEEP">
+const Footer = () => (
+  <div className="w-full bg-BG_MAIN dark:bg-DARK_BG_MAIN">
   <Container>
-    <div className="flex justify-start gap-6 items-start select-none   ">
+    {/* <div className="flex justify-start gap-6 items-start select-none   ">
       <div>
         <Heading level={3}>快速导航</Heading>
         <ul>
@@ -44,8 +44,11 @@ export default () => (
           <li></li>
         </ul>
       </div>
-    </div>
+    </div> */}
+    This is a simple footer
   </Container>
   </div>
 
 );
+
+export default Footer
