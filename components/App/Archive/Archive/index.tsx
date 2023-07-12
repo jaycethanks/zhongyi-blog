@@ -44,7 +44,7 @@ const Block: React.FC<PropsWithChildren & StandardProps> = ({
 }) => {
   return <div className={`p-4 ${className}`}>{children}</div>;
 };
-const ArchiveList = () => {
+const Archive = () => {
   return (
     <div>
       <SpacerBar gap={16} />
@@ -102,4 +102,4 @@ const ArchiveList = () => {
     </div>
   );
 };
-export default ArchiveList;
+export default Archive;
