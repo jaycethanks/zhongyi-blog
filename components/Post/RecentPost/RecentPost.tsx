@@ -10,7 +10,7 @@ type PostType = {
 
 type RecentPostsPropsType = {
 	recentPosts: PostType[];
-	handleLoadMore:()=>void
+	handleLoadMore?:()=>void,
 };
 
 type PostRecordProps = {
@@ -44,7 +44,10 @@ export default function RecentPost({recentPosts,handleLoadMore}: StandardProps &
 					);
 				})
 			}
-			<button onClick={handleLoadMore}>Loading More</button>
+			{
+				handleLoadMore && <button onClick={handleLoadMore}>Loading More</button>
+			}
+			
 			
 		</main>
 	</>);
