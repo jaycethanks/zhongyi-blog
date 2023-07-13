@@ -129,7 +129,7 @@ const Archieve = () => {
       <Head>
         <title>ZY - 归档</title>
       </Head>
-      <Container title="归档">
+      <Container title="/归档">
         <Tab
           tabItems={tabItems}
         ></Tab>

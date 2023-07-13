@@ -120,7 +120,7 @@ const About = () => {
                 你也可以在本博客
                 <Link
                   className=" text-blue-500  dark:text-blue-700"
-                  href={"/messageboard"}
+                  href={"/board"}
                 >
                   留言板
                 </Link>
