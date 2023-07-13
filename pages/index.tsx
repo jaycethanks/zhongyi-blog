@@ -31,8 +31,7 @@ export default function Home(props: any) {
 	// 这里为了开发阶段默认启用夜间模式， 上线应该去掉
 		<div>
 			<Layout>
-				<Container>
-					<SpacerBar gap={4} />
+				<Container title='/'>
 					{/* <HomeRecentPosts /> */}
 					<About />
 				</Container>

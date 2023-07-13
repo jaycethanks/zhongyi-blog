@@ -1,12 +1,13 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 
-import Container from '@/components/common/Container';
-import LazyImage from '@/components/common/LazyImage/index';
-import SpacerBar from '@/components/common/SpacerBar';
+import Container from "@/components/common/Container";
+import LazyImage from "@/components/common/LazyImage/index";
+import SpacerBar from "@/components/common/SpacerBar";
+import BannerImage from "../App/About/BannerImage";
 
-export default (props) => {
+const About = () => {
   const abouts = [
     {
       aboid: "jasldjl",
@@ -58,19 +59,15 @@ export default (props) => {
   };
 
   return (
-    <Container title="About Me.">
-      <Head>
-        <title>ZY - 关于</title>
-      </Head>
-
-      {/* <div className="HeadSlogan relative">
-          <BannerImage
-            height="h-96"
-            src="http://placeimg.com/1280/480/nature"
-            title="关于"
-            subTitle="emmm...好像确实放个图片会好看一些"
-          />
-        </div> */}
+    <>
+      <div className="HeadSlogan relative">
+        <BannerImage
+          height="h-96"
+          src="https://picsum.photos/seed/picsum/1280/480"
+          title="关于"
+          subTitle="emmm...好像确实放个图片会好看一些"
+        />
+      </div>
 
       <div className="p-2 sm:p-0">
         <div className="basic-info card">
@@ -80,7 +77,7 @@ export default (props) => {
             <div className="inline-block w-48 shrink-0">
               <LazyImage
                 height="h-48"
-                src="http://placeimg.com/480/480/nature"
+                src="https://picsum.photos/seed/picsum/480/480"
               />
               <ul className="link-group mt-4 flex justify-center gap-2 sm:justify-start">
                 {findMe.list.map((it) => {
@@ -149,6 +146,8 @@ export default (props) => {
             );
           })} */}
       </div>
-    </Container>
+    </>
   );
 };
+
+export default About;
