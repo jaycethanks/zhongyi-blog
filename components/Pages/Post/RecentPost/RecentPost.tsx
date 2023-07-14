@@ -1,4 +1,3 @@
-import style from './RecentPost.module.scss';
 import {motion} from 'framer-motion';
 
 
@@ -12,8 +11,8 @@ type PostRecordProps = {
 	post: PostType;
 };
 
-const PostRecord: React.FC<PostRecordProps> = ({post, ...props}) => {
-	const {id, title, createdAt, assumeCost} = post;
+const PostRecord: React.FC<PostRecordProps> = ({post}) => {
+	const {title, createdAt, assumeCost} = post;
 	return (<>
 		<p className='transition-colors duration-TRANSITION_DURATION text-xl text-REMARK_TEXT dark:text-DARK_REMARK_TEXT hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN font-mono my-4 cursor-pointer'>{title} <span className='text-sm hover:opacity-75'>{createdAt} {assumeCost}</span></p>
 	</>);

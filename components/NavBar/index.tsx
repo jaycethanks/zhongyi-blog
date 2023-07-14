@@ -1,20 +1,18 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
-import moonFace from '@/components/Icons/animateIcon/moon-face.png';
-import moon from '@/components/Icons/animateIcon/moon.png';
-import sun from '@/components/Icons/animateIcon/sun.png';
-
-import styles from './navbar.module.scss';
+import moon from "@/components/Icons/animateIcon/moon.png";
+import sun from "@/components/Icons/animateIcon/sun.png";
 
 import type { LinkProps } from "next/link";
+import eventBus from "@/utils/useEventBus";
+
 declare const LinkProps: LinkProps & {
   before: string;
 };
 
 const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
-  children,
   className,
 }) => {
   const [isDark, setIsDark] = useState(false);
@@ -23,6 +21,7 @@ const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
     const state = html?.classList.toggle("dark");
     window.localStorage.setItem("theme", state ? state?.toString() : "false");
     setIsDark(!isDark);
+    eventBus.emit("toggleTheme", isDark);
   };
   useEffect(() => {
     const savedTheme = window?.localStorage.getItem("theme");
@@ -54,7 +53,7 @@ const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
 //   return <button onClick={clickHandler}>{menuFold.toString()}</button>;
 // };
 const DEFAULT_NAV_LIST = [
-  { path: "/post", name: "P", title: 'Posts' },
+  { path: "/post", name: "P", title: "Posts" },
   { path: "/archieve", name: "A", title: "Archieve" },
   { path: "/board", name: "B", title: "Board" },
 ];
@@ -62,17 +61,17 @@ const NavItem = ({
   href,
   title,
   name,
-}: PropsWithChildren<{ href: string; title: string, name: any }>) => (
-  <li className="shrink-0 h-auto">
+}: PropsWithChildren<{ href: string; title: string; name: any }>) => (
+  <li className="h-auto shrink-0">
     <Link
       className={`
         flex 
         w-full 
+        min-w-[50px]
         items-center
         justify-center
-        leading-8
         text-base
-        min-w-[50px]
+        leading-8
       `}
       title={title}
       href={href}
@@ -82,11 +81,6 @@ const NavItem = ({
   </li>
 );
 const NavBar = () => {
-  const [expanded, setExpanded] = useState(false);
-  const menuClickHandler = () => {
-    setExpanded(!expanded);
-  };
-
   // 收缩展开header
   const headerRef = useRef<HTMLDivElement>(null);
   const [shrink, setShrink] = useState(false);
@@ -109,33 +103,34 @@ const NavBar = () => {
       <header
         ref={headerRef}
         className={`
-          ${shrink && '-translate-y-full'}
+          ${shrink && "-translate-y-full"}
           sticky
           inset-x-0
           top-0
           z-50 
           select-none 
+          bg-BG_MAIN
           text-sm
           transition-all
           duration-200
           dark:border-gray-700
-          bg-BG_MAIN
           dark:bg-DARK_BG_MAIN
           `}
       >
-        <nav className='h-12 w-full px-4'>
-          <ul className="flex justify-end h-full  items-center gap-1 sm:gap-4">
+        <nav className="h-12 w-full px-4">
+          <ul className="flex h-full items-center  justify-end gap-1 sm:gap-4">
             <div>
               <NavItem href="/" name={<h1>/</h1>} title="Home Page" />
             </div>
             {DEFAULT_NAV_LIST.map(({ path, name, title }) => {
-              return <NavItem key={path} href={path} name={name} title={title} />;
+              return (
+                <NavItem key={path} href={path} name={name} title={title} />
+              );
             })}
             <DarkModeSwitcher className="shrink-0" />
           </ul>
         </nav>
       </header>
-
     </>
   );
 };

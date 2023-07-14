@@ -1,37 +1,9 @@
-import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
-
-import Container from "@/components/common/Container";
 import LazyImage from "@/components/common/LazyImage/index";
 import SpacerBar from "@/components/common/SpacerBar";
-import BannerImage from "../App/About/BannerImage";
+import BannerImage from "./BannerImage";
 
 const About = () => {
-  const abouts = [
-    {
-      aboid: "jasldjl",
-      title: "About",
-      subTitle: "让我简单的介绍一下我自己吧!",
-      content:
-        "好吧, 想了很久, 确实没什么好介绍的, 那就祝你 Hava a nice day! 好啦.🎉🎉🎉",
-    },
-    {
-      aboid: "jasasdsl",
-      title: "Things not related to web ?",
-      subTitle: "emmm 写作文一样困难!",
-      content:
-        "鲁迅说, 如果你今天晚睡了一个小时, 那么你这一天就会少休息一个小时",
-    },
-    {
-      aboid: "lkashjahsd",
-      title: "This blog project?",
-      subTitle: "",
-      content:
-        "该博客基于前台基于 Nextjs + GraphQL + Tailwindcss/Sass 构建, 后台管理发文系统 采用了 Antdpro 集成框架, Server 端,采用了 Nestjs, Mysql, Prisma, GraphQL Server, 以及 Nginx 用于页面Serve + 静态资源服务.",
-    },
-  ];
-
   const findMe = {
     title: "如何找到我?",
     subTitle: "你可以在这些地方发现我",
@@ -81,7 +53,7 @@ const About = () => {
               />
               <ul className="link-group mt-4 flex justify-center gap-2 sm:justify-start">
                 {findMe.list.map((it) => {
-                  const { id, icon, bgColor, name, url } = it;
+                  const { id, icon, name, url } = it;
                   return (
                     <li key={id}>
                       <a
@@ -109,8 +81,8 @@ const About = () => {
 
             <div className="leading-7">
               <span className="inline-block  w-[2rem] tracking-wider"></span>
-              "非真洪到能人我关倒身受赐冈苟位，接郭欲助，就更下秦关非因身付价冇养把是生今啊死身，够不介的国国韩不程游啊韩，九只反向并承人宋整希活觉的快己案，仍使办必内流县二德躲极间明，俭勉穿事将艳挟，得上杨，法。"
-              你可能会好奇: "你这写的是什么玩意?" ,
+              &quot;非真洪到能人我关倒身受赐冈苟位，接郭欲助，就更下秦关非因身付价冇养把是生今啊死身，够不介的国国韩不程游啊韩，九只反向并承人宋整希活觉的快己案，仍使办必内流县二德躲极间明，俭勉穿事将艳挟，得上杨，法。&quot;
+              你可能会好奇: &quot;你这写的是什么玩意?&quot; ,
               实际上,我不相信有人会真的把这段话读一遍, 就拿我自己来说,
               我一次也没有读过, 所以如果你要问我这写的是什么? 我也不知道,
               因为它是一段 Lorem 。

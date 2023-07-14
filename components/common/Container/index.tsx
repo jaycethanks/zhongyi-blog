@@ -2,7 +2,6 @@ import {type PropsWithChildren} from 'react';
 
 import Heading from '@/components/common/Heading';
 import SpacerBar from '@/components/common/SpacerBar';
-import Fonts from '@/fonts';
 
 type ContainerProps = {
 	className?: string;

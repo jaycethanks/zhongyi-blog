@@ -1,32 +1,17 @@
 import 'bytemd/dist/index.css';
 
-import {useState} from 'react';
-
-import About from '@/components/About';
-import ArticleCard from '@/components/App/Post/ArticleCard';
-import RecentPosts from '@/components/App/Post/RecentPosts';
-import Banner from '@/components/Banner';
+import About from '@/components/Pages/About';
 import Container from '@/components/common/Container';
-import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
-// Import TagLine from
-import SpacerBar from '@/components/common/SpacerBar';
-import AtricleViewer from '@/components/HomePage/AtricleViewer';
-import TagLine from '@/components/Tagline';
-import Fonts from '@/fonts';
-// Import gfm from '@bytemd/plugin-gfm'
-import {Editor, Viewer} from '@bytemd/react';
 
-import HomeRecentPosts from '../components/HomePage/HomeRecentPosts/index';
 
-const plugins = [
-	// Gfm(),
-	// Add more plugins here
-];
-
-export default function Home(props: any) {
+export default function Home() {
+	/**
 	const [value, setValue] = useState('');
 	const {whetherData} = props;
+	*/
+	
+	
 	return (
 	// 这里为了开发阶段默认启用夜间模式， 上线应该去掉
 		<div>
@@ -39,7 +24,7 @@ export default function Home(props: any) {
 		</div>
 	);
 }
-
+/**
 export async function getServerSideProps(context: any) {
 	try {
 		const ip = '149.28.248.35';
@@ -86,3 +71,4 @@ export async function getServerSideProps(context: any) {
 		};
 	}
 }
+ */
