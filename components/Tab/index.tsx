@@ -1,7 +1,4 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from './tab.module.scss';
-import {type PropsWithChildren, ReactElement, type ReactNode, useEffect, useRef, useState} from 'react';
+import {type PropsWithChildren, type ReactNode, useState} from 'react';
 import { motion } from 'framer-motion';
 type TabItemType = {
 	content: (params:any)=>ReactNode | string;

@@ -1,19 +1,4 @@
-import Heading from "@/components/common/Heading";
-import Fonts from "@/fonts";
 import Container from "@/components/common/Container";
-const quickEntrylinks = [
-  { path: "/", name: "Home" },
-  { path: "/post", name: "文章" },
-  { path: "/column", name: "专栏" },
-  { path: "/archive", name: "归档" },
-  { path: "/messageboard", name: "留言" },
-  { path: "/about", name: "关于" },
-];
-
-const more = [
-  { path: "/", name: "Github" },
-  { path: "/", name: "Git Page" }
-];
 const Footer = () => (
   <div className="w-full bg-BG_MAIN dark:bg-DARK_BG_MAIN">
   <Container>

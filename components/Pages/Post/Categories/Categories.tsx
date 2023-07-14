@@ -1,5 +1,3 @@
-import style from './Categories.module.scss';
-
 import {motion} from 'framer-motion';
 
 type CategoryItemType = {
@@ -17,8 +15,8 @@ type CategoryItemProps = {
 	category: CategoryItemType;
 };
 
-const CategoryItem: React.FC<CategoryItemProps> = ({category, ...props}) => {
-	const {id, name, postCount} = category;
+const CategoryItem: React.FC<CategoryItemProps> = ({category}) => {
+	const { name, postCount} = category;
 	return (<>
 		<p className='text-xl text-REMARK_TEXT dark:text-DARK_REMARK_TEXT hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN font-mono my-4 cursor-pointer'>{name} <span className='text-sm hover:opacity-75'>{postCount} </span></p>
 	</>);

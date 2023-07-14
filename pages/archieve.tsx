@@ -2,7 +2,7 @@ import Head from "next/head";
 import Tab from "@/components/Tab";
 import Container from "@/components/common/Container";
 import Layout from "@/components/common/Layout";
-import RecentPost from "@/components/Post/RecentPost/RecentPost";
+import RecentPost from "@/components/Pages/Post/RecentPost/RecentPost";
 import { useState } from "react";
 const _mock = [
   {
@@ -116,7 +116,7 @@ const archieveMock = [
 
 
 const Archieve = () => {
-  const [archieveRecords,setArchieveRecords] = useState<ArchieveRecord[]>(archieveMock)
+  const [archieveRecords] = useState<ArchieveRecord[]>(archieveMock)
   const tabItems = archieveRecords.map(record=>{
     return {
       id:record.id,

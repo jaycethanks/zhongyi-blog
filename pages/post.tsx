@@ -1,15 +1,8 @@
-import RecentPosts from '@/components/App/Post/RecentPosts';
-import Banner from '@/components/Banner';
 import Container from '@/components/common/Container';
-import Heading from '@/components/common/Heading';
 import Layout from '@/components/common/Layout';
-import SpacerBar from '@/components/common/SpacerBar';
 import Tab from '@/components/Tab';
-import Fonts from '@/fonts';
-import RecentPost from '@/components/Post/RecentPost/RecentPost';
-import Categories from '@/components/Post/Categories/Categories';
-import RightColumn from '../components/App/Post/RightColumn/index';
-import TopReads from '../components/App/Post/TopReads/index';
+import RecentPost from '@/components/Pages/Post/RecentPost/RecentPost';
+import Categories from '@/components/Pages/Post/Categories/Categories';
 import { useState } from 'react';
 const _mock = [
   {
@@ -186,7 +179,8 @@ const fake = [
  ]
 export default function Home() {
   const [posts,setPosts] = useState(_mock)
-  const [categories,setCategories] = useState(fake)
+  const [categories] = useState(fake)
+  // setCategories(fake)// mock action
   function handleLoadMore(){
     setPosts([..._mock,..._loadMock])
   }

@@ -7,7 +7,7 @@ const Board =  () => {
       // <Head>
       //   <title>ZY - 留言板</title>
       // </Head>
-      <Container className='bg-white' title="/留言">
+      <Container className='bg-white' title="Resume">
           Resumr
       </Container>
     // </Layout>

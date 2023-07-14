@@ -1,16 +1,23 @@
 import Head from 'next/head';
 import style from "./board.module.scss"
-import BulletChat from '@/components/App/MessageBoard/BulletChat';
-import MessageList from '@/components/App/MessageBoard/MessageList';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import Giscus from '@giscus/react';
-import { useContext, useEffect, useState } from 'react';
+import eventBus from '@/utils/useEventBus';
+import { useState, useEffect } from 'react';
 
 // https://github.com/giscus/giscus/blob/main/README.zh-CN.md
 // https://github.com/giscus/giscus-component
-console.log('[style]: ',style)
 const Board =  () => {
+  
+  const [ theme,setTheme ] = useState()
+  useEffect(()=>{
+    const cacheTheme = localStorage.getItem('theme') === 'false' ? 'light' : 'dark'
+    setTheme(cacheTheme)
+  },[])
+  eventBus.on("toggleTheme",(isLight:Boolean)=>{
+    setTheme(isLight ? "light" : "dark")
+  })
   return (
     <Layout>
       <Head>
@@ -31,7 +38,7 @@ const Board =  () => {
           reactionsEnabled="1"
           emitMetadata="0"
           inputPosition="top"
-          theme="transparent_dark"
+          theme={theme}
           lang="zh-CN"
           loading="lazy"
         />
