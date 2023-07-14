@@ -121,7 +121,7 @@ const Archieve = () => {
     return {
       id:record.id,
       title:record.year,
-      content:<RecentPost recentPosts={record.posts}></RecentPost>
+      content:(toRight:Boolean)=><RecentPost toRight={toRight} recentPosts={record.posts}></RecentPost>
     }
   })
   return (

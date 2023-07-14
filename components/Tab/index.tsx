@@ -4,7 +4,7 @@ import styles from './tab.module.scss';
 import {type PropsWithChildren, ReactElement, type ReactNode, useEffect, useRef, useState} from 'react';
 import { motion } from 'framer-motion';
 type TabItemType = {
-	content: ReactNode | string;
+	content: (params:any)=>ReactNode | string;
 	title: string;
 	id: number;
 };
@@ -30,7 +30,6 @@ const Tab = ({
   // let last = 0;
   const [last,setLast] = useState(0)
   const [toRight,setToRight] = useState(true)
-  
   function handleClick(id: number,index:number) {
     setToRight(index > last)// 当前点击项索引大于上一个，就向右，否则向左
     setCurrent(id);
@@ -38,7 +37,7 @@ const Tab = ({
     // update last
     setLast(index)
   }
-
+  
   return (<>
     {
       tabItems.map((tab,index) => (
@@ -52,9 +51,9 @@ const Tab = ({
         key={activeItem?.id}
         initial={{y:10,x:toRight ? 200 : -200,opacity:0 }}
         animate={{y:0,x:0,opacity:1}}
-        transition={{ duration:.5,type:'spring',bounce: 0.25,damping: 20, }}
+        transition={{ duration:.3,type:'spring',bounce: 0.25,damping: 20, }}
       >
-        {activeItem?.content}
+        {activeItem?.content(toRight)}
       </motion.ul>
     </div>
   </>);

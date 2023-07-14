@@ -207,12 +207,12 @@ export default function Home() {
           <Tab
             tabItems={[
               {
-                content: <RecentPost handleLoadMore={handleLoadMore} recentPosts={posts}></RecentPost>,
+                content:(toRight:Boolean)=> <RecentPost toRight={toRight} handleLoadMore={handleLoadMore} recentPosts={posts}></RecentPost>,
                 title: 'Recent Posts',
                 id: 0,
               },
               {
-                content: <Categories categories={categories}></Categories>,
+                content:(toRight:Boolean)=> <Categories  categories={categories}></Categories>,
                 title: 'Categories',
                 id: 1,
               },

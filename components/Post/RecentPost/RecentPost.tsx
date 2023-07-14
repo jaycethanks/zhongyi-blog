@@ -5,6 +5,7 @@ import {motion} from 'framer-motion';
 type RecentPostsPropsType = {
 	recentPosts: PostType[];
 	handleLoadMore?:()=>void,
+	toRight:Boolean
 };
 
 type PostRecordProps = {
@@ -19,19 +20,20 @@ const PostRecord: React.FC<PostRecordProps> = ({post, ...props}) => {
 	</>);
 };
 
-export default function RecentPost({recentPosts,handleLoadMore}: StandardProps & RecentPostsPropsType) {
+export default function RecentPost({recentPosts,toRight,handleLoadMore}: StandardProps & RecentPostsPropsType) {
 	return (<>
 		<main className='recent-posts'>
 			{
 				recentPosts.map((post, index) => {
 					const {id} = post;
 					return (
+						
 						<motion.li
 							className='list-none'
 							key={id}
-							initial={{y: 10, opacity: 0}}
-							animate={{y: 0, opacity: 1}}
-							transition={{delay: index * 0.08,bounce: 0.25,damping: 20,}}
+							initial={{y: 50,x:toRight ? 100 : -100, opacity: 0}}
+							animate={{y: 0,x:0, opacity: 1}}
+							transition={{delay: index * 0.02,bounce: 0.25,damping: 20,}}
 						>
 							<PostRecord key={id} post={post}></PostRecord>
 						</motion.li>
