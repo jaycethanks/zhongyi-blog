@@ -19,5 +19,11 @@
 //     });
 //   },
 // };
-import mitt from 'mitt'
-export default mitt();
+import mitt, { Emitter }  from 'mitt'
+
+type Events = {
+    toggleTheme: boolean;
+  };
+  
+const mitter: Emitter<Events> = mitt<Events>()
+export default mitter;

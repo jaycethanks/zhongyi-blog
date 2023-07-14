@@ -32,7 +32,7 @@ export default function RecentPost({recentPosts,toRight,handleLoadMore}: Standar
 							key={id}
 							initial={{y: 50,x:toRight ? 100 : -100, opacity: 0}}
 							animate={{y: 0,x:0, opacity: 1}}
-							transition={{delay: index * 0.02,bounce: 0.25,damping: 20,}}
+							transition={{delay: index * 0.02,bounce: 0.75,damping: 20,}}
 						>
 							<PostRecord key={id} post={post}></PostRecord>
 						</motion.li>
