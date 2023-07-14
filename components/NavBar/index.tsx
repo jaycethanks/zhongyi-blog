@@ -53,9 +53,9 @@ const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
 //   return <button onClick={clickHandler}>{menuFold.toString()}</button>;
 // };
 const DEFAULT_NAV_LIST = [
-  { path: "/post", name: "P", title: "Posts" },
-  { path: "/archieve", name: "A", title: "Archieve" },
-  { path: "/board", name: "B", title: "Board" },
+  { path: "/post", name: "Posts", title: "Posts" },
+  { path: "/archieve", name: "Archieve", title: "Archieve" },
+  { path: "/board", name: "Board", title: "Board" },
 ];
 const NavItem = ({
   href,
