@@ -1,5 +1,6 @@
 import { type PropsWithChildren, type ReactNode, useState } from "react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/utils/useIsMobile";
 type TabItemType = {
   content: (params: any) => ReactNode | string;
   title: string;
@@ -16,7 +17,7 @@ type TabTitleType = {
 const TabTitle = ({ title, onClick, id, current }: TabTitleType) => (
   <>
     <span
-      className={`mr-6 cursor-pointer select-none text-3xl transition-colors duration-TRANSITION_DURATION ${
+      className={`mr-6 whitespace-nowrap cursor-pointer select-none text-3xl transition-colors duration-TRANSITION_DURATION ${
         id === current
           ? "text-TEXT_MAIN dark:text-DARK_TEXT_MAIN"
           : "text-REMARK_TEXT dark:text-DARK_REMARK_TEXT"
@@ -45,15 +46,18 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
     setLast(index);
   }
 
+	const isMobile = true
+
+
   return (
     <>
-    <div className="tab-titles flex">
+    <div className="tab-titles flex overflow-x-auto">
       {tabItems.map((tab, index) => (
         <motion.li
           className="list-none"
           key={tab.id}
           initial={{  x: 20, opacity: 0 }}
-          animate={{  x: 0, opacity: 1 }}
+          animate={isMobile ? false  : {  x: 0, opacity: 1 }}
           transition={{ delay: index * 0.07, bounce: 0.25, }}
         >
           <TabTitle
@@ -73,7 +77,7 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
         <motion.ul
           key={activeItem?.id}
           initial={{ y: 10, x: toRight ? 200 : -200, opacity: 0 }}
-          animate={{ y: 0, x: 0, opacity: 1 }}
+          animate={isMobile ? false : { y: 0, x: 0, opacity: 1 }}
           transition={{
             duration: 0.3,
             type: "spring",

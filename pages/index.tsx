@@ -1,28 +1,36 @@
-import 'bytemd/dist/index.css';
+import "bytemd/dist/index.css";
 
-import About from '@/components/Pages/About';
-import Container from '@/components/common/Container';
-import Layout from '@/components/common/Layout';
-
+import About from "@/components/Pages/About";
+import Container from "@/components/common/Container";
+import Layout from "@/components/common/Layout";
+import { motion } from "framer-motion";
+import { useIsMobile } from "@/utils/useIsMobile";
 
 export default function Home() {
-	/**
+  /**
 	const [value, setValue] = useState('');
 	const {whetherData} = props;
 	*/
-	
-	
-	return (
-	// 这里为了开发阶段默认启用夜间模式， 上线应该去掉
-		<div>
-			<Layout>
-				<Container title='/'>
-					{/* <HomeRecentPosts /> */}
-					<About />
-				</Container>
-			</Layout>
-		</div>
-	);
+	const isMobile = true
+  return (
+    // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
+    <div>
+      <Layout>
+        <Container title="/">
+          {/* <HomeRecentPosts /> */}
+          <motion.div
+            className="list-none"
+            initial={{ y: 50, opacity: 0 }}
+            animate={isMobile ? false : { y: 0, opacity: 1 }}
+			transition={{damping: 100,}}
+
+          >
+            <About />
+          </motion.div>
+        </Container>
+      </Layout>
+    </div>
+  );
 }
 /**
 export async function getServerSideProps(context: any) {

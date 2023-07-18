@@ -114,7 +114,6 @@ const archieveMock = [
   
 ];
 
-
 const Archieve = () => {
   const [archieveRecords] = useState<ArchieveRecord[]>(archieveMock)
   const tabItems = archieveRecords.map(record=>{

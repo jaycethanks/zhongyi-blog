@@ -32,14 +32,14 @@ const About = () => {
 
   return (
     <>
-      <div className="HeadSlogan relative">
+      {/* <div className="HeadSlogan relative">
         <BannerImage
           height="h-96"
           src="https://picsum.photos/seed/picsum/1280/480"
           title="关于"
           subTitle="emmm...好像确实放个图片会好看一些"
         />
-      </div>
+      </div> */}
 
       <div className="p-2 sm:p-0">
         <div className="basic-info card">

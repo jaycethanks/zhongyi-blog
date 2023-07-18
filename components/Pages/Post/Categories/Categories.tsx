@@ -1,3 +1,4 @@
+import { useIsMobile } from '@/utils/useIsMobile';
 import {motion} from 'framer-motion';
 
 type CategoryItemType = {
@@ -23,6 +24,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({category}) => {
 };
 
 const Categories = ({categories}: StandardProps & CategoriesType)=> {
+	const isMobile = true
 	return (<>
 		<main className='recent-posts'>
 			{
@@ -33,7 +35,7 @@ const Categories = ({categories}: StandardProps & CategoriesType)=> {
 							className='list-none'
 							key={id}
 							initial={{y: 10, opacity: 0}}
-							animate={{y: 0, opacity: 1}}
+							animate={isMobile ? false : {y: 0, opacity: 1}}
 							transition={{delay: index * 0.1}}
 						>
 							<CategoryItem key={id} category={category}></CategoryItem>
