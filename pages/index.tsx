@@ -1,30 +1,26 @@
-import "bytemd/dist/index.css";
+import 'bytemd/dist/index.css';
 
-import About from "@/components/Pages/About";
-import Container from "@/components/common/Container";
-import Layout from "@/components/common/Layout";
-import { motion } from "framer-motion";
-import { useIsMobile } from "@/utils/useIsMobile";
+import type { HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
+import About from '@/components/Pages/About';
+import Container from '@/components/common/Container';
+import Layout from '@/components/common/Layout';
+import { isMobileDevice } from '@/utils/isMobile';
 
 export default function Home() {
-  /**
-	const [value, setValue] = useState('');
-	const {whetherData} = props;
-	*/
-	const isMobile = true
+  const isMobile = isMobileDevice(navigator);
+  const motionsProps: HTMLMotionProps<'div'> = isMobile
+    ? {}
+    : {
+        initial: { y: 50, opacity: 0 },
+        animate: { y: 0, opacity: 1 },
+        transition: { damping: 100 },
+      };
   return (
-    // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
     <div>
       <Layout>
         <Container title="/">
-          {/* <HomeRecentPosts /> */}
-          <motion.div
-            className="list-none"
-            initial={{ y: 50, opacity: 0 }}
-            animate={isMobile ? false : { y: 0, opacity: 1 }}
-			transition={{damping: 100,}}
-
-          >
+          <motion.div className="list-none" {...motionsProps}>
             <About />
           </motion.div>
         </Container>

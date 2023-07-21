@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import Tab from '@/components/Tab';
 import RecentPost from '@/components/Pages/Post/RecentPost/RecentPost';
 import Categories from '@/components/Pages/Post/Categories/Categories';
-import { useState } from 'react';
+
 const _mock = [
   {
     createdAt: '2023-07-10T03:10:14.747Z',
@@ -83,7 +84,6 @@ const _mock = [
     assumeCost: '7',
     id: '13',
   },
-  
 ];
 const _loadMock = [
   {
@@ -128,85 +128,78 @@ const _loadMock = [
     assumeCost: '5',
     id: '20',
   },
-]
+];
 
 const fake = [
   {
-   "name": "eligendi-animi-harum",
-   "postCount": 90,
-   "id": "1"
+    name: 'eligendi-animi-harum',
+    postCount: 90,
+    id: '1',
   },
   {
-   "name": "nihil-tenetur-magnam",
-   "postCount": 79,
-   "id": "2"
+    name: 'nihil-tenetur-magnam',
+    postCount: 79,
+    id: '2',
   },
   {
-   "name": "ipsam-quidem-quia",
-   "postCount": 55,
-   "id": "3"
+    name: 'ipsam-quidem-quia',
+    postCount: 55,
+    id: '3',
   },
   {
-   "name": "in-alias-doloremque",
-   "postCount": 16,
-   "id": "4"
+    name: 'in-alias-doloremque',
+    postCount: 16,
+    id: '4',
   },
   {
-   "name": "perspiciatis-odit-corporis",
-   "postCount": 36,
-   "id": "5"
+    name: 'perspiciatis-odit-corporis',
+    postCount: 36,
+    id: '5',
   },
   {
-   "name": "beatae-error-optio",
-   "postCount": 29,
-   "id": "6"
+    name: 'beatae-error-optio',
+    postCount: 29,
+    id: '6',
   },
   {
-   "name": "reprehenderit-sit-cum",
-   "postCount": 1,
-   "id": "7"
+    name: 'reprehenderit-sit-cum',
+    postCount: 1,
+    id: '7',
   },
   {
-   "name": "dolorem-culpa-minima",
-   "postCount": 20,
-   "id": "8"
+    name: 'dolorem-culpa-minima',
+    postCount: 20,
+    id: '8',
   },
   {
-   "name": "et-nam-quibusdam",
-   "postCount": 69,
-   "id": "9"
-  }
- ]
+    name: 'et-nam-quibusdam',
+    postCount: 69,
+    id: '9',
+  },
+];
 export default function Home() {
-  const [posts,setPosts] = useState(_mock)
-  const [categories] = useState(fake)
+  const [posts, setPosts] = useState(_mock);
+  const [categories] = useState(fake);
   // setCategories(fake)// mock action
-  function handleLoadMore(){
-    setPosts([..._mock,..._loadMock])
+  function handleLoadMore() {
+    setPosts([..._mock, ..._loadMock]);
   }
   return (
-  // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
+    // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
     <div>
       <Layout>
-        <Container title='/文章'>
-          {/* <Banner /> */}
-          {/* <div className="flex flex-col gap-6 sm:flex-row">
-            <RightColumn />
-            <div className="order-2 sm:order-1">
-              <RecentPosts />
-              <SpacerBar gap={8} />
-              <TopReads />
-            </div>
-          </div> */}
+        <Container title="/文章">
           <Tab
             tabItems={[
               {
-                content:(toRight:Boolean)=> <RecentPost toRight={toRight} handleLoadMore={handleLoadMore} recentPosts={posts}></RecentPost>,
+                content: (toRight: boolean) => (
+                  <RecentPost toRight={toRight} handleLoadMore={handleLoadMore} recentPosts={posts}></RecentPost>
+                ),
                 title: 'Recent Posts',
                 id: 0,
               },
               {
-                content:(toRight:Boolean)=> <Categories  categories={categories}></Categories>,
+                content: (toRight: boolean) => <Categories categories={categories}></Categories>,
                 title: 'Categories',
                 id: 1,
               },
