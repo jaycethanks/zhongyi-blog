@@ -2,13 +2,14 @@ import 'bytemd/dist/index.css';
 
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
+import isMobileDevice from 'is-mobile';
 import About from '@/components/Pages/About';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
-import { isMobileDevice } from '@/utils/isMobile';
 
+// import isMobileDevice from 'is-mobile';
 export default function Home() {
-  const isMobile = isMobileDevice(navigator);
+  const isMobile = isMobileDevice();
   const motionsProps: HTMLMotionProps<'div'> = isMobile
     ? {}
     : {

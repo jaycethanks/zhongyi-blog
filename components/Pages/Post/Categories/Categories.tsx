@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { isMobileDevice } from '@/utils/isMobile';
+import isMobileDevice from 'is-mobile';
 
 interface CategoryItemType {
   id: string
@@ -29,7 +29,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
 };
 
 const Categories = ({ categories }: StandardProps & CategoriesType) => {
-  const isMobile = isMobileDevice(navigator);
+  const isMobile = isMobileDevice();
   return (
     <>
       <main className="recent-posts">

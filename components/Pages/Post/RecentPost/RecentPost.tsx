@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { isMobileDevice } from '@/utils/isMobile';
+import isMobileDevice from 'is-mobile';
 
 interface RecentPostsPropsType {
   recentPosts: PostType[]
@@ -28,7 +28,7 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
 };
 
 export default function RecentPost({ recentPosts, toRight, handleLoadMore }: StandardProps & RecentPostsPropsType) {
-  const isMobile = isMobileDevice(navigator);
+  const isMobile = isMobileDevice();
 
   return (
     <>

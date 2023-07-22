@@ -1,7 +1,7 @@
 import { type PropsWithChildren, type ReactNode, useState } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { isMobileDevice } from '@/utils/isMobile';
+import isMobileDevice from 'is-mobile';
 
 interface TabItemType {
   content: (params: any) => ReactNode | string
@@ -46,7 +46,7 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
     setLast(index);
   }
 
-  const isMobile = isMobileDevice(navigator);
+  const isMobile = isMobileDevice();
   const motionUlProps: HTMLMotionProps<'ul'> = isMobile
     ? {}
     : {
