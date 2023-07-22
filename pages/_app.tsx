@@ -2,28 +2,39 @@ import '../styles/globals.css';
 
 import Head from 'next/head';
 
-import Fonts from '@/fonts';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
+import type { AppProps } from 'next/app';
 
-import type { AppProps } from "next/app";
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: 'http://localhost:4567/graphql',
+    headers: {
+      'uid': process.env.NEXT_PUBLIC_USERID || '',
+      'X-App-Version': '1.0.0',
+    },
+  }),
+  cache: new InMemoryCache(),
+});
 export default function App({ Component, pageProps }: AppProps) {
   const times: any = {
-    "12": "🕛",
-    "1": "🕐",
-    "2": "🕑",
-    "3": "🕒",
-    "4": "🕓",
-    "5": "🕔",
-    "6": "🕕",
-    "7": "🕖",
-    "8": "🕗",
-    "9": "🕘",
-    "10": "🕙",
-    "11": "🕚",
+    12: '🕛',
+    1: '🕐',
+    2: '🕑',
+    3: '🕒',
+    4: '🕓',
+    5: '🕔',
+    6: '🕕',
+    7: '🕖',
+    8: '🕗',
+    9: '🕘',
+    10: '🕙',
+    11: '🕚',
   };
   let hours: any = new Date().getHours();
   hours = (hours % 12 || 12).toString(); // 转12小时制
   return (
     <>
+     <ApolloProvider client={client}>
       {/* https://css-tricks.com/emoji-as-a-favicon/ */}
       {/* 这里的favicon 将会覆盖 /public/ 下的ico */}
       <Head>
@@ -41,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <main className={Fonts.SongJianTi}> */}
         <Component {...pageProps} />
       </main>
+      </ApolloProvider>
     </>
   );
 }

@@ -5,10 +5,18 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "placeimg.com",
+        protocol: 'http',
+        hostname: 'placeimg.com',
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/file/:path*',
+        destination: 'http://localhost:8989/:path*', // Proxy to Backend
+      },
+    ];
   },
 };
 

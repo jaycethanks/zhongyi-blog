@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
     "@bytemd/react": "^1.18.0",
     "@giscus/react": "^2.2.6",
     "@multiavatar/multiavatar": "^1.0.7",
     "@next/font": "^13.0.3",
+    "@sunzhongyi/react-svg-box": "^1.0.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
@@ -23,9 +25,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.56.2",
-    "swiper": "^8.4.5"
+    "swiper": "^8.4.5",
+    "uninstall": "^0.0.0"
   },
   "devDependencies": {
+    "@expo/webpack-config": "^18.1.2",
     "@laison/eslint-config": "^0.0.18",
     "@typescript-eslint/eslint-plugin": ">=5.57.0",
     "@typescript-eslint/parser": ">=5.57.0",
