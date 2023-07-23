@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useQuery } from '@apollo/client';
 import Tab from '@/components/Tab';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import RecentPost from '@/components/Pages/Post/RecentPost/RecentPost';
+import type { ArchieveInterface } from '@/apis/QueryList';
+import { ARCHIEVE } from '@/apis/QueryList';
 
 const _mock = [
   {
@@ -116,12 +118,12 @@ const archieveMock = [
 console.log('archieveMock', archieveMock);
 
 const Archieve = () => {
-  const [archieveRecords] = useState<ArchieveRecord[]>(archieveMock);
-  const tabItems = archieveRecords.map((record) => {
+  const { loading, error, data } = useQuery<{ archieves: ArchieveInterface[] }>(ARCHIEVE);
+  const tabItems = (data?.archieves || []).map((record) => {
     return {
-      id: record.id,
+      id: +record.year,
       title: record.year,
-      content: (toRight: boolean) => <RecentPost toRight={toRight} recentPosts={record.posts}></RecentPost>,
+      content: (toRight: boolean) => <RecentPost toRight={toRight} recentPosts={record?.posts}></RecentPost>,
     };
   });
   return (

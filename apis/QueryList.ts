@@ -16,11 +16,11 @@ export const GET_ABOUT = gql`
 `;
 
 export interface RecentPostInterface {
-  title: string
-  createdAt: string
-  artid: string
-  banner: string
-  description: string
+  title?: string
+  createdAt?: string
+  artid?: string
+  banner?: string
+  description?: string
 }
 export const RECENT_POSTS = gql`
   query {
@@ -48,5 +48,21 @@ export const CATEGORIES = gql`
     relateCount
     description
   }
+  }
+`;
+export interface ArchieveInterface {
+  year: string
+  posts: RecentPostInterface[]
+}
+export const ARCHIEVE = gql`
+  query {
+    archieves{
+      year
+      posts{
+        artid
+        createdAt
+        title
+      }
+    }
   }
 `;

@@ -7,7 +7,7 @@ import type { AppProps } from 'next/app';
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'http://localhost:4567/graphql',
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
     headers: {
       'uid': process.env.NEXT_PUBLIC_USERID || '',
       'X-App-Version': '1.0.0',
