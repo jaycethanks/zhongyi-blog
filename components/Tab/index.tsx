@@ -47,6 +47,7 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
   }
 
   const isMobile = isMobileDevice();
+
   const motionUlProps: HTMLMotionProps<'ul'> = isMobile
     ? {}
     : {
@@ -59,22 +60,20 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
           damping: 20,
         },
       };
-
   return (
     <>
       <div className="tab-titles flex overflow-x-auto">
         {/* tab titles */}
         {tabItems.map((tab, index) => {
-          // const motionProps: HTMLMotionProps<'li'> = isMobile
-          //   ? {}
-          //   : {
-          //       initial: { x: 20, opacity: 0 },
-          //       animate: { x: 0, opacity: 1 },
-          //       transition: { delay: index * 0.07, bounce: 0.25 },
-          //     };
-          const motionProps: HTMLMotionProps<'li'> = {};
+          const motionlLiProps: HTMLMotionProps<'li'> = isMobile
+            ? {}
+            : {
+                initial: { x: 20, opacity: 0 },
+                animate: { x: 0, opacity: 1 },
+                transition: { delay: index * 0.07, bounce: 0.25 },
+              };
           return (
-            <motion.li className="list-none" key={tab.id} {...motionProps}>
+            <motion.li className="list-none" key={tab.id} {...motionlLiProps}>
               <TabTitle
                 key={tab.id}
                 current={current}
