@@ -3,10 +3,15 @@ import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import dayjs from 'dayjs';
 import type { RecentPostInterface } from '@/apis/QueryList';
+import SimplestLoading from '@/components/Loading/SimplestLoading';
 
 interface RecentPostsPropsType {
   recentPosts: RecentPostInterface[] | undefined
   toRight: boolean
+  title: string
+  enableLoadMore?: boolean
+  handleLoad?: (title: string) => void
+  loading?: boolean
 }
 
 interface PostRecordProps {
@@ -28,7 +33,7 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   );
 };
 
-export default function RecentPost({ recentPosts, toRight }: StandardProps & RecentPostsPropsType) {
+export default function RecentPost({ recentPosts, toRight, title, enableLoadMore = false, handleLoad, loading = false }: StandardProps & RecentPostsPropsType) {
   const isMobile = isMobileDevice();
 
   return (
@@ -49,6 +54,10 @@ export default function RecentPost({ recentPosts, toRight }: StandardProps & Rec
             </motion.li>
             );
           })}
+          {
+
+            enableLoadMore && (<>{ loading ? <SimplestLoading/> : <button onClick={() => handleLoad?.(title)}>加载更多</button>}</>)
+          }
 
       </main>
     </>

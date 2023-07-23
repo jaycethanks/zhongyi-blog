@@ -31,7 +31,7 @@ const TabTitle = ({ title, onClick, id, current }: TabTitleType) => (
 );
 
 const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
-  const [current, setCurrent] = useState(tabItems[0].id);
+  const [current, setCurrent] = useState(tabItems[0]?.id);
   let activeItem = tabItems.find(it => it.id === current);
 
   // last 用于记录上一个tab index,

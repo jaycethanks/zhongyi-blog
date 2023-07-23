@@ -54,9 +54,9 @@ export interface ArchieveInterface {
   year: string
   posts: RecentPostInterface[]
 }
-export const ARCHIEVE = gql`
+export const ARCHIEVE = (perMaxSize: number) => gql`
   query {
-    archieves{
+    archieves(perMaxSize:${perMaxSize}){
       year
       posts{
         artid
@@ -65,4 +65,28 @@ export const ARCHIEVE = gql`
       }
     }
   }
+`;
+
+/**
+ *
+ * @param pageInfo
+ * @param pageInfo.size append 条目数
+ * @param pageInfo.year 查询年份
+ * @param pageInfo.start 当前条目的结束索引位， 也就是当前的 数据列表.length
+ * @returns RecentPostInterface[]
+ */
+export const QUERY_MORE = (pageInfo: { size: number; year: string; start: number }) => gql`
+query{
+  queryMore(pageInfo:{
+    size:${pageInfo.size}
+    year:"${pageInfo.year}"
+    start:${pageInfo.start}
+  }){
+    title
+    createdAt
+    artid
+    banner
+    description
+  }
+}
 `;
