@@ -16,10 +16,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
   const { name, relateCount, catid, description } = category;
   return (
     <>
-      <p className="my-4 cursor-pointer font-mono text-xl text-REMARK_TEXT hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
-        {name} <span className="text-sm hover:opacity-75">{relateCount} </span>
+      <p className="mt-8 cursor-pointer font-mono text-xl text-REMARK_TEXT  dark:text-DARK_REMARK_TEXT ">
+        <span className='hover:dark:text-DARK_TEXT_MAIN hover:text-TEXT_MAIN'>{name} </span>
+        <span className="text-sm hover:opacity-75">{relateCount} </span>
       </p>
-      <p>{description}</p>
+      <p className='my-0 cursor-pointer font-mono text-sm text-REMARK_TEXT  dark:text-DARK_REMARK_TEXT '>{description}</p>
     </>
   );
 };
