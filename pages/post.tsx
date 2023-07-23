@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import Tab from '@/components/Tab';
@@ -6,12 +5,13 @@ import RecentPost from '@/components/Pages/Post/RecentPost/RecentPost';
 import Categories from '@/components/Pages/Post/Categories/Categories';
 import type { CategoryInterface, RecentPostInterface } from '@/apis/QueryList';
 import { CATEGORIES, RECENT_POSTS } from '@/apis/QueryList';
-import SimplestLoading from '@/components/Loading/SimplestLoading';
+import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 
-export default function Home() {
-  const { loading, error, data } = useQuery<{ recentPosts: RecentPostInterface[] }>(RECENT_POSTS);
-  const { loading: _loading, error: _error, data: _data } = useQuery<{ categories: CategoryInterface[] }>(CATEGORIES);
-  console.log('loading', loading);
+interface HomeProps {
+  recentPosts: RecentPostInterface[]
+  categories: CategoryInterface[]
+}
+export default function Home({ recentPosts, categories }: HomeProps) {
   return (
     // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
     <div>
@@ -20,19 +20,13 @@ export default function Home() {
           <Tab
             tabItems={[
               {
-                content: (toRight: boolean) => (
-                  loading
-                    ? <SimplestLoading/>
-                    : <RecentPost toRight={toRight} recentPosts={data?.recentPosts}></RecentPost>
-                ),
+                content: (toRight: boolean) => <RecentPost toRight={toRight} recentPosts={recentPosts}></RecentPost>,
                 title: 'Recent Posts',
                 id: 0,
               },
               {
-                content: (toRight: boolean) => (_loading
-                  ? <SimplestLoading/>
-                  : <Categories categories={_data?.categories}></Categories>
-                ),
+                content: (toRight: boolean) =>
+                   <Categories categories={categories}></Categories>,
                 title: 'Categories',
                 id: 1,
               },
@@ -42,4 +36,23 @@ export default function Home() {
       </Layout>
     </div>
   );
+}
+
+async function recentPostsData(): Promise<{ recentPosts: RecentPostInterface[] } > {
+  return await SericeSideGraphQLClient.request(RECENT_POSTS);
+}
+async function categoriesData(): Promise<{ categories: CategoryInterface[] }> {
+  return await SericeSideGraphQLClient.request(CATEGORIES);
+}
+
+// 基于时间的增量渲染（ISR）
+export async function getStaticProps() {
+  const [{ recentPosts }, { categories }] = await Promise.all([recentPostsData(), categoriesData()]);
+  return {
+    props: {
+      recentPosts, categories,
+    },
+    // 重新生成页面的时间间隔为 1 小时
+    revalidate: 3600,
+  };
 }

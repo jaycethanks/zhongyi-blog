@@ -3,12 +3,12 @@ import 'bytemd/dist/index.css';
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
-import { GraphQLClient } from 'graphql-request';
 import About from '@/components/Pages/About';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import SimplestLoading from '@/components/Loading/SimplestLoading';
 import { GET_ABOUT } from '@/apis/QueryList';
+import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 
 // import isMobileDevice from 'is-mobile';
 export default function Home({ data }) {
@@ -34,12 +34,10 @@ export default function Home({ data }) {
     </div>
   );
 }
-// SSG
+// 基于时间的增量渲染（ISR）
 export async function getStaticProps() {
 //   const { loading, error, data } = useQuery<{ about: ABOUT }>(GET_ABOUT);
-  const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHQL_API_URL || '');
-  client.setHeader('uid', process.env.NEXT_PUBLIC_USERID || '');
-  const data = await client.request(GET_ABOUT);
+  const data = await SericeSideGraphQLClient.request(GET_ABOUT);
   return {
     props: {
       data,
