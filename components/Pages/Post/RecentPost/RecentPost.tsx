@@ -2,7 +2,6 @@ import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import dayjs from 'dayjs';
-import SimplestLoading from '@/components/Loading/SimplestLoading';
 import type { RecentPostInterface } from '@/apis/QueryList';
 
 interface RecentPostsPropsType {
@@ -35,9 +34,7 @@ export default function RecentPost({ recentPosts, toRight }: StandardProps & Rec
   return (
     <>
       <main className="recent-posts">
-        { !recentPosts && <SimplestLoading/>}
-        { recentPosts && <>
-          {recentPosts?.map((post, index) => {
+          {(recentPosts || []).map((post, index) => {
             const { artid } = post;
             const motionProps: HTMLMotionProps<'li'> = isMobile
               ? {}
@@ -52,7 +49,6 @@ export default function RecentPost({ recentPosts, toRight }: StandardProps & Rec
             </motion.li>
             );
           })}
-        </>}
 
       </main>
     </>

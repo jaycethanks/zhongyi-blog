@@ -33,3 +33,20 @@ export const RECENT_POSTS = gql`
   }
   }
 `;
+
+export interface CategoryInterface {
+  name: string
+  relateCount: string
+  catid: string
+  description: string
+}
+export const CATEGORIES = gql`
+  query {
+    categories{
+    catid
+    name
+    relateCount
+    description
+  }
+  }
+`;
