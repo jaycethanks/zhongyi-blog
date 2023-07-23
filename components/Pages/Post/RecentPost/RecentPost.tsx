@@ -18,9 +18,9 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   const { title, createdAt } = post;
   return (
     <>
-      <p className="my-4 cursor-pointer font-mono text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
+      <p className="flex items-start justify-between gap-4  sm:block my-4 cursor-pointer font-mono text-base sm:text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
         {title}{' '}
-        <span className="text-sm hover:opacity-75">
+        <span className="shrink-0 text-sm hover:opacity-75">
           {dayjs(createdAt).format('YYYY/MM/DD')}
         </span>
       </p>
