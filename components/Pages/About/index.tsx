@@ -3,6 +3,7 @@ import SvgBox from '@/components/SvgBox';
 import LazyImage from '@/components/common/LazyImage/index';
 import SpacerBar from '@/components/common/SpacerBar';
 import type { ABOUT } from '@/apis/QueryList';
+import SimplestLoading from '@/components/Loading/SimplestLoading';
 
 interface LinkType {
   icon?: string
@@ -10,7 +11,7 @@ interface LinkType {
   url?: string
 }
 const About: React.FC<{ about: ABOUT | undefined }> = ({ about, ...rest }) => {
-  if (!about) return <p>loading...</p>;
+  if (!about) return <SimplestLoading/>;
   const { avatar, links, msg } = about;
   const parsedLinks = JSON.parse(links) as LinkType[];
   return (

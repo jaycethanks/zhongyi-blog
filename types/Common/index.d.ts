@@ -7,5 +7,5 @@ type PostType = {
 	id: string;
 	title: string;
 	createdAt: string;
-	assumeCost: string;
+	assumeCost?: string;
 };

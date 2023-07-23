@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useQuery } from '@apollo/client';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import Tab from '@/components/Tab';
 import RecentPost from '@/components/Pages/Post/RecentPost/RecentPost';
 import Categories from '@/components/Pages/Post/Categories/Categories';
+import type { RecentPostInterface } from '@/apis/QueryList';
+import { RECENT_POSTS } from '@/apis/QueryList';
 
 const _mock = [
   {
@@ -178,12 +181,12 @@ const fake = [
   },
 ];
 export default function Home() {
+  const { loading, error, data } = useQuery<{ recentPosts: RecentPostInterface[] }>(RECENT_POSTS);
+
   const [posts, setPosts] = useState(_mock);
   const [categories] = useState(fake);
   // setCategories(fake)// mock action
-  function handleLoadMore() {
-    setPosts([..._mock, ..._loadMock]);
-  }
+
   return (
     // 这里为了开发阶段默认启用夜间模式， 上线应该去掉
     <div>
@@ -193,7 +196,7 @@ export default function Home() {
             tabItems={[
               {
                 content: (toRight: boolean) => (
-                  <RecentPost toRight={toRight} handleLoadMore={handleLoadMore} recentPosts={posts}></RecentPost>
+                  <RecentPost toRight={toRight} recentPosts={data?.recentPosts}></RecentPost>
                 ),
                 title: 'Recent Posts',
                 id: 0,

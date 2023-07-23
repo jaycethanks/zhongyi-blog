@@ -14,3 +14,22 @@ export const GET_ABOUT = gql`
     }
   }
 `;
+
+export interface RecentPostInterface {
+  title: string
+  createdAt: string
+  artid: string
+  banner: string
+  description: string
+}
+export const RECENT_POSTS = gql`
+  query {
+    recentPosts {
+    title
+    createdAt
+    artid
+    banner
+    description
+  }
+  }
+`;
