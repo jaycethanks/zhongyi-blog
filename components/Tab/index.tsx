@@ -1,6 +1,6 @@
 import { type PropsWithChildren, type ReactNode, useState } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 
 interface TabItemType {
@@ -54,10 +54,10 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
         initial: { y: 10, x: toRight ? 200 : -200, opacity: 0 },
         animate: { y: 0, x: 0, opacity: 1 },
         transition: {
-          duration: 0.3,
+          duration: 10,
           type: 'spring',
           bounce: 0.25,
-          damping: 20,
+          damping: 12,
         },
       };
   return (
@@ -90,9 +90,11 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
 
       {/* tabcontent */}
       <div className="mt-6" key={activeItem?.id}>
+      <AnimatePresence key="animate-presence">
         <motion.ul key={activeItem?.id} {...motionUlProps}>
           {activeItem?.content(toRight)}
         </motion.ul>
+      </AnimatePresence>
       </div>
     </>
   );

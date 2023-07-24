@@ -16,16 +16,16 @@ const Archieve = ({ archieves }: ArchieveType) => {
   const [loading, setLoading] = useState(false);
   const handleLoad = async (title: string) => {
     setLoading(true);
-    const certainArchieve = archieves.find(archieve => archieve.year === title);
+    const certainArchieve = archState.find(archState => archState.year === title);
     const pageInfo = {
       start: certainArchieve?.posts.length || 0, // 从哪个索引位开始继续加载
-      size: 5, // 一次加载的最多条目数
+      size: 10, // 一次加载的最多条目数
       year: title,
     };
     const res = await SericeSideGraphQLClient.request(QUERY_MORE(pageInfo)) as { queryMore: RecentPostInterface[] };
 
     if (res.queryMore.length) {
-      const updatedArchieves = archieves.map((archieve) => {
+      const updatedArchieves = archState.map((archieve) => {
         if (archieve.year === title) {
           return {
             ...archieve,

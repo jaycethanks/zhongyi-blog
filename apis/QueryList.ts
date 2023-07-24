@@ -90,3 +90,61 @@ query{
   }
 }
 `;
+
+interface CategoryDto {
+  catid: string
+  name: string
+}
+interface TagDto {
+  tagid: string
+  name: string
+}
+interface CategoryDto {
+  catid: string
+  name: string
+}
+interface ColumnDto {
+  colid: string
+  name: string
+}
+
+export interface PostDto {
+  artid: string
+  createdAt: Date
+  title: string
+  content?: string
+  category?: CategoryDto
+  tags?: TagDto[] | null
+  cover?: string
+  column?: ColumnDto
+  banner?: boolean
+  description?: string
+  password?: string
+  visible?: boolean
+  status?: number
+}
+export const QUERY_BY_ID = (artid: string) => gql`
+query{
+  article(artid:"${artid}"){
+    artid
+    title
+    cover
+    description
+    password
+    content
+    category{
+      name,
+      catid
+    }
+    column{
+      colid
+      name
+    }
+    tags{
+      tagid
+      name
+    }
+    createdAt
+  }
+}
+`;
