@@ -5,12 +5,19 @@ import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
+import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+import { useEffect, useState } from 'react';
+import Giscus from '@giscus/react';
+import Head from 'next/head';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
 import SpacerBar from '@/components/common/SpacerBar';
+import eventBus from '@/utils/useEventBus';
 
 // import isMobileDevice from 'is-mobile';
 interface PostType {
@@ -18,11 +25,35 @@ interface PostType {
 }
 
 const BackBtn: React.FC<StandardProps> = ({ children }) => {
-  return <Link className='text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl' href="/post">{children}</Link>;
+  return (
+    <Link className="text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl" href="/post">
+      {children}
+    </Link>
+  );
 };
 
 export default function Post({ post }: PostType) {
   const isMobile = isMobileDevice();
+
+  // Gis 主题切换
+  const [theme, setTheme] = useState<string>();
+  useEffect(() => {
+    const cacheTheme
+      = localStorage.getItem('theme') === 'false' ? 'light' : 'dark';
+    setTheme(cacheTheme);
+  }, []);
+  eventBus.on('toggleTheme', (isLight: boolean) => {
+    setTheme(isLight ? 'light' : 'dark');
+  });
+  // 这个插件的主题导入有bug, https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/509
+  // import { funky } from 'react-syntax-highlighter/dist/esm/styles/prism';
+  // 以下是一个异步导入的临时解决方案
+  const [style, setStyle] = useState({});
+  useEffect(() => {
+    import('react-syntax-highlighter/dist/esm/styles/prism/material-dark')
+      .then(mod => setStyle(mod.default));
+  });
+
   const motionsProps: HTMLMotionProps<'div'> = isMobile
     ? {}
     : {
@@ -33,20 +64,63 @@ export default function Post({ post }: PostType) {
   return (
     <div>
       <Layout>
+      <Head>
+        <title>{post?.article?.title}</title>
+      </Head>
         {/* 返回 */}
-        <Container className='py-0'><BackBtn>../</BackBtn></Container>
+        <Container className="py-0">
+          <BackBtn>../</BackBtn>
+        </Container>
         {/* 正文 */}
         <Container title={post?.article?.title || ''}>
-        <SpacerBar gap={6}/>
+          <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
-            <ReactMarkdown>{post?.article?.content || ''}</ReactMarkdown>
+            <ReactMarkdown
+              children={post?.article?.content || ''}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match
+                    ? (
+                    <SyntaxHighlighter
+                      {...props}
+                      children={String(children).replace(/\n$/, '')}
+                      style={style}
+                      language={match[1]}
+                      PreTag="div"
+                    />
+                      )
+                    : (
+                    <code {...props} className={className}>
+                      {children}
+                    </code>
+                      );
+                },
+              }}
+            />
           </motion.div>
         </Container>
 
         {/* 返回 */}
         <Container>
           <BackBtn>cd ..</BackBtn>
-          </Container>
+          <Giscus
+            id="comments"
+            repo="jaycethanks/sunzhongyi-blog-comment-giscus"
+            repoId="R_kgDOIqyzkg"
+            category="Blog-comment"
+            categoryId="DIC_kwDOIqyzks4CTPaB"
+            mapping="title"
+            term="Welcome to @giscus/react component!"
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="top"
+            theme={theme}
+            lang="zh-CN"
+            loading="lazy"
+          />
+        </Container>
       </Layout>
     </div>
   );

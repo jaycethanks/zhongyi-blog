@@ -1,22 +1,22 @@
-import Head from "next/head";
-import style from "./board.module.scss";
-import Container from "@/components/common/Container";
-import Layout from "@/components/common/Layout";
-import Giscus from "@giscus/react";
-import eventBus from "@/utils/useEventBus";
-import { useState, useEffect } from "react";
+import Head from 'next/head';
+import Giscus from '@giscus/react';
+import { useEffect, useState } from 'react';
+import style from './board.module.scss';
+import Container from '@/components/common/Container';
+import Layout from '@/components/common/Layout';
+import eventBus from '@/utils/useEventBus';
 
 // https://github.com/giscus/giscus/blob/main/README.zh-CN.md
 // https://github.com/giscus/giscus-component
 const Board = () => {
   const [theme, setTheme] = useState<string>();
   useEffect(() => {
-    const cacheTheme =
-      localStorage.getItem("theme") === "false" ? "light" : "dark";
+    const cacheTheme
+      = localStorage.getItem('theme') === 'false' ? 'light' : 'dark';
     setTheme(cacheTheme);
   }, []);
-  eventBus.on("toggleTheme", (isLight: Boolean) => {
-    setTheme(isLight ? "light" : "dark");
+  eventBus.on('toggleTheme', (isLight: boolean) => {
+    setTheme(isLight ? 'light' : 'dark');
   });
   return (
     <Layout>
@@ -27,7 +27,7 @@ const Board = () => {
       <Container title="/留言">
         {/* className={style.} */}
         <div
-          className={`min-h-[20rem] w-full p-2 sm:p-6 ${style["giscus-custom"]}`}
+          className={`min-h-[20rem] w-full p-2 sm:p-6 ${style['giscus-custom']}`}
         >
           <Giscus
             id="comments"

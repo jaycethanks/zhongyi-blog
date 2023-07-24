@@ -19,11 +19,12 @@
 //     });
 //   },
 // };
-import mitt, { Emitter }  from 'mitt'
+import type { Emitter } from 'mitt';
+import mitt from 'mitt';
 
-type Events = {
-    toggleTheme: boolean;
-  };
-  
-const mitter: Emitter<Events> = mitt<Events>()
+interface Events {
+  toggleTheme: boolean
+}
+
+const mitter: Emitter<Events> = mitt<Events>();
 export default mitter;
