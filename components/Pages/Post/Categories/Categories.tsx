@@ -49,3 +49,4 @@ const Categories = ({ categories }: StandardProps & CategoriesType) => {
 };
 
 export default Categories;
+

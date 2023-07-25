@@ -45,7 +45,6 @@ export default function RecentPost({
   return (
     <>
       <main className="recent-posts">
-        <AnimatePresence>
           <ul>
             {(recentPosts || []).map((post, index) => {
               const { artid } = post;
@@ -63,7 +62,6 @@ export default function RecentPost({
               );
             })}
           </ul>
-        </AnimatePresence>
 
         <p className="font-mono text-base sm:text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
           {enableLoadMore && (
