@@ -1,32 +1,21 @@
-import 'bytemd/dist/index.css';
-
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
-import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
 import { useEffect, useState } from 'react';
 import Giscus from '@giscus/react';
 import Head from 'next/head';
-import remarkSlug from 'remark-slug';
-import remarkToc from 'remark-toc';
-import Image from 'next/image';
-import d from 'react-syntax-highlighter/dist/esm/styles/prism/one-light';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
 import SpacerBar from '@/components/common/SpacerBar';
+import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 
-// import markdownStyle from '@/styles/markdown-styles.module.scss';
-// import "@/styles/markdown-styles.scss"
 import eventBus from '@/utils/useEventBus';
-
-console.log('d', d);
+import ArticleViewer from '@/components/ArticleViewer';
+import type { StandardProps } from '@/types';
 
 // import isMobileDevice from 'is-mobile';
 interface PostType {
@@ -41,61 +30,24 @@ const BackBtn: React.FC<StandardProps> = ({ children }) => {
   );
 };
 
-const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <linearGradient id="g">
-      <stop stop-color="#333" offset="20%" />
-      <stop stop-color="#222" offset="50%" />
-      <stop stop-color="#333" offset="70%" />
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="#333" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`;
-
-const toBase64 = (str: string) =>
-  typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str);
-
-console.log('[ ]: ', toBase64(shimmer(400, 300)));
-
 export default function Post({ post }: PostType) {
   const isMobile = isMobileDevice();
 
   // 代码段主题
-  const [styles, setStyles] = useState<any>([]);
-  const [style, setStyle] = useState({});
-
-  // 这个插件的主题导入有bug, https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/509
-  // import { funky } from 'react-syntax-highlighter/dist/esm/styles/prism';
-  // 以下是一个异步导入的临时解决方案
-  useEffect(() => {
-    // 在 useEffect 中使用 await 关键字是不允许的，因为 useEffect 函数必须是一个同步函数。如果你想要在 useEffect 中使用异步代码，你可以将异步代码封装成一个函数，并在 useEffect 中调用这个函数。
-    const fetchStyles = async () => {
-      const [{ default: lightStyle }, { default: darkStyle }] = await Promise.all([
-        import('react-syntax-highlighter/dist/esm/styles/prism/one-light'),
-        import('react-syntax-highlighter/dist/esm/styles/prism/one-dark'),
-      ]);
-      setStyles([lightStyle, darkStyle]);
-    };
-    fetchStyles();
-  }, []);
-
+  const [codeStyle, setCodeStyle] = useState<any>(null);
   // Gis 主题切换
   const [theme, setTheme] = useState<string>();
   useEffect(() => {
     const cacheTheme = localStorage.getItem('theme') === 'false' ? 'light' : 'dark';
     setTheme(cacheTheme);
-    setStyle(cacheTheme === 'light' ? styles[0] : styles[1]);
-  }, [styles]);
+    setCodeStyle(cacheTheme === 'light' ? oneLight : oneDark);
+  }, []);
   eventBus.on('toggleTheme', (isLight: boolean) => {
     setTheme(isLight ? 'light' : 'dark');
-    setStyle(isLight ? styles[0] : styles[1]);
+    setCodeStyle(isLight ? oneLight : oneDark);
   });
 
+  // motion Prop Type
   const motionsProps: HTMLMotionProps<'div'> = isMobile
     ? {}
     : {
@@ -117,65 +69,7 @@ export default function Post({ post }: PostType) {
         <Container title={post?.article?.title || ''} >
           <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
-            <ReactMarkdown
-              className='markdown-body'
-              children={post?.article?.content || ''}
-              remarkPlugins={[[remarkSlug], [remarkToc], [remarkGfm]]}
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match
-                    ? (
-                    <SyntaxHighlighter
-                      {...props}
-                      children={String(children).replace(/\n$/, '')}
-                      style={d}
-                      language={match[1]}
-                      PreTag="div"
-                    />
-                      )
-                    : (
-                    <code {...props} className={className}>
-                      {children}
-                    </code>
-                      );
-                },
-                p({ node, className, children, ...props }) {
-                  // const { node } = paragraph
-                  if ((node.children[0] as any).tagName === 'img') {
-                    const image = node.children[0] as any;
-                    const metastring = image.properties.alt;
-                    const alt = metastring?.replace(/ *\{[^)]*\} */g, '');
-                    const metaWidth = metastring.match(/{([^}]+)x/);
-                    const metaHeight = metastring.match(/x([^}]+)}/);
-                    const width = metaWidth ? metaWidth[1] : '768';
-                    const height = metaHeight ? metaHeight[1] : '432';
-                    const isPriority = metastring?.toLowerCase().match('{priority}');
-                    const hasCaption = metastring?.toLowerCase().includes('{caption:');
-                    const caption = metastring?.match(/{caption: (.*?)}/)?.pop();
-
-                    return (
-                      <div className="postImgWrapper">
-                        <Image
-                          src={image.properties.src}
-                          width={width}
-                          height={height}
-                          className="postImg"
-                          alt={alt}
-                          priority={isPriority}
-                          loading="lazy"
-                          placeholder='blur'
-                          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width, height))}`}
-                        />
-                          {hasCaption ? <div className="caption" aria-label={caption}>{caption}</div> : null}
-                      </div>
-                    );
-                  }
-                  return <p>{children}</p>;
-                },
-
-              }}
-            />
+            <ArticleViewer codeStyle={codeStyle} contentStr={post?.article?.content || ''}/>
           </motion.div>
         </Container>
 
