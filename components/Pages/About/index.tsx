@@ -9,7 +9,8 @@ interface LinkType {
   title?: string
   url?: string
 }
-const About: React.FC<{ about: ABOUT }> = ({ about, ...rest }) => {
+const About: React.FC<{ about: ABOUT|null }> = ({ about, ...rest }) => {
+  if(!about) return (<>No Info</>)
   const { avatar, links, msg } = about;
   const parsedLinks = JSON.parse(links) as LinkType[];
   return (
@@ -32,7 +33,7 @@ const About: React.FC<{ about: ABOUT }> = ({ about, ...rest }) => {
                 src={avatar}
               />
               <ul className="link-group mt-4 flex justify-center gap-2 sm:justify-start">
-                {parsedLinks.map((it) => {
+                {(parsedLinks || []).map((it) => {
                   const { title, icon, url } = it;
                   return (
                     <li key={title}>

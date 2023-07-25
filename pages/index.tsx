@@ -38,6 +38,7 @@ export default function Home({ data }) {
 export async function getStaticProps() {
 //   const { loading, error, data } = useQuery<{ about: ABOUT }>(GET_ABOUT);
   const data = await SericeSideGraphQLClient.request(GET_ABOUT);
+  console.log('[data]: ',data)
   return {
     props: {
       data,
