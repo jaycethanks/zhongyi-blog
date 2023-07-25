@@ -3,18 +3,11 @@ import 'bytemd/dist/index.css';
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
-import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import { useEffect, useState } from 'react';
 import Giscus from '@giscus/react';
 import Head from 'next/head';
-import remarkSlug from 'remark-slug';
-import remarkToc from 'remark-toc';
-import Image from 'next/image';
-import d from 'react-syntax-highlighter/dist/esm/styles/prism/one-light';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
@@ -25,8 +18,7 @@ import SpacerBar from '@/components/common/SpacerBar';
 // import markdownStyle from '@/styles/markdown-styles.module.scss';
 // import "@/styles/markdown-styles.scss"
 import eventBus from '@/utils/useEventBus';
-
-console.log('d', d);
+import ArticleViewer from '@/components/ArticleViewer';
 
 // import isMobileDevice from 'is-mobile';
 interface PostType {
@@ -117,65 +109,7 @@ export default function Post({ post }: PostType) {
         <Container title={post?.article?.title || ''} >
           <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
-            <ReactMarkdown
-              className='markdown-body'
-              children={post?.article?.content || ''}
-              remarkPlugins={[[remarkSlug], [remarkToc], [remarkGfm]]}
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match
-                    ? (
-                    <SyntaxHighlighter
-                      {...props}
-                      children={String(children).replace(/\n$/, '')}
-                      style={d}
-                      language={match[1]}
-                      PreTag="div"
-                    />
-                      )
-                    : (
-                    <code {...props} className={className}>
-                      {children}
-                    </code>
-                      );
-                },
-                p({ node, className, children, ...props }) {
-                  // const { node } = paragraph
-                  if ((node.children[0] as any).tagName === 'img') {
-                    const image = node.children[0] as any;
-                    const metastring = image.properties.alt;
-                    const alt = metastring?.replace(/ *\{[^)]*\} */g, '');
-                    const metaWidth = metastring.match(/{([^}]+)x/);
-                    const metaHeight = metastring.match(/x([^}]+)}/);
-                    const width = metaWidth ? metaWidth[1] : '768';
-                    const height = metaHeight ? metaHeight[1] : '432';
-                    const isPriority = metastring?.toLowerCase().match('{priority}');
-                    const hasCaption = metastring?.toLowerCase().includes('{caption:');
-                    const caption = metastring?.match(/{caption: (.*?)}/)?.pop();
-
-                    return (
-                      <div className="postImgWrapper">
-                        <Image
-                          src={image.properties.src}
-                          width={width}
-                          height={height}
-                          className="postImg"
-                          alt={alt}
-                          priority={isPriority}
-                          loading="lazy"
-                          placeholder='blur'
-                          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width, height))}`}
-                        />
-                          {hasCaption ? <div className="caption" aria-label={caption}>{caption}</div> : null}
-                      </div>
-                    );
-                  }
-                  return <p>{children}</p>;
-                },
-
-              }}
-            />
+            <ArticleViewer isDark={false} contentStr={post?.article?.content || ''}/>
           </motion.div>
         </Container>
 
