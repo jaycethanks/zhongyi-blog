@@ -11,7 +11,6 @@ import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
 import SpacerBar from '@/components/common/SpacerBar';
-import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 
 import eventBus from '@/utils/useEventBus';
 import ArticleViewer from '@/components/ArticleViewer';
@@ -34,17 +33,15 @@ export default function Post({ post }: PostType) {
   const isMobile = isMobileDevice();
 
   // 代码段主题
-  const [codeStyle, setCodeStyle] = useState<any>(null);
+  // const [codeStyle, setCodeStyle] = useState<any>(null);
   // Gis 主题切换
   const [theme, setTheme] = useState<string>();
   useEffect(() => {
     const cacheTheme = localStorage.getItem('theme') === 'false' ? 'light' : 'dark';
     setTheme(cacheTheme);
-    setCodeStyle(cacheTheme === 'light' ? oneLight : oneDark);
   }, []);
   eventBus.on('toggleTheme', (isLight: boolean) => {
     setTheme(isLight ? 'light' : 'dark');
-    setCodeStyle(isLight ? oneLight : oneDark);
   });
 
   // motion Prop Type
@@ -69,7 +66,7 @@ export default function Post({ post }: PostType) {
         <Container title={post?.article?.title || ''} >
           <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
-            <ArticleViewer codeStyle={codeStyle} contentStr={post?.article?.content || ''}/>
+            <ArticleViewer isLight={theme === 'light'} contentStr={post?.article?.content || ''}/>
           </motion.div>
         </Container>
 

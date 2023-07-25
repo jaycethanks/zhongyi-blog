@@ -13,7 +13,7 @@ const Container = ({
   title,
 }: PropsWithChildren & ContainerProps) => (
   <div
-    className={`container mx-auto max-w-[65ch] p-8 md:py-4 md:px-4 xl:w-[80%] ${className ?? ''}`}
+    className={`container mx-auto max-w-[70ch] p-8 md:py-4 md:px-4 xl:w-[80%] ${className ?? ''}`}
   >
     <Heading level={1} className={'font-extrabold'}>
       {title}
