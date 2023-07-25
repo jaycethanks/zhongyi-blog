@@ -110,11 +110,11 @@ export default function Post({ post }: PostType) {
             repo="jaycethanks/sunzhongyi-blog-comment-giscus"
             repoId="R_kgDOIqyzkg"
             category="Blog-comment"
-            categoryId="DIC_kwDOIqyzks4CTPaB"
+            categoryId="DIC_kwDOIqyzks4CTPaE"
             mapping="title"
             term="Welcome to @giscus/react component!"
             reactionsEnabled="1"
-            emitMetadata="0"
+            emitMetadata="1"
             inputPosition="top"
             theme={theme}
             lang="zh-CN"

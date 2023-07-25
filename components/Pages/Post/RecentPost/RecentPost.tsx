@@ -10,7 +10,7 @@ import SimplestLoading from '@/components/Loading/SimplestLoading';
 interface RecentPostsPropsType {
   recentPosts: RecentPostInterface[] | undefined
   toRight: boolean
-  title: string
+  title?: string
   enableLoadMore?: boolean
   handleLoad?: (title: string) => void
   loading?: boolean
@@ -25,8 +25,8 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   const { title, createdAt, artid } = post;
   return (
     <>
-      <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
-        <Link href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm hover:opacity-75">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
+      <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
+        <Link  href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm hover:opacity-75">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
       </p>
     </>
   );

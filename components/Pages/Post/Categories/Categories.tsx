@@ -27,6 +27,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
 
 const Categories = ({ categories }: StandardProps & CategoriesType) => {
   const isMobile = isMobileDevice();
+  if(!categories || !categories.length) return <>No Info</>
   return (
     <>
       <main className="recent-posts">

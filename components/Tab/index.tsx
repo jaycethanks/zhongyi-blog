@@ -54,10 +54,9 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
         initial: { y: 10, x: toRight ? 200 : -200, opacity: 0 },
         animate: { y: 0, x: 0, opacity: 1 },
         transition: {
-          duration: 10,
           type: 'spring',
           bounce: 0.25,
-          damping: 12,
+          damping: 20,
         },
       };
   return (
@@ -90,11 +89,9 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
 
       {/* tabcontent */}
       <div className="mt-6" key={activeItem?.id}>
-      <AnimatePresence key="animate-presence">
         <motion.ul key={activeItem?.id} {...motionUlProps}>
           {activeItem?.content(toRight)}
         </motion.ul>
-      </AnimatePresence>
       </div>
     </>
   );
