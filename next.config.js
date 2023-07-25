@@ -7,7 +7,10 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'placeimg.com',
-      },
+      },{
+        protocol:'https',
+        hostname:'raw.githubusercontent.com'
+      }
     ],
   },
   async rewrites() {
