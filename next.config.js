@@ -3,15 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'placeimg.com',
-      },{
-        protocol:'https',
-        hostname:'raw.githubusercontent.com'
-      }
-    ],
+    domains: ['placeimg.com','raw.githubusercontent.com'],
   },
   async rewrites() {
     return [

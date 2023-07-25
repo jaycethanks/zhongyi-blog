@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import "@/styles/markdown-styles.scss"
 
 import Head from 'next/head';
 

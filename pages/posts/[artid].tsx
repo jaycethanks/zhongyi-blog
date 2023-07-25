@@ -18,7 +18,8 @@ import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
 import SpacerBar from '@/components/common/SpacerBar';
 import remarkSlug from 'remark-slug';
-import markdownStyle from '@/styles/markdown-styles.module.css';
+// import markdownStyle from '@/styles/markdown-styles.module.scss';
+// import "@/styles/markdown-styles.scss"
 import remarkToc from 'remark-toc';
 import eventBus from '@/utils/useEventBus';
 import Image from 'next/image'
@@ -112,10 +113,11 @@ export default function Post({ post }: PostType) {
           <BackBtn>../</BackBtn>
         </Container>
         {/* 正文 */}
-        <Container title={post?.article?.title || ''}>
+        <Container title={post?.article?.title || ''} >
           <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
             <ReactMarkdown
+              className='markdown-body'
               children={post?.article?.content || ''}
               remarkPlugins={[remarkSlug,remarkToc,remarkGfm]}
               components={{
@@ -167,34 +169,6 @@ export default function Post({ post }: PostType) {
                     )
                   }
                   return <p>{children}</p>
-                  
-                  // if (node.children[0].tagName === "img") {
-                  //   const image = node.children[0]
-                  //   const metastring = image.properties.alt
-                  //   const alt = metastring?.replace(/ *\{[^)]*\} */g, "")
-                  //   const metaWidth = metastring.match(/{([^}]+)x/)
-                  //   const metaHeight = metastring.match(/x([^}]+)}/)
-                  //   const width = metaWidth ? metaWidth[1] : "768"
-                  //   const height = metaHeight ? metaHeight[1] : "432"
-                  //   const isPriority = metastring?.toLowerCase().match('{priority}')
-                  //   const hasCaption = metastring?.toLowerCase().includes('{caption:')
-                  //   const caption = metastring?.match(/{caption: (.*?)}/)?.pop()
-                
-                  //   return (
-                  //     <div className="postImgWrapper">
-                  //       <Image
-                  //         src={image.properties.src}
-                  //         width={width}
-                  //         height={height}
-                  //         className="postImg"
-                  //         alt={alt}
-                  //         priority={isPriority}
-                  //       />
-                  //         {hasCaption ? <div className="caption" aria-label={caption}>{caption}</div> : null}
-                  //     </div>
-                  //   )
-                  // }
-                  // return <p>{paragraph.children}</p>
                 },
                 
               }}
