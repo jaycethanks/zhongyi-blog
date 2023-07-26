@@ -72,11 +72,13 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
               const caption = metastring?.match(/{caption: (.*?)}/)?.pop();
 
               const [imgSrc, setImgSrc] = useState(image.properties.src);
+              const isValidSrc  = /^(?:https?:\/\/|\/|data:image\/[a-z]+;base64,)[^\s]+\.(?:jpg|jpeg|gif|png|bmp)$/.test(imgSrc)
 
               return (
                 <>
+                {/* Image 的src 如果是 xxx.assets/image-20230130110529790.png 这种错误的数据结构, 将无法被捕获错误,会报错, 而不会进入到 onError */}
                   <Image
-                    src={imgSrc}
+                    src={isValidSrc ? imgSrc : 'data:image/svg+xml;base64,'}
                     width={width}
                     height={height}
                     className="postImg"
