@@ -14,16 +14,16 @@ import SpacerBar from '@/components/common/SpacerBar';
 
 import eventBus from '@/utils/useEventBus';
 import ArticleViewer from '@/components/ArticleViewer';
-import type { StandardProps } from '@/types';
-
+import BackOutlined from '@/components/Icons/BackOutlined';
+import { StandardProps } from '@/types';
 // import isMobileDevice from 'is-mobile';
 interface PostType {
-  post: { article: PostDto } | null
+  post: { article: PostDto } | null;
 }
 
-const BackBtn: React.FC<StandardProps> = ({ children }) => {
+const BackBtn: React.FC<StandardProps & { title?: string }> = ({ children,className, title }) => {
   return (
-    <Link className="text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl" href="/post">
+    <Link title={title} className={`${className} text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl`} href="/post">
       {children}
     </Link>
   );
@@ -63,16 +63,18 @@ export default function Post({ post }: PostType) {
           <BackBtn>../</BackBtn>
         </Container>
         {/* 正文 */}
-        <Container title={post?.article?.title || ''} >
+        <Container title={post?.article?.title || ''}>
           <SpacerBar gap={6} />
           <motion.div className="list-none" {...motionsProps}>
-            <ArticleViewer isLight={theme === 'light'} contentStr={post?.article?.content || ''}/>
+            <ArticleViewer isLight={theme === 'light'} contentStr={post?.article?.content || ''} />
           </motion.div>
         </Container>
 
         {/* 返回 */}
         <Container>
-          <BackBtn>cd ..</BackBtn>
+          <BackBtn title="Back" className=' hover:bg-gray-100 dark:hover:bg-gray-800   inline-flex min-w-[2em]  justify-center'>
+            <BackOutlined />
+          </BackBtn>
           <Giscus
             id="comments"
             repo="jaycethanks/sunzhongyi-blog-comment-giscus"
@@ -95,8 +97,8 @@ export default function Post({ post }: PostType) {
 }
 interface Params {
   params: {
-    artid: string
-  }
+    artid: string;
+  };
 }
 
 // 基于时间的增量渲染（ISR）
