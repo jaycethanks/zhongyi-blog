@@ -71,7 +71,7 @@ async function archieveData(perMaxSize: number): Promise<{ archieves: ArchieveIn
 
 // 基于时间的增量渲染（ISR）
 export async function getStaticProps() {
-  const { archieves } = await archieveData(10);
+  const { archieves } = await archieveData(15);
   return {
     props: {
       archieves,

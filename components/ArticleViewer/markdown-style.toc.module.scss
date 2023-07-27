@@ -1,11 +1,14 @@
 .markdown-toc {
+
   :global {
-    ol {
-      // root container
-      position: fixed;
-      right: 0;
-      li {
-        // toc-item
+    nav.toc_nav{
+      ol {
+        // root container
+        // right: 0;
+        li {
+          list-style: none;
+          // toc-item
+        }
       }
     }
   }

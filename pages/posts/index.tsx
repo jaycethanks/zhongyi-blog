@@ -61,7 +61,7 @@ const Tab = ({ tabItems }: PropsWithChildren<{ tabItems: TabItemType[] }>) => {
       };
   return (
     <>
-      <div className="tab-titles flex overflow-x-auto overflow-y-hidden">
+      <div className="isMobileDevice() flex overflow-x-auto">
         {/* tab titles */}
         {tabItems.map((tab, index) => {
           const motionlLiProps: HTMLMotionProps<'li'> = isMobile
