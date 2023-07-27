@@ -11,7 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.17",
     "@bytemd/react": "^1.18.0",
-    "@giscus/react": "^2.2.6",
+    "@giscus/react": "^2.3.0",
     "@multiavatar/multiavatar": "^1.0.7",
     "@next/font": "^13.0.3",
     "@sunzhongyi/react-svg-box": "^1.0.0",
@@ -29,13 +29,15 @@
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.7",
     "react-syntax-highlighter": "^15.5.0",
+    "rehype-raw": "^6.1.1",
     "remark": "^14.0.3",
     "remark-gfm": "^3.0.1",
     "remark-slug": "^7.0.1",
     "remark-toc": "^8.0.1",
     "sass": "^1.56.2",
     "swiper": "^8.4.5",
-    "uninstall": "^0.0.0"
+    "uninstall": "^0.0.0",
+    "update": "^0.7.4"
   },
   "devDependencies": {
     "@expo/webpack-config": "^18.1.2",
