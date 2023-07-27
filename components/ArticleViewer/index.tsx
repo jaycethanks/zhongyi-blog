@@ -1,11 +1,14 @@
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
+import rehypeRaw from "rehype-raw"
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkSlug from 'remark-slug';
 import Image from 'next/image';
 import { useState } from 'react';
 import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
+import styles from "./markdown-styles.module.scss"
+
 
 // 图片加载时的闪耀效果图
 
@@ -33,11 +36,12 @@ interface ArticleViewerType {
 }
 const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => {
   return (
-    <>
+    <div className={styles['markdown-style']}>
       <ReactMarkdown
         className="markdown-body"
         children={contentStr || ''}
-        remarkPlugins={[[remarkSlug], [remarkToc], [remarkGfm]]}
+        rehypePlugins={[rehypeRaw]}
+        remarkPlugins={[[remarkSlug],[remarkToc,{prefix: 'user-content-',singleTilde:false}],[remarkGfm]]}
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
@@ -103,7 +107,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
           },
         }}
       />
-    </>
+    </div>
   );
 };
 
