@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
   height: 5px;
   overflow: auto;
   float: left;
   margin: 0 10px;
-  background: #000000;
+  background: transparent;
+  background: rgb(255, 255, 255);
 }
 ::-webkit-scrollbar-thumb {
-  background: #b8b8b8;
+  border-radius: .5rem;
+  background: rgb(237, 236, 232);
 }
 .dark ::-webkit-scrollbar {
-  background: #030320;
+  background: rgb(14, 20, 31);
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #34448a;
+  background: rgba(255, 255, 255, 0.41);
 }
 /* @font-face {
   font-family: IBM Plex Sans;
