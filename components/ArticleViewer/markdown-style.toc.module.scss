@@ -1,0 +1,12 @@
+.markdown-toc {
+  :global {
+    ol {
+      // root container
+      position: fixed;
+      right: 0;
+      li {
+        // toc-item
+      }
+    }
+  }
+}

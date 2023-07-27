@@ -1,6 +1,10 @@
 import remarkGfm from 'remark-gfm';
-import remarkToc from 'remark-toc';
+import remarkToc from 'remark-toc'; // NOT WORK 
+import rehypeToc from "@jsdevtools/rehype-toc"
 import rehypeRaw from "rehype-raw"
+import remarkMermaidjs from "remark-mermaidjs"
+import remarkEmoji from 'remark-emoji';
+
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkSlug from 'remark-slug';
@@ -8,10 +12,10 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 import styles from "./markdown-styles.module.scss"
-
+import tocStyle from "./markdown-style.toc.module.scss"
+import React from 'react';
 
 // 图片加载时的闪耀效果图
-
 function generateShimmer(w: number, h: number, isLight = false) {
   const shimmer = (w: number, h: number) => `
 <svg style="opacity: 0.3;" width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -30,6 +34,40 @@ function generateShimmer(w: number, h: number, isLight = false) {
   const toBase64 = (str: string) => window.btoa(str);
   return `data:image/svg+xml;base64,${toBase64(shimmer(w, h))}`;
 }
+
+
+interface NodeTree {
+  type: string;
+  properties: {
+    [key: string]: any;
+  };
+  children: (NodeTree | string)[];
+}
+function renderNodeTree(nodeTree: NodeTree): JSX.Element {
+  const { type, properties, children } = nodeTree;
+
+  const childElements = (children || []).map((child) => {
+    if (typeof child === 'string') {
+      return child;
+    } else {
+      return renderNodeTree(child);
+    }
+  });
+
+  return React.createElement(type, properties, ...childElements);
+}
+
+function customizeTOC(toc:NodeTree){
+  const tocJsx = renderNodeTree(toc)
+  // return <motion.div>{tocJsx}</motion.div>
+  return "Hello"
+  // console.log('[toc]: ',tocJsx)
+}
+
+
+
+
+
 interface ArticleViewerType {
   isLight: boolean // 是否暗色主题
   contentStr: string // markdown 文本
@@ -40,8 +78,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
       <ReactMarkdown
         className="markdown-body"
         children={contentStr || ''}
-        rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[[remarkSlug],[remarkToc,{prefix: 'user-content-',singleTilde:false}],[remarkGfm]]}
+        remarkPlugins={[[remarkToc,{ heading: '\\[toc\\]'}],remarkEmoji,remarkGfm,remarkMermaidjs]}
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
