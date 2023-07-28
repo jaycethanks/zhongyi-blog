@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import type { RecentPostInterface } from '@/apis/QueryList';
 import SimplestLoading from '@/components/Loading/SimplestLoading';
+import { StandardProps } from '@/types';
 
 interface RecentPostsPropsType {
   recentPosts: RecentPostInterface[] | undefined
@@ -25,8 +26,8 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   const { title, createdAt, artid } = post;
   return (
     <>
-      <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
-        <Link  href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm hover:opacity-75">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
+      <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
+        <Link className='hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN'  href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
       </p>
     </>
   );

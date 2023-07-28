@@ -9,11 +9,12 @@ import rehypeRaw from 'rehype-raw';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { Ref, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './markdown-styles.module.scss';
 import tocStyle from './markdown-style.toc.module.scss';
 import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
+import useThrottle from '@/hooks/useThrottle';
 
 // 图片加载时的闪耀效果图
 function generateShimmer(w: number, h: number, isLight = false) {
@@ -36,11 +37,11 @@ function generateShimmer(w: number, h: number, isLight = false) {
 }
 
 interface NodeTree {
-  type: string
+  type: string;
   properties: {
-    [key: string]: any
-  }
-  children: (NodeTree | string)[]
+    [key: string]: any;
+  };
+  children: (NodeTree | string)[];
 }
 
 function renderNodeTree(nodeTree: NodeTree): JSX.Element {
@@ -63,12 +64,13 @@ function customizeTOC(toc: NodeTree) {
 }
 
 interface ArticleViewerType {
-  isLight: boolean // 是否暗色主题
-  contentStr: string // markdown 文本
+  isLight: boolean; // 是否暗色主题
+  contentStr: string; // markdown 文本
 }
 const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => {
   return (
     <div className={styles['markdown-style']}>
+      <div className="toc-anchor"></div>
       <ReactMarkdown
         className="markdown-body "
         children={contentStr || ''}
@@ -77,8 +79,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
-            return !inline && match
-              ? (
+            return !inline && match ? (
               <SyntaxHighlighter
                 {...props}
                 children={String(children).replace(/\n$/, '')}
@@ -86,12 +87,11 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 language={match[1]}
                 PreTag="div"
               />
-                )
-              : (
+            ) : (
               <code {...props} className={className}>
                 {children}
               </code>
-                );
+            );
           },
           p({ node, className, children, ...props }) {
             // const { node } = paragraph
@@ -109,7 +109,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
 
               const [imgSrc, setImgSrc] = useState(image.properties.src);
               const isValidSrc = /^(?:https?:\/\/|\/|data:image\/[a-z]+;base64,)[^\s]+\.(?:jpg|jpeg|gif|png|bmp)$/.test(
-                imgSrc,
+                imgSrc
               );
 
               return (
@@ -124,54 +124,74 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                     priority={isPriority}
                     loading="lazy"
                     placeholder="blur"
-                    onError={e => setImgSrc(generateShimmer(width, height, isLight))}
+                    onError={(e) => setImgSrc(generateShimmer(width, height, isLight))}
                     blurDataURL={generateShimmer(width, height, isLight)}
                   />
-                  {hasCaption
-                    ? (
+                  {hasCaption ? (
                     <div className="caption" aria-label={caption}>
                       {caption}
                     </div>
-                      )
-                    : null}
+                  ) : null}
                 </>
               );
             }
             return <p>{children}</p>;
           },
           nav({ node, className, children, ...props }) {
+            // MutableRefObject<HTMLElement | null>
+            const navRef = useRef(null);
+            // const [width, setWidth] = useState(window.innerWidth);
+            const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0, top: 0, bottom: 0 });
+            const gap = 64;
+            
+            
+            // 定义一个回调函数来更新组件的状态
+            function handleResize() {
+              const { innerHeight, innerWidth } = window;
+              console.log('[innerWidth]: ',innerWidth)
+              if (navRef && navRef.current) {
+                const { offsetHeight, offsetWidth } = navRef.current as unknown as HTMLDivElement;
+                setDragConstraints({ left: 0,top: 0, right: innerWidth - offsetWidth,  bottom: innerHeight - offsetHeight });
+                // (navRef.current as unknown as HTMLDivElement).style.marginLeft = '64px';
+              }
+            }
+            const throttledResize = useThrottle(handleResize, 250);
+            useEffect(() => {
+              window.addEventListener('resize', throttledResize);
+              return () => {
+                window.removeEventListener('resize', throttledResize);
+              };
+            }, [navRef]);
             return (
-            // <AnimatePresence initial={false}>
-            //
-
+              // <AnimatePresence initial={false}>
+              //
               <motion.div
+                ref={navRef}
                 className={`${tocStyle['markdown-toc']}
-              fixed left-0 top-0 overflow-y-auto max-h-[calc(100vh-6.5rem)] z-10
-              border rounded-lg mt-14 ml-4 pl-2 pr-6 py-2 hidden xl:block
-              max-w-[35ch] 
-              cursor-pointer 
-               bg-BG_MAIN border-DIVIDER_LINE
-                dark:bg-DARK_BG_MAIN  dark:border-DARK_DIVIDER_LINE
-                transition-colors duration-TRANSITION_DURATION
+                fixed left-0 top-0 overflow-y-auto  z-10
+                border rounded-lg mt-14 
+                pl-2 pr-2  py-2 hidden lg:block
+                max-w-[35ch] 
+                max-h-[calc(100vh-6.5rem)]
+                cursor-pointer 
                 transition-opacity
-                opacity-0
-                hover:opacity-100
-
+                transition-colors duration-TRANSITION_DURATION
+                bg-BG_MAIN border-DIVIDER_LINE
+                dark:bg-DARK_BG_MAIN  dark:border-DARK_DIVIDER_LINE
+                text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
                 text-sm `}
+                // opacity-0
+                // hover:opacity-100
                 drag
-                dragConstraints={{
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+                dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
+                dragConstraints={dragConstraints}
               >
-                {/* style={{ left: widget.x, top: widget.y }} */}
-                <p className='indicator'>Table of Content</p>
                 <nav className="toc_nav">{children}</nav>
               </motion.div>
 
-            // </AnimatePresence>
+              // </AnimatePresence>
             );
           },
         }}

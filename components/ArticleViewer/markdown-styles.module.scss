@@ -16,6 +16,7 @@ $contentColor: #555;
 .markdown-style {
   :global {
     .markdown-body {
+      scroll-behavior: smooth;
       word-break: break-word;
       line-height: 1.75;
       font-weight: 400;

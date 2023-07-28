@@ -1,13 +1,30 @@
 .markdown-toc {
-
   :global {
-    nav.toc_nav{
+    nav.toc_nav {
       ol {
+        text-overflow: ellipsis;
         // root container
         // right: 0;
         li {
           list-style: none;
+          padding-left: 0.8rem;
+          line-height: 1.5em;
+          margin-top: 0.5em;
           // toc-item
+          a {
+            opacity: 0.75;
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill,
+              stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 0.15s;
+            &:hover{
+              opacity: 1;
+              color:inherit
+            }
+          }
         }
       }
     }
