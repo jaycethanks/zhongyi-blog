@@ -1,10 +1,9 @@
 .markdown-toc {
   :global {
     nav.toc_nav {
+      overflow-x: hidden;
       ol {
-        text-overflow: ellipsis;
-        // root container
-        // right: 0;
+        width: inherit;
         li {
           list-style: none;
           padding-left: 0.8rem;
@@ -13,6 +12,7 @@
           // toc-item
           a {
             opacity: 0.75;
+            display: inline-block;
             color: inherit;
             text-decoration: underline;
             text-underline-offset: 4px;
@@ -20,6 +20,11 @@
               stroke, opacity, box-shadow, transform, filter, backdrop-filter;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 0.15s;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            max-width: 100% ;
+
             &:hover{
               opacity: 1;
               color:inherit

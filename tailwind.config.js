@@ -1,14 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   // Plugins: [require("tailwindcss-multi-column")],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1800px',
+      },
       colors: {
         BG_MAIN: 'rgb(255, 255, 255)',
         BG_MAIN_DEEP: 'rgb(237, 236, 232)',
@@ -24,6 +23,7 @@ module.exports = {
         DARK_DIVIDER_LINE: 'rgb(71, 85, 105)',
         // White-hover-#555 dark-hover-#bbb
         // dark-emphasis-#fff dark-unemphasis
+
       },
       transitionDuration: {
         TRANSITION_DURATION: '200ms',

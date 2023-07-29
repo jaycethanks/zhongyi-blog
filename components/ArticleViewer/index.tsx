@@ -9,12 +9,12 @@ import rehypeRaw from 'rehype-raw';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Image from 'next/image';
-import React, { Ref, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useAnimationControls, useDragControls } from 'framer-motion';
+import { LocateMenu } from '../Icons/LocateMenu';
 import styles from './markdown-styles.module.scss';
 import tocStyle from './markdown-style.toc.module.scss';
 import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
-import useThrottle from '@/hooks/useThrottle';
 
 // 图片加载时的闪耀效果图
 function generateShimmer(w: number, h: number, isLight = false) {
@@ -37,11 +37,11 @@ function generateShimmer(w: number, h: number, isLight = false) {
 }
 
 interface NodeTree {
-  type: string;
+  type: string
   properties: {
-    [key: string]: any;
-  };
-  children: (NodeTree | string)[];
+    [key: string]: any
+  }
+  children: (NodeTree | string)[]
 }
 
 function renderNodeTree(nodeTree: NodeTree): JSX.Element {
@@ -64,13 +64,24 @@ function customizeTOC(toc: NodeTree) {
 }
 
 interface ArticleViewerType {
-  isLight: boolean; // 是否暗色主题
-  contentStr: string; // markdown 文本
+  isLight: boolean // 是否暗色主题
+  contentStr: string // markdown 文本
 }
 const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => {
+  const dragControls = useDragControls();
+  const animationControls = useAnimationControls();
+
+  const handleResetTocPosition = () => {
+    animationControls.start({
+      x: 0,
+      y: 0,
+    });
+  };
+
   return (
     <div className={styles['markdown-style']}>
-      <div className="toc-anchor"></div>
+      <span className="hidden lg:inline-block toc-anchor fixed top-16 hover:rotate-45 transition-all duration-TRANSITION_DURATION opacity-50 hover:scale-110 hover:opacity-100 left-16 text-lg xl:text-2xl cursor-pointer" onClick={handleResetTocPosition}><LocateMenu/></span>
+      <motion.div>
       <ReactMarkdown
         className="markdown-body "
         children={contentStr || ''}
@@ -79,7 +90,8 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
-            return !inline && match ? (
+            return !inline && match
+              ? (
               <SyntaxHighlighter
                 {...props}
                 children={String(children).replace(/\n$/, '')}
@@ -87,11 +99,12 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 language={match[1]}
                 PreTag="div"
               />
-            ) : (
+                )
+              : (
               <code {...props} className={className}>
                 {children}
               </code>
-            );
+                );
           },
           p({ node, className, children, ...props }) {
             // const { node } = paragraph
@@ -109,7 +122,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
 
               const [imgSrc, setImgSrc] = useState(image.properties.src);
               const isValidSrc = /^(?:https?:\/\/|\/|data:image\/[a-z]+;base64,)[^\s]+\.(?:jpg|jpeg|gif|png|bmp)$/.test(
-                imgSrc
+                imgSrc,
               );
 
               return (
@@ -124,14 +137,16 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                     priority={isPriority}
                     loading="lazy"
                     placeholder="blur"
-                    onError={(e) => setImgSrc(generateShimmer(width, height, isLight))}
+                    onError={e => setImgSrc(generateShimmer(width, height, isLight))}
                     blurDataURL={generateShimmer(width, height, isLight)}
                   />
-                  {hasCaption ? (
+                  {hasCaption
+                    ? (
                     <div className="caption" aria-label={caption}>
                       {caption}
                     </div>
-                  ) : null}
+                      )
+                    : null}
                 </>
               );
             }
@@ -142,60 +157,61 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
             const navRef = useRef(null);
             // const [width, setWidth] = useState(window.innerWidth);
             const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0, top: 0, bottom: 0 });
-            const gap = 64;
-            
-            
+            const gap = 64;// 注意， motion.div 上应该和这个同步(ml-[64px])， 不然页面刷新会闪一下
+
             // 定义一个回调函数来更新组件的状态
-            function handleResize() {
+            //
+            useEffect(() => {
               const { innerHeight, innerWidth } = window;
-              console.log('[innerWidth]: ',innerWidth)
               if (navRef && navRef.current) {
                 const { offsetHeight, offsetWidth } = navRef.current as unknown as HTMLDivElement;
-                setDragConstraints({ left: 0,top: 0, right: innerWidth - offsetWidth,  bottom: innerHeight - offsetHeight });
-                // (navRef.current as unknown as HTMLDivElement).style.marginLeft = '64px';
+                setDragConstraints({ left: 0, top: 0, right: innerWidth - offsetWidth - 2 * gap, bottom: innerHeight - offsetHeight - 2 * gap });
+                animationControls.start({
+                  opacity: 1,
+                });
+                (navRef.current as unknown as HTMLDivElement).style.marginLeft = `${gap}px`;
               }
-            }
-            const throttledResize = useThrottle(handleResize, 250);
-            useEffect(() => {
-              window.addEventListener('resize', throttledResize);
-              return () => {
-                window.removeEventListener('resize', throttledResize);
-              };
             }, [navRef]);
             return (
               // <AnimatePresence initial={false}>
-              //
               <motion.div
                 ref={navRef}
                 className={`${tocStyle['markdown-toc']}
                 fixed left-0 top-0 overflow-y-auto  z-10
-                border rounded-lg mt-14 
+                mt-16 ml-[64px]
                 pl-2 pr-2  py-2 hidden lg:block
-                max-w-[35ch] 
-                max-h-[calc(100vh-6.5rem)]
+                w-[35ch] 
+                3xl:w-[45ch] 
+                max-h-[60ch]
+                h-auto
                 cursor-pointer 
                 transition-opacity
                 transition-colors duration-TRANSITION_DURATION
-                bg-BG_MAIN border-DIVIDER_LINE
-                dark:bg-DARK_BG_MAIN  dark:border-DARK_DIVIDER_LINE
+                bg-BG_MAIN 
+                rounded-md
+                dark:bg-DARK_BG_MAIN  
                 text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
                 text-sm `}
                 // opacity-0
                 // hover:opacity-100
+                initial={{ opacity: 0 }}
                 drag
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
                 dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
                 dragConstraints={dragConstraints}
+                animate={animationControls}
+                dragControls={dragControls}
               >
                 <nav className="toc_nav">{children}</nav>
               </motion.div>
 
-              // </AnimatePresence>
+            // </AnimatePresence>
             );
           },
         }}
       />
+      </motion.div>
     </div>
   );
 };

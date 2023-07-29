@@ -3,7 +3,17 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['placeimg.com', 'raw.githubusercontent.com', '**.cnblogs.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
+    // domains: ['placeimg.com', 'raw.githubusercontent.com', '**.cnblogs.com', 'img2023.cnblogs.com', 'img2022.cnblogs.com', 'img2021.cnblogs.com'],
   },
   async rewrites() {
     return [

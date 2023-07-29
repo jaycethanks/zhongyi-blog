@@ -6,6 +6,9 @@ $contentColor: #555;
 
 :global(.dark) .markdown-style{
   :global {
+    // .toc-anchor{
+    //   color: red;
+    // }
     .markdown-body {
       $contentColor: #ffffff;
       
