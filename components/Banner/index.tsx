@@ -4,6 +4,7 @@ import JaycesBlog from "./jaycesblog";
 import SpacerBar from "../common/SpacerBar";
 import getDateString from "@/utils/getDateString";
 import Fonts from '@/fonts';
+import { StandardProps } from "@/types";
 
 type BannerProps = {
   whetherData: any;
@@ -22,7 +23,7 @@ const Banner: React.FC<StandardProps & BannerProps> = ({
         <div className="w-full flex sm:justify-between justify-center text-sm ">
           <div className={`w-1/3 font-semibold hidden sm:flex sm:flex-col justify-end items-start ${Fonts.HeiTi}`}>
             <p >
-            {getDateString()}
+            {/* {getDateString()} */}
             </p>
             <p className="font-thin">You deserve better thing!</p>
           </div>

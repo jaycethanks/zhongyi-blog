@@ -2,6 +2,7 @@ import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import type { CategoryInterface } from '@/apis/QueryList';
+import { StandardProps } from '@/types';
 
 interface CategoriesType {
   categories: CategoryInterface[] | undefined

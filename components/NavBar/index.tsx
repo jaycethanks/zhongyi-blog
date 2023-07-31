@@ -7,6 +7,7 @@ import sun from "@/components/Icons/animateIcon/sun.png";
 
 import type { LinkProps } from "next/link";
 import eventBus from "@/utils/useEventBus";
+import { StandardProps } from "@/types";
 
 declare const LinkProps: LinkProps & {
   before: string;

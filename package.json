@@ -20,6 +20,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
     "framer-motion": "^10.12.18",
     "graphql-request": "^6.1.0",
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "@expo/webpack-config": "^18.1.2",
-    "@laison/eslint-config": "^0.0.18",
+    "@laison/eslint-config": "^0.0.20",
     "@typescript-eslint/eslint-plugin": ">=5.57.0",
     "@typescript-eslint/parser": ">=5.57.0",
     "autoprefixer": "^10.4.13",

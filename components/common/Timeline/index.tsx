@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import SpacerBar from '../SpacerBar';
 import styles from './timeline.module.scss';
+import { StandardProps } from '@/types';
 
 type TimelineProps = {
   title: any;

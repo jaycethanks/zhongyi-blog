@@ -18,7 +18,7 @@ interface RecentPostsPropsType {
 }
 
 interface PostRecordProps {
-  key: string
+  key?: string
   post: RecentPostInterface
 }
 
@@ -65,7 +65,7 @@ export default function RecentPost({
           </ul>
 
         <p className="font-mono text-base sm:text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
-          {enableLoadMore && (
+          {enableLoadMore && title && (
             <>{loading ? <SimplestLoading /> : <button onClick={() => handleLoad?.(title)}>加载更多</button>}</>
           )}
         </p>

@@ -1,3 +1,4 @@
+import { StandardProps } from '@/types';
 import { PropsWithChildren } from 'react';
 
 enum fontSize {

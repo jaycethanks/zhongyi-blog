@@ -11,7 +11,7 @@ import { GET_ABOUT } from '@/apis/QueryList';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 
 // import isMobileDevice from 'is-mobile';
-export default function Home({ data }) {
+export default function Home({ data }: any) {
   //   const { loading, error, data } = useQuery<{ about: ABOUT }>(GET_ABOUT);
   //   console.log('data', data);
   const isMobile = isMobileDevice();
@@ -38,7 +38,6 @@ export default function Home({ data }) {
 export async function getStaticProps() {
 //   const { loading, error, data } = useQuery<{ about: ABOUT }>(GET_ABOUT);
   const data = await SericeSideGraphQLClient.request(GET_ABOUT);
-  console.log('[data]: ',data)
   return {
     props: {
       data,
