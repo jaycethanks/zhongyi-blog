@@ -9,8 +9,8 @@ interface LinkType {
   title?: string
   url?: string
 }
-const About: React.FC<{ about: ABOUT|null }> = ({ about, ...rest }) => {
-  if(!about) return (<>No Info</>)
+const About: React.FC<{ about: ABOUT | null }> = ({ about }) => {
+  if (!about) return (<>No Info</>);
   const { avatar, links, msg } = about;
   const parsedLinks = JSON.parse(links) as LinkType[];
   return (

@@ -2,7 +2,7 @@ import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import type { CategoryInterface } from '@/apis/QueryList';
-import { StandardProps } from '@/types';
+import type { StandardProps } from '@/types';
 
 interface CategoriesType {
   categories: CategoryInterface[] | undefined
@@ -14,7 +14,7 @@ interface CategoryItemProps {
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
-  const { name, relateCount, catid, description } = category;
+  const { name, relateCount, description } = category;
   return (
     <>
       <p className="mt-8 cursor-pointer font-mono text-xl text-REMARK_TEXT  dark:text-DARK_REMARK_TEXT ">
@@ -28,7 +28,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
 
 const Categories = ({ categories }: StandardProps & CategoriesType) => {
   const isMobile = isMobileDevice();
-  if(!categories || !categories.length) return <>No Info</>
+  if (!categories || !categories.length) return <>No Info</>;
   return (
     <>
       <main className="recent-posts">
@@ -51,4 +51,3 @@ const Categories = ({ categories }: StandardProps & CategoriesType) => {
 };
 
 export default Categories;
-

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 function useThrottle<T extends any[]>(callback: (...args: T) => void, delay: number): (...args: T) => void {
   const lastExec = useRef(0);
@@ -13,9 +13,8 @@ function useThrottle<T extends any[]>(callback: (...args: T) => void, delay: num
       if (timeSinceLastExec < delay) {
         setLastCallArgs(args);
 
-        if (timer.current) {
+        if (timer.current)
           clearTimeout(timer.current);
-        }
 
         timer.current = setTimeout(() => {
           if (lastCallArgs) {
@@ -23,19 +22,19 @@ function useThrottle<T extends any[]>(callback: (...args: T) => void, delay: num
             setLastCallArgs(null);
           }
         }, delay - timeSinceLastExec);
-      } else {
+      }
+      else {
         lastExec.current = now;
         callback(...args);
       }
     },
-    [callback, delay]
+    [callback, delay],
   );
 
   useEffect(() => {
     return () => {
-      if (timer.current) {
+      if (timer.current)
         clearTimeout(timer.current);
-      }
     };
   }, []);
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-type IconProps = {
-  className?: string;
-  size?: string;
-};
-export default ({ className, size = "w-12 h-12" }: IconProps) => {
+interface IconProps {
+  className?: string
+  size?: string
+}
+export default ({ className, size = 'w-12 h-12' }: IconProps) => {
   return (
     <svg
       viewBox="171.62 113.125 24.897 27.664"

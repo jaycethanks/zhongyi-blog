@@ -1,17 +1,17 @@
-import { StandardProps } from '@/types';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { StandardProps } from '@/types';
 
 enum fontSize {
-  "text-base " = 6,
-  "text-lg" = 5,
-  "text-xl" = 4,
-  "text-2xl" = 3,
-  "text-[1.795rem]" = 2,
-  "text-[1.986rem]" = 1,
+  'text-base ' = 6,
+  'text-lg' = 5,
+  'text-xl' = 4,
+  'text-2xl' = 3,
+  'text-[1.795rem]' = 2,
+  'text-[1.986rem]' = 1,
 }
 type HeadingProps = {
-  level: 1 | 2 | 3 | 4 | 5 | 6;
-  rightSlot?: any;
+  level: 1 | 2 | 3 | 4 | 5 | 6
+  rightSlot?: any
 } & StandardProps;
 
 const Heading: React.FC<PropsWithChildren & HeadingProps> = ({

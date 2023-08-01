@@ -1,12 +1,12 @@
-import classNames from 'classnames';
-import { ImgHTMLAttributes, useState } from 'react';
+import type { ImgHTMLAttributes } from 'react';
+import { useState } from 'react';
 
 type LazyImageType = {
-  onLoad?(): void;
-  onError?(): void;
-  src: string;
-  classNames?: string;
-  height?: string;
+  onLoad?(): void
+  onError?(): void
+  src: string
+  classNames?: string
+  height?: string
 } & ImgHTMLAttributes<HTMLImageElement>;
 
 const LazyImage: React.FC<LazyImageType> = ({
@@ -16,17 +16,18 @@ const LazyImage: React.FC<LazyImageType> = ({
   height,
   ...rest
 }) => {
+  const [loading, setLoading] = useState(true);
+
   const handleOnload = () => {
     setLoading(false);
     onLoad?.();
-    console.log("ONLOAD");
+    console.log('ONLOAD');
   };
   const handleOnError = () => {
     setLoading(false);
     onError?.();
-    console.log("ONERROR");
+    console.log('ONERROR');
   };
-  const [loading, setLoading] = useState(true);
   return (
     <div className={`lazyload-img relative ${height}`}>
       <div

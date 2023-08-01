@@ -1,46 +1,41 @@
-import Image from "next/image";
-import Link from "next/link";
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { PropsWithChildren } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import moon from "@/components/Icons/animateIcon/moon.png";
-import sun from "@/components/Icons/animateIcon/sun.png";
+import moon from '@/components/Icons/animateIcon/moon.png';
+import sun from '@/components/Icons/animateIcon/sun.png';
 
-import type { LinkProps } from "next/link";
-import eventBus from "@/utils/useEventBus";
-import { StandardProps } from "@/types";
-
-declare const LinkProps: LinkProps & {
-  before: string;
-};
+import eventBus from '@/utils/useEventBus';
+import type { StandardProps } from '@/types';
 
 const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
   className,
 }) => {
   const [isDark, setIsDark] = useState(false);
   const handleClick = () => {
-    const html = document.querySelector("html");
-    const state = html?.classList.toggle("dark");
-    window.localStorage.setItem("theme", state ? state?.toString() : "false");
+    const html = document.querySelector('html');
+    const state = html?.classList.toggle('dark');
+    window.localStorage.setItem('theme', state ? state?.toString() : 'false');
     setIsDark(!isDark);
-    eventBus.emit("toggleTheme", isDark);
+    eventBus.emit('toggleTheme', isDark);
   };
   useEffect(() => {
-    const savedTheme = window?.localStorage.getItem("theme");
-    if (savedTheme === "true") {
+    const savedTheme = window?.localStorage.getItem('theme');
+    if (savedTheme === 'true')
       setIsDark(true);
-    } else {
+    else
       setIsDark(false);
-    }
   }, []);
   return (
     <div onClick={handleClick} className={`cursor-pointer  ${className}`}>
       <span>
-        {isDark ? (
-          <Image src={sun} className="h-6 w-6" alt="" />
-        ) : (
+        {isDark
+          ? <Image src={sun} className="h-6 w-6" alt="" />
+          : (
           <Image src={moon} className="h-6 w-6" alt="" />
           // <Image src={moonFace} className="h-6 w-6 -rotate-12" alt="" />
-        )}
+            )}
       </span>
     </div>
   );
@@ -54,9 +49,9 @@ const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
 //   return <button onClick={clickHandler}>{menuFold.toString()}</button>;
 // };
 const DEFAULT_NAV_LIST = [
-  { path: "/post", name: "Posts", title: "Posts" },
-  { path: "/archieve", name: "Archieve", title: "Archieve" },
-  { path: "/board", name: "Board", title: "Board" },
+  { path: '/post', name: 'Posts', title: 'Posts' },
+  { path: '/archieve', name: 'Archieve', title: 'Archieve' },
+  { path: '/board', name: 'Board', title: 'Board' },
 ];
 const NavItem = ({
   href,
@@ -86,13 +81,14 @@ const NavBar = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [shrink, setShrink] = useState(false);
   useEffect(() => {
-    window.addEventListener("scroll", fixNav);
+    window.addEventListener('scroll', fixNav);
     function fixNav() {
       if (!headerRef.current) return;
       if (window.scrollY > headerRef.current.offsetHeight + 150) {
         // header.classList.add('active');
         setShrink(true);
-      } else {
+      }
+      else {
         // header.classList.remove('active');
         setShrink(false);
       }
@@ -104,7 +100,7 @@ const NavBar = () => {
       <header
         ref={headerRef}
         className={`
-          ${shrink && "-translate-y-full"}
+          ${shrink && '-translate-y-full'}
           sticky
           inset-x-0
           top-0

@@ -1,12 +1,12 @@
 import Heading from '@/components/common/Heading';
 import LazyImage from '@/components/common/LazyImage';
 
-type BannerImageProps = {
-  src: string;
-  height: string;
-  title: string;
-  subTitle: string;
-};
+interface BannerImageProps {
+  src: string
+  height: string
+  title: string
+  subTitle: string
+}
 const BannerImage: React.FC<BannerImageProps> = ({
   src,
   height,

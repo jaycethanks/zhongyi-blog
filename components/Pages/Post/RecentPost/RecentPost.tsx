@@ -1,12 +1,12 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
-import { AnimatePresence, motion } from 'framer-motion'; // AnimatePresence 处理动画的消失状态
+import { motion } from 'framer-motion'; // AnimatePresence 处理动画的消失状态
 import isMobileDevice from 'is-mobile';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import type { RecentPostInterface } from '@/apis/QueryList';
 import SimplestLoading from '@/components/Loading/SimplestLoading';
-import { StandardProps } from '@/types';
+import type { StandardProps } from '@/types';
 
 interface RecentPostsPropsType {
   recentPosts: RecentPostInterface[] | undefined
@@ -27,7 +27,7 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   return (
     <>
       <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
-        <Link className='hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN'  href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
+        <Link className='hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN' href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
       </p>
     </>
   );

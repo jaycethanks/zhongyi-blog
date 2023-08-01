@@ -1,7 +1,7 @@
-import { StandardProps } from '@/types';
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
+import type { StandardProps } from '@/types';
 
 interface CategoryItemType {
   id: string

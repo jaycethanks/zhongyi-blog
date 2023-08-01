@@ -1,17 +1,18 @@
 import Container from '@/components/common/Container';
+
 // import Layout from '@/components/common/Layout';
 
-const Board =  () => {
+const Board = () => {
   return (
-    // <Layout>
+  // <Layout>
       // <Head>
       //   <title>ZY - 留言板</title>
       // </Head>
       <Container className='bg-white' title="Resume">
           Resumr
       </Container>
-    // </Layout>
+  // </Layout>
   );
 };
 
-export default Board
+export default Board;

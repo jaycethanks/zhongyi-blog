@@ -17,7 +17,7 @@ import tocStyle from './markdown-style.toc.module.scss';
 import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 
 // 图片加载时的闪耀效果图
-function generateShimmer(w: number, h: number, isLight = false) {
+function generateShimmer(w: number, h: number) {
   const shimmer = (w: number, h: number) => `
 <svg style="opacity: 0.3;" width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
@@ -34,33 +34,6 @@ function generateShimmer(w: number, h: number, isLight = false) {
 
   const toBase64 = (str: string) => window.btoa(str);
   return `data:image/svg+xml;base64,${toBase64(shimmer(w, h))}`;
-}
-
-interface NodeTree {
-  type: string
-  properties: {
-    [key: string]: any
-  }
-  children: (NodeTree | string)[]
-}
-
-function renderNodeTree(nodeTree: NodeTree): JSX.Element {
-  const { type, properties, children } = nodeTree;
-
-  const childElements = (children || []).map((child) => {
-    if (typeof child === 'string') return child;
-    else return renderNodeTree(child);
-  });
-
-  return React.createElement(type, properties, ...childElements);
-}
-function customizeTOC(toc: NodeTree) {
-  const tocJsx = renderNodeTree(toc);
-  // return render(<motion.div>{tocJsx}</motion.div>);
-  return false;
-  // return 'Hello';
-  return true;
-  // console.log('[toc]: ',tocJsx)
 }
 
 interface ArticleViewerType {
@@ -88,7 +61,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
         rehypePlugins={[rehypeRaw, rehypeSlug, rehypeToc]}
         remarkPlugins={[remarkEmoji, remarkGfm, remarkMermaidjs]}
         components={{
-          code({ node, inline, className, children, ...props }) {
+          code({ inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match
               ? (
@@ -106,7 +79,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
               </code>
                 );
           },
-          p({ node, className, children, ...props }) {
+          p({ node, children }) {
             // const { node } = paragraph
             if ((node.children[0] as any).tagName === 'img') {
               const image = node.children[0] as any;
@@ -137,8 +110,8 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                     priority={isPriority}
                     loading="lazy"
                     placeholder="blur"
-                    onError={e => setImgSrc(generateShimmer(width, height, isLight))}
-                    blurDataURL={generateShimmer(width, height, isLight)}
+                    onError={() => setImgSrc(generateShimmer(width, height))}
+                    blurDataURL={generateShimmer(width, height)}
                   />
                   {hasCaption
                     ? (
@@ -152,7 +125,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
             }
             return <p>{children}</p>;
           },
-          nav({ node, className, children, ...props }) {
+          nav({ children }) {
             // MutableRefObject<HTMLElement | null>
             const navRef = useRef(null);
             // const [width, setWidth] = useState(window.innerWidth);

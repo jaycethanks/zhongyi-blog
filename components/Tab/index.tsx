@@ -1,6 +1,6 @@
 import { type PropsWithChildren, type ReactNode, useState } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 
 interface TabItemType {

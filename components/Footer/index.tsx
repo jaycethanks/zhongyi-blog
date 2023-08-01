@@ -1,4 +1,5 @@
-import Container from "@/components/common/Container";
+import Container from '@/components/common/Container';
+
 const Footer = () => (
   <div className="w-full bg-BG_MAIN dark:bg-DARK_BG_MAIN">
   <Container>
@@ -36,4 +37,4 @@ const Footer = () => (
 
 );
 
-export default Footer
+export default Footer;

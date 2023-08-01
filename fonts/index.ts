@@ -1,14 +1,14 @@
 import localFont from '@next/font/local';
 
-const SongJianTi = localFont({ src: "../fonts/FangZhengShuSongJianTi.ttf" });
-const HeiTi = localFont({ src: "../fonts/FangZhengHeiTiJianTi.ttf" });
-const KaiTi = localFont({ src: "../fonts/FangZhengKaiTiJianTi.ttf" });
+const SongJianTi = localFont({ src: '../fonts/FangZhengShuSongJianTi.ttf' });
+const HeiTi = localFont({ src: '../fonts/FangZhengHeiTiJianTi.ttf' });
+const KaiTi = localFont({ src: '../fonts/FangZhengKaiTiJianTi.ttf' });
 const SourceHanSerifCN = localFont({
-  src: "../fonts/SourceHanSerifCN-Regular.otf",
+  src: '../fonts/SourceHanSerifCN-Regular.otf',
 });
 
 const SourceHanSansCNRegular = localFont({
-  src: "../fonts/SourceHanSansCN-Regular.otf",
+  src: '../fonts/SourceHanSansCN-Regular.otf',
 });
 const Fonts = {
   SongJianTi: SongJianTi.className,

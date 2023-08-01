@@ -24,7 +24,7 @@ import mitt from 'mitt';
 
 interface Events {
   toggleTheme: boolean
-  [key: string | symbol ]: any;
+  [key: string | symbol ]: any
 }
 
 const mitter: Emitter<Events> = mitt<Events>();

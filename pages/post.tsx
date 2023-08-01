@@ -25,7 +25,7 @@ export default function Home({ recentPosts, categories }: HomeProps) {
                 id: 0,
               },
               {
-                content: (toRight: boolean) => <Categories categories={categories}></Categories>,
+                content: () => <Categories categories={categories}></Categories>,
                 title: 'Categories',
                 id: 1,
               },

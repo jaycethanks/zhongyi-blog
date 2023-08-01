@@ -1,8 +1,8 @@
 import React from 'react';
 
-type IconProps = {
-  className?: string;
-};
+interface IconProps {
+  className?: string
+}
 export default ({ className }: IconProps) => {
   return (
     <i className="inline-block">
