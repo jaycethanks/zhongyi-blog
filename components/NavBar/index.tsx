@@ -22,10 +22,10 @@ const DarkModeSwitcher: React.FC<PropsWithChildren & StandardProps> = ({
   };
   useEffect(() => {
     const savedTheme = window?.localStorage.getItem('theme');
-    if (savedTheme === 'true')
+    if (savedTheme === 'true') {
       setIsDark(true);
-    else
-      setIsDark(false);
+    }
+    else { setIsDark(false); }
   }, []);
   return (
     <div onClick={handleClick} className={`cursor-pointer  ${className}`}>

@@ -9,13 +9,15 @@ const Layout = ({ children }: PropsWithChildren<PageProps>) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const savedTheme = window?.localStorage.getItem('theme');
-    if (savedTheme === 'true')
+    if (savedTheme === 'true') {
       document.querySelector('html')?.classList.add('dark');
+    }
 
     setLoading(false);
   }, []);
-  if (loading)
+  if (loading) {
     return <></>;
+  }
 
   return (
     <div

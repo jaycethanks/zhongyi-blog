@@ -35,8 +35,9 @@ interface GapProp {
 }
 
 export default ({ gap }: PropsWithChildren<GapProp>) => {
-  if (gap < 1 || gap > 28)
+  if (gap < 1 || gap > 28) {
     throw new Error('gap prop for 「SpacerBar」 must be in `1 ~ 28`');
+  }
 
   return <div className={`spacer-bar w-full flex-shrink-0  ${GAP[gap]}`}></div>;
 };

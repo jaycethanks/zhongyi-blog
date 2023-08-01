@@ -13,8 +13,9 @@ function useThrottle<T extends any[]>(callback: (...args: T) => void, delay: num
       if (timeSinceLastExec < delay) {
         setLastCallArgs(args);
 
-        if (timer.current)
+        if (timer.current) {
           clearTimeout(timer.current);
+        }
 
         timer.current = setTimeout(() => {
           if (lastCallArgs) {
@@ -33,8 +34,9 @@ function useThrottle<T extends any[]>(callback: (...args: T) => void, delay: num
 
   useEffect(() => {
     return () => {
-      if (timer.current)
+      if (timer.current) {
         clearTimeout(timer.current);
+      }
     };
   }, []);
 

@@ -46,8 +46,9 @@ const SvgBox: FC<Props> = ({ children, ...rest }) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    if (svgRef.current)
+    if (svgRef.current) {
       setViewBox(calculateViewBox(svgRef.current));
+    }
   }, [svgRef.current]);
   return (
     <svg key={children as string} ref={svgRef} viewBox={viewBox} className={className} color={color} height={height} width={width} style={style} dangerouslySetInnerHTML={{ __html: children as string }}>
