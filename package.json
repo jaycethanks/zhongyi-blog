@@ -8,7 +8,7 @@
     "start": "next start -p 80",
     "lint": "next lint",
     "lint:fix": "eslint . --fix",
-    "docker:build": "docker build -t zhongyi-blog-img .",
+    "docker:build": "docker build -t zhongyi-blog-img --network app-net .",
     "docker:run": "docker run -d -p 80:3000 --name zhongyi-blog --restart=always zhongyi-blog-img",
     "docker:commit": "docker commit zhongyi-blog jaycethanks/zhongyi-blog:latest",
     "docker:push": "docker push jaycethanks/zhongyi-blog:latest"
