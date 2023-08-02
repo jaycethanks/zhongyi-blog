@@ -32,7 +32,10 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # 安装 pnpm，构建应用，安装生产依赖
 RUN npm install -g pnpm
+
 ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com/
+
+
 RUN pnpm build && pnpm install --production --ignore-scripts --prefer-offline
 
 RUN echo "打包完成！"
@@ -46,6 +49,9 @@ WORKDIR /app
 
 # 设置环境变量 NODE_ENV 为 production，添加用户和组
 ENV NODE_ENV production
+
+
+
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 

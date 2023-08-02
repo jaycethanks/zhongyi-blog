@@ -1,5 +1,5 @@
 docker 镜像构建
 step1: 编写 Dockerfile
 step2: docker build -t blog-image-name . #打包
-step3: docker run -p 80:80  blog-image-name #运行镜像
+step3: docker run -p 80:3000  blog-image-name #运行镜像
 step4: docker commit blog-image-container publish-image-name:tag #提交镜像

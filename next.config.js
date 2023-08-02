@@ -19,7 +19,7 @@ const nextConfig = {
     return [
       {
         source: '/file/:path*',
-        destination: 'http://localhost:8989/:path*', // Proxy to Backend
+        destination: `${process.env.NEXT_PUBLIC_NGINX_SERVER}/:path*`, // Proxy to Backend
       },
     ];
   },
