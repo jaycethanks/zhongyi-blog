@@ -34,7 +34,9 @@ COPY --from=deps /app/node_modules ./node_modules
 RUN npm install -g pnpm
 
 ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com/
-
+ENV NEXT_PUBLIC_USERID=${NEXT_PUBLIC_USERID}
+ENV NEXT_PUBLIC_GRAPHQL_API_URL=${NEXT_PUBLIC_GRAPHQL_API_URL}
+ENV NEXT_PUBLIC_NGINX_SERVER=${NEXT_PUBLIC_NGINX_SERVER}
 
 RUN pnpm build && pnpm install --production --ignore-scripts --prefer-offline
 
@@ -50,7 +52,9 @@ WORKDIR /app
 # 设置环境变量 NODE_ENV 为 production，添加用户和组
 ENV NODE_ENV production
 
-
+ENV NEXT_PUBLIC_USERID=${NEXT_PUBLIC_USERID}
+ENV NEXT_PUBLIC_GRAPHQL_API_URL=${NEXT_PUBLIC_GRAPHQL_API_URL}
+ENV NEXT_PUBLIC_NGINX_SERVER=${NEXT_PUBLIC_NGINX_SERVER}
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
