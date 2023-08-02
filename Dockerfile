@@ -32,12 +32,14 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # 安装 pnpm，构建应用，安装生产依赖
 RUN npm install -g pnpm
+ARG NEXT_PUBLIC_GRAPHQL_API_URL
+ARG NEXT_PUBLIC_NGINX_SERVER
+ARG NEXT_PUBLIC_USERID
 
 ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com/
-ENV NEXT_PUBLIC_USERID=1d58a529-51d8-475d-b923-e8d35471624b
-ENV NEXT_PUBLIC_GRAPHQL_API_URL=http://nestjs-app:4567/graphql
-ENV NEXT_PUBLIC_NGINX_SERVER=http://nginx:8989
-
+ENV NEXT_PUBLIC_USERID=${NEXT_PUBLIC_USERID}
+ENV NEXT_PUBLIC_GRAPHQL_API_URL=${NEXT_PUBLIC_GRAPHQL_API_URL}
+ENV NEXT_PUBLIC_NGINX_SERVER=${NEXT_PUBLIC_NGINX_SERVER}
 RUN pnpm build && pnpm install --production --ignore-scripts --prefer-offline
 
 RUN echo "打包完成！"
@@ -52,9 +54,13 @@ WORKDIR /app
 # 设置环境变量 NODE_ENV 为 production，添加用户和组
 ENV NODE_ENV production
 
-ENV NEXT_PUBLIC_USERID=1d58a529-51d8-475d-b923-e8d35471624b
-ENV NEXT_PUBLIC_GRAPHQL_API_URL=http://nestjs-app:4567/graphql
-ENV NEXT_PUBLIC_NGINX_SERVER=http://nginx:8989
+ARG NEXT_PUBLIC_GRAPHQL_API_URL
+ARG NEXT_PUBLIC_NGINX_SERVER
+ARG NEXT_PUBLIC_USERID
+
+ENV NEXT_PUBLIC_USERID=${NEXT_PUBLIC_USERID}
+ENV NEXT_PUBLIC_GRAPHQL_API_URL=${NEXT_PUBLIC_GRAPHQL_API_URL}
+ENV NEXT_PUBLIC_NGINX_SERVER=${NEXT_PUBLIC_NGINX_SERVER}
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
@@ -69,8 +75,8 @@ COPY --from=builder /app/package.json ./package.json
 
 # 切换用户为 nextjs，暴露 3000 端口，设置环境变量 PORT 为 3000
 USER nextjs
-EXPOSE 3000
-ENV PORT 3000
+EXPOSE 3030
+ENV PORT 3030
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
