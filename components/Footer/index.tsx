@@ -31,7 +31,7 @@ const Footer = () => (
         </ul>
       </div>
     </div> */}
-    This is a simple footer
+    <a href='http://beian.miit.gov.cn/'>鄂ICP备2022014762号-2</a>
   </Container>
   </div>
 

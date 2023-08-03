@@ -26,7 +26,7 @@
           }
           // toc-item
           a {
-            opacity: 0.8;
+            opacity: 0.7;
             display: inline-block;
             color: inherit;
             text-underline-offset: 4px;
@@ -43,12 +43,12 @@
             }
             &.toc-link-h2{
               font-weight: 500;
-              
             }
 
             &:hover{
               text-decoration: underline;
-              color:inherit
+              color:inherit;
+              opacity: 1;
             }
           }
         }

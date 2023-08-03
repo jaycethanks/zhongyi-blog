@@ -1,5 +1,5 @@
 import type { HTMLMotionProps } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import { useEffect, useState } from 'react';
 import Giscus from '@giscus/react';
@@ -16,6 +16,7 @@ import eventBus from '@/utils/useEventBus';
 import ArticleViewer from '@/components/ArticleViewer';
 import BackOutlined from '@/components/Icons/BackOutlined';
 import type { StandardProps } from '@/types';
+import ScrollToTopOutlined from '@/components/Icons/ScrollToTopOutlined';
 
 // import isMobileDevice from 'is-mobile';
 interface PostType {
@@ -26,14 +27,62 @@ const BackBtn: React.FC<StandardProps & { title?: string }> = ({ children, class
   const router = useRouter();
 
   return (
-    <span onClick={() => router.back()} title={title} className={`${className} text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl cursor-pointer`} >
+    <span
+      onClick={() => router.back()}
+      title={title}
+      className={`${className} text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl cursor-pointer`}
+    >
       {children}
     </span>
   );
 };
 
+const ScrollToTop: React.FC<StandardProps> = ({ className }) => {
+  const [ifshowToTop, setIfshowToTop] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollY } = window;
+      if (scrollY > 10) {
+        setIfshowToTop(true);
+      }
+      else {
+        setIfshowToTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {ifshowToTop
+        ? (
+        <motion.div
+          key={ifshowToTop.toString()}
+          onClick={() => window.scrollTo(0, 0)}
+          className="fixed p-2 right-24 "
+          exit={{ bottom: 0, opacity: 0, rotate: -360 }}
+          initial={{ bottom: 0, opacity: 0 }}
+          animate={{ bottom: 200, opacity: 1, rotate: 360 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className={`${className} cursor-pointer w-6 h-6 animate-bounce text-current opacity-70 hover:opacity-100`} >
+            <ScrollToTopOutlined />
+          </div>
+        </motion.div>
+          )
+        : (
+        <></>
+          )}
+    </AnimatePresence>
+  );
+};
+
 export default function Post({ post }: PostType) {
   const isMobile = isMobileDevice();
+  const { scrollYProgress } = useScroll();
 
   // 代码段主题
   // const [codeStyle, setCodeStyle] = useState<any>(null);
@@ -61,6 +110,11 @@ export default function Post({ post }: PostType) {
         <Head>
           <title>{post?.article?.title}</title>
         </Head>
+        <ScrollToTop />
+        <motion.div
+          className="fixed top-0 left-0 right-0 origin-left h-1 bg-REMARK_TEXT dark:bg-DARK_REMARK_TEXT"
+          style={{ scaleX: scrollYProgress }}
+        />
         {/* 正文 */}
         <Container title={post?.article?.title || ''}>
           <SpacerBar gap={6} />
@@ -71,7 +125,10 @@ export default function Post({ post }: PostType) {
 
         {/* 返回 */}
         <Container>
-          <BackBtn title="Back" className=' hover:bg-gray-100 dark:hover:bg-gray-800   inline-flex min-w-[2em]  justify-center'>
+          <BackBtn
+            title="Back"
+            className=" hover:bg-gray-100 dark:hover:bg-gray-800   inline-flex min-w-[2em]  justify-center"
+          >
             <BackOutlined />
           </BackBtn>
           <Giscus

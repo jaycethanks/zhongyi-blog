@@ -4,6 +4,7 @@ import remarkMermaidjs from 'remark-mermaidjs';
 import remarkEmoji from 'remark-emoji';
 import rehypeToc from '@jsdevtools/rehype-toc';
 import rehypeSlug from 'rehype-slug';
+import remarkSlug from 'remark-slug';
 import rehypeRaw from 'rehype-raw';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -50,16 +51,18 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
     });
   };
   const [showTocPin, setShowTocPin] = useState(false);
+
   return (
     <div className={styles['markdown-style']}>
-      { showTocPin && <span className="hidden lg:inline-block toc-anchor fixed top-16 hover:rotate-45 transition-all duration-TRANSITION_DURATION opacity-50 hover:scale-110 hover:opacity-100 left-16 text-lg xl:text-2xl cursor-pointer" onClick={handleResetTocPosition}><LocateMenu/></span>}
+      { showTocPin && <span className="hidden lg:inline-block toc-anchor fixed top-16 hover:rotate-45 transition-all duration-TRANSITION_DURATION opacity-70 hover:scale-110 hover:opacity-100 left-16 text-lg xl:text-2xl cursor-pointer" onClick={handleResetTocPosition}><LocateMenu/></span>}
       <motion.div>
       <ReactMarkdown
         className="markdown-body "
         children={contentStr || ''}
         rehypePlugins={[rehypeRaw, rehypeSlug, rehypeToc]}
-        remarkPlugins={[remarkEmoji, remarkGfm, remarkMermaidjs]}
+        remarkPlugins={[remarkEmoji, remarkGfm, remarkMermaidjs, remarkSlug]}
         components={{
+
           code({ inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match
@@ -155,6 +158,9 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 fixed left-0 top-0 overflow-y-auto  z-10
                 mt-16 ml-[64px]
                 pl-2 pr-2  py-2 hidden lg:block
+                border
+                border-REMARK_TEXT/20
+                dark:border-DARK_REMARK_TEXT/20
                 w-[35ch] 
                 3xl:w-[40ch] 
                 max-h-[75ch]

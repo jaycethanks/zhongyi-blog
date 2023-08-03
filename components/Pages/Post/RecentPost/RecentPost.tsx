@@ -27,7 +27,16 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   return (
     <>
       <p className="flex items-center justify-between sm:justify-start gap-4 sm:whitespace-nowrap  my-4  font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
-        <Link title={title} className='cursor-pointer inline-block text-ellipsis max-w-full overflow-hidden hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN' href={`/posts/${artid}`}>{title}</Link> <span className="cursor-default text-current opacity-50 shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
+        <Link
+          title={title}
+          className="cursor-pointer inline-block text-ellipsis max-w-full overflow-hidden hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN"
+          href={`/posts/${artid}`}
+        >
+          {title}
+        </Link>{' '}
+        <span className="cursor-default text-current opacity-50 shrink-0 text-sm ">
+          {dayjs(createdAt).format('YYYY/MM/DD')}
+        </span>
       </p>
     </>
   );
@@ -46,27 +55,34 @@ export default function RecentPost({
   return (
     <>
       <main className="recent-posts">
-          <ul>
-            {(recentPosts || []).map((post, index) => {
-              const { artid } = post;
-              const motionProps: HTMLMotionProps<'li'> = isMobile
-                ? {}
-                : {
-                    initial: { y: 50, x: toRight ? 100 : -100, opacity: 0 },
-                    animate: { y: 0, x: 0, opacity: 1 },
-                    transition: { delay: index * 0.02, bounce: 0.75, damping: 20 },
-                  };
-              return (
-                <motion.li className="list-none" key={artid} {...motionProps}>
-                  <PostRecord key={artid} post={post}></PostRecord>
-                </motion.li>
-              );
-            })}
-          </ul>
+        <ul>
+          {(recentPosts || []).map((post, index) => {
+            const { artid } = post;
+            const motionProps: HTMLMotionProps<'li'> = isMobile
+              ? {}
+              : {
+                  initial: { y: 50, x: toRight ? 50 : -50, opacity: 0 },
+                  animate: { y: 0, x: 0, opacity: 1 },
+                  transition: { delay: index * 0.02, bounce: 0.75 },
+                };
+            return (
+              <motion.li className="list-none" key={artid} {...motionProps}>
+                <PostRecord key={artid} post={post}></PostRecord>
+              </motion.li>
+            );
+          })}
+        </ul>
 
         <p className="font-mono text-base sm:text-xl text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION hover:text-TEXT_MAIN dark:text-DARK_REMARK_TEXT hover:dark:text-DARK_TEXT_MAIN">
           {enableLoadMore && title && (
-            <>{loading ? <SimplestLoading /> : <button onClick={() => handleLoad?.(title)}>加载更多</button>}</>
+            <motion.li
+              className='text-sm mt-6'
+              initial= {{ x: toRight ? 50 : -50, opacity: 0 }}
+              animate={ { x: 0, opacity: 1 }}
+              transition={{ delay: 0.3, bounce: 0.75 }}
+            >
+              {loading ? <SimplestLoading /> : <button onClick={() => handleLoad?.(title)}>加载更多</button>}
+            </motion.li>
           )}
         </p>
       </main>
