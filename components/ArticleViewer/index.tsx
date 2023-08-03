@@ -1,6 +1,5 @@
 import remarkGfm from 'remark-gfm';
 
-// import remarkToc from 'remark-toc'; // NOT WORK
 import remarkMermaidjs from 'remark-mermaidjs';
 import remarkEmoji from 'remark-emoji';
 import rehypeToc from '@jsdevtools/rehype-toc';
@@ -50,10 +49,10 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
       y: 0,
     });
   };
-
+  const [showTocPin, setShowTocPin] = useState(false);
   return (
     <div className={styles['markdown-style']}>
-      <span className="hidden lg:inline-block toc-anchor fixed top-16 hover:rotate-45 transition-all duration-TRANSITION_DURATION opacity-50 hover:scale-110 hover:opacity-100 left-16 text-lg xl:text-2xl cursor-pointer" onClick={handleResetTocPosition}><LocateMenu/></span>
+      { showTocPin && <span className="hidden lg:inline-block toc-anchor fixed top-16 hover:rotate-45 transition-all duration-TRANSITION_DURATION opacity-50 hover:scale-110 hover:opacity-100 left-16 text-lg xl:text-2xl cursor-pointer" onClick={handleResetTocPosition}><LocateMenu/></span>}
       <motion.div>
       <ReactMarkdown
         className="markdown-body "
@@ -139,12 +138,15 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
               if (navRef && navRef.current) {
                 const { offsetHeight, offsetWidth } = navRef.current as unknown as HTMLDivElement;
                 setDragConstraints({ left: 0, top: 0, right: innerWidth - offsetWidth - 2 * gap, bottom: innerHeight - offsetHeight - 2 * gap });
-                animationControls.start({
-                  opacity: 1,
-                });
+                // animationControls.start({
+                //   opacity: 1,
+                // });
                 (navRef.current as unknown as HTMLDivElement).style.marginLeft = `${gap}px`;
               }
             }, [navRef]);
+            const hasToc = (children[0] as any)?.props?.children?.length;
+            if (hasToc) setShowTocPin(true);
+            if (!hasToc) return <></>;
             return (
               // <AnimatePresence initial={false}>
               <motion.div
@@ -154,22 +156,21 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 mt-16 ml-[64px]
                 pl-2 pr-2  py-2 hidden lg:block
                 w-[35ch] 
-                3xl:w-[45ch] 
-                max-h-[60ch]
+                3xl:w-[40ch] 
+                max-h-[75ch]
                 h-auto
                 cursor-pointer 
-                transition-opacity
                 transition-colors duration-TRANSITION_DURATION
-                bg-BG_MAIN 
+                bg-white/80
                 rounded-md
-                dark:bg-DARK_BG_MAIN  
+                dark:bg-black/80
                 text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
                 text-sm `}
                 // opacity-0
                 // hover:opacity-100
-                initial={{ opacity: 0 }}
+                // initial={{ opacity: 0 }}
                 drag
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
                 dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
                 dragConstraints={dragConstraints}

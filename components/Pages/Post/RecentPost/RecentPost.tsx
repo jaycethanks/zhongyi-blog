@@ -26,8 +26,8 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   const { title, createdAt, artid } = post;
   return (
     <>
-      <p className="flex  items-start justify-between gap-4 sm:whitespace-nowrap sm:block my-4 cursor-pointer font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
-        <Link className='hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN' href={`/posts/${artid}`}>{title}</Link> <span className="shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
+      <p className="flex items-center justify-between sm:justify-start gap-4 sm:whitespace-nowrap  my-4  font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
+        <Link title={title} className='cursor-pointer inline-block text-ellipsis max-w-full overflow-hidden hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN' href={`/posts/${artid}`}>{title}</Link> <span className="cursor-default text-current opacity-50 shrink-0 text-sm ">{dayjs(createdAt).format('YYYY/MM/DD')}</span>
       </p>
     </>
   );

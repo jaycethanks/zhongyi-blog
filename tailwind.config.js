@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         BG_MAIN: 'rgb(255, 255, 255)',
         BG_MAIN_DEEP: 'rgb(237, 236, 232)',
-        DARK_BG_MAIN: 'rgb(14, 20, 31)',
+        DARK_BG_MAIN: '#121212',
         DARK_BG_MAIN_DEEP: 'rgb(19, 24, 36)',
         TEXT_MAIN: 'rgb(30, 41, 59)',
         REMARK_TEXT: '#999999',

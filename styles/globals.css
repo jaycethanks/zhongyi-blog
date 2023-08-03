@@ -9,11 +9,11 @@
   float: left;
   /* margin: 0 10px; */
   background: transparent;
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
 }
 ::-webkit-scrollbar-thumb {
   border-radius: .5rem;
-  background: rgb(237, 236, 232);
+  background: rgb(219, 219, 217);
 }
 .dark ::-webkit-scrollbar {
   background: rgb(14, 20, 31);

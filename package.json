@@ -43,7 +43,6 @@
     "remark-gfm": "^3.0.1",
     "remark-mermaidjs": "4",
     "remark-slug": "^7.0.1",
-    "remark-toc": "^8.0.1",
     "sass": "^1.56.2",
     "swiper": "^8.4.5",
     "uninstall": "^0.0.0",
