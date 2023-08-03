@@ -72,6 +72,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+# 没有 next.config.js  三方图片会报 400 Bad Request
+COPY --from=builder /app/next.config.js ./
 
 # 切换用户为 nextjs，暴露 3000 端口，设置环境变量 PORT 为 3000
 USER nextjs
