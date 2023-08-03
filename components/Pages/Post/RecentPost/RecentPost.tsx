@@ -7,6 +7,7 @@ import Link from 'next/link';
 import type { RecentPostInterface } from '@/apis/QueryList';
 import SimplestLoading from '@/components/Loading/SimplestLoading';
 import type { StandardProps } from '@/types';
+import DoubleDownArrowOutlined from '@/components/Icons/DoubleDownArrowOutlined';
 
 interface RecentPostsPropsType {
   recentPosts: RecentPostInterface[] | undefined
@@ -77,11 +78,11 @@ export default function RecentPost({
           {enableLoadMore && title && (
             <motion.li
               className='text-sm mt-6'
-              initial= {{ x: toRight ? 50 : -50, opacity: 0 }}
-              animate={ { x: 0, opacity: 1 }}
-              transition={{ delay: 0.3, bounce: 0.75 }}
+              initial= {{ y: 100, opacity: 0 }}
+              animate={ { y: 0, opacity: 1 }}
+              transition={{ delay: 0.30, duration: 0.5 }}
             >
-              {loading ? <SimplestLoading /> : <button onClick={() => handleLoad?.(title)}>加载更多</button>}
+              {loading ? <SimplestLoading /> : <button onClick={() => handleLoad?.(title)}><div className='flex items-center animate-bounce'>更多 <DoubleDownArrowOutlined/></div></button>}
             </motion.li>
           )}
         </p>
