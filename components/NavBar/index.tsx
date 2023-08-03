@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { PropsWithChildren } from 'react';
 import { useEffect, useRef, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import moon from '@/components/Icons/animateIcon/moon.png';
 import sun from '@/components/Icons/animateIcon/sun.png';
 
@@ -76,6 +76,20 @@ const NavItem = ({
     </Link>
   </li>
 );
+
+// console.log('[location]: ', window?.location);
+const Back: React.FC<StandardProps & { title?: string }> = ({ children, className, title }) => {
+  const router = useRouter();
+  const currentPath = router.pathname;
+  const deepth = (currentPath.match(/\//g) || []).length;
+
+  if (deepth <= 1) return <></>;
+  return (
+    <span onClick={() => router.back()} title={title} className={`${className}  cursor-pointer tracking-widest inline-block h-auto shrink-0 leading-8 text-base hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl`} >
+      {children}
+    </span>
+  );
+};
 const NavBar = () => {
   // 收缩展开header
   const headerRef = useRef<HTMLDivElement>(null);
@@ -114,8 +128,12 @@ const NavBar = () => {
           dark:bg-DARK_BG_MAIN
           `}
       >
-        <nav className="h-12 w-full px-4">
-          <ul className="flex h-full items-center  justify-end gap-1 sm:gap-4">
+        <nav className="h-12 w-full px-4 flex justify-between items-center">
+          <ul>
+          {/* 返回 */}
+          <Back>../</Back>
+          </ul>
+          <ul className="flex h-full items-center justify-end gap-1 sm:gap-4">
             <div>
               <NavItem href="/" name={<h1>/</h1>} title="Home Page" />
             </div>

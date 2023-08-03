@@ -1,10 +1,10 @@
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Giscus from '@giscus/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
@@ -23,10 +23,12 @@ interface PostType {
 }
 
 const BackBtn: React.FC<StandardProps & { title?: string }> = ({ children, className, title }) => {
+  const router = useRouter();
+
   return (
-    <Link title={title} className={`${className} text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl`} href="/post">
+    <span onClick={() => router.back()} title={title} className={`${className} text-3xl  hover:underline underline-offset-4 decoration-1 px-1 py-1 rounded-xl cursor-pointer`} >
       {children}
-    </Link>
+    </span>
   );
 };
 
@@ -59,10 +61,6 @@ export default function Post({ post }: PostType) {
         <Head>
           <title>{post?.article?.title}</title>
         </Head>
-        {/* 返回 */}
-        <Container className="py-0">
-          <BackBtn>../</BackBtn>
-        </Container>
         {/* 正文 */}
         <Container title={post?.article?.title || ''}>
           <SpacerBar gap={6} />
