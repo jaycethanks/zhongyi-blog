@@ -26,10 +26,10 @@ const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
   const { title, createdAt, artid } = post;
   return (
     <>
-      <p className="flex items-center justify-between sm:justify-start gap-4 sm:whitespace-nowrap  my-4  font-mono text-base sm:text-lg text-REMARK_TEXT transition-colors duration-TRANSITION_DURATION  dark:text-DARK_REMARK_TEXT ">
+      <p className="flex items-center justify-between sm:justify-start gap-4 sm:whitespace-nowrap  my-4 font-mono text-base sm:text-lg transition-colors duration-TRANSITION_DURATION  ">
         <Link
           title={title}
-          className="cursor-pointer inline-block text-ellipsis max-w-full overflow-hidden hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN"
+          className="cursor-pointer inline-block  text-ellipsis max-w-full overflow-hidden text-TEXT_MAIN/40 dark:text-DARK_TEXT_MAIN/40 hover:text-TEXT_MAIN hover:dark:text-DARK_TEXT_MAIN"
           href={`/posts/${artid}`}
         >
           {title}
