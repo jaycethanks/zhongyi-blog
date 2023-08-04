@@ -11,7 +11,6 @@ import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
 import SpacerBar from '@/components/common/SpacerBar';
-
 import eventBus from '@/utils/useEventBus';
 import ArticleViewer from '@/components/ArticleViewer';
 import BackOutlined from '@/components/Icons/BackOutlined';
@@ -62,10 +61,10 @@ const ScrollToTop: React.FC<StandardProps> = ({ className }) => {
         <motion.div
           key={ifshowToTop.toString()}
           onClick={() => window.scrollTo(0, 0)}
-          className="fixed p-2 right-24 "
-          exit={{ bottom: 0, opacity: 0, rotate: -360 }}
-          initial={{ bottom: 0, opacity: 0 }}
-          animate={{ bottom: 200, opacity: 1, rotate: 360 }}
+          className="fixed p-2 right-4 sm:right-24 "
+          exit={{ bottom: 0, opacity: 0, rotate: -360, scale: 0 }}
+          initial={{ bottom: 0, opacity: 0, scale: 0 }}
+          animate={{ bottom: isMobileDevice() ? 50 : 200, opacity: 1, rotate: 360, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <div className={`${className} cursor-pointer w-6 h-6 animate-bounce text-current opacity-70 hover:opacity-100`} >
