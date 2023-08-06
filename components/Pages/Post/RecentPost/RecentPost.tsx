@@ -24,7 +24,7 @@ interface PostRecordProps {
 }
 
 const PostRecord: React.FC<PostRecordProps> = ({ post }) => {
-  const { title, createdAt, artid, category } = post;
+  const { title, createdAt, artid } = post;
   return (
     <>
       <p className="flex items-center justify-between sm:justify-start gap-4 sm:whitespace-nowrap  my-4 font-mono text-base sm:text-lg transition-colors duration-TRANSITION_DURATION  ">

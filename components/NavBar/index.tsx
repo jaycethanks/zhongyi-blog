@@ -96,8 +96,7 @@ const NavBar = () => {
   const [shrink, setShrink] = useState(false);
   useEffect(() => {
     window.addEventListener('scroll', fixNav);
-    function fixNav(e) {
-      // console.log('[e]: ', e);
+    function fixNav() {
       if (!headerRef.current) return;
       if (window.scrollY > headerRef.current.offsetHeight + 150) {
         // header.classList.add('active');
