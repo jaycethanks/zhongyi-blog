@@ -1,15 +1,16 @@
+import { error } from 'node:console';
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
 import Link from 'next/link';
 import Container from '@/components/common/Container';
 import Layout from '@/components/common/Layout';
-import { GET_ABOUT } from '@/apis/QueryList';
-import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import Fonts from '@/fonts';
 import LazyImage from '@/components/common/LazyImage';
 import SvgBox from '@/components/SvgBox';
 import SimplestLoading from '@/components/Loading/SimplestLoading';
+import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
+import { GET_ABOUT } from '@/apis/QueryList';
 
 export default function Home({ data }: any) {
   interface LinkType {
@@ -25,9 +26,12 @@ export default function Home({ data }: any) {
         animate: { y: 0, opacity: 1 },
         transition: { delay: 0.04 },
       };
+  if (!data?.about) {
+    return <span className='text-white'>No User Detected !</span>;
+  }
+
   const { avatar, links, msg } = data.about;
   const parsedLinks = JSON.parse(links) as LinkType[];
-
   const paragraphs = [
     <div className={'flex gap-4'}>
       <div className="left shrink-0">
@@ -44,15 +48,25 @@ export default function Home({ data }: any) {
                     title={title}
                     href={url}
                     target="_blank"
-                    key={title}
-                    className={
-                      'flex items-center justify-center bg-BG_MAIN_DEEP/40 hover:bg-BG_MAIN_DEEP p-2 transition-colors duration-TRANSITION_DURATION dark:bg-white/10 hover:dark:bg-white/20'
-                    }
+                    className='flex items-center justify-center p-2 transition-colors duration-TRANSITION_DURATION
+                    bg-BG_MAIN_DEEP/50
+                    hover:bg-BG_MAIN_DEEP
+
+                    dark:bg-DARK_BG_MAIN_DEEP/50
+                    hover:dark:bg-DARK_BG_MAIN_DEEP
+
+                    text-TEXT_MAIN/70
+                    hover:text-TEXT_MAIN
+
+                    dark:text-DARK_TEXT_MAIN/70
+                    dark:hover:text-DARK_TEXT_MAIN
+                    '
+
                   >
                     <SvgBox
                       width="16"
                       height="16"
-                      className=" fill-TEXT_MAIN transition-all duration-TRANSITION_DURATION dark:fill-DARK_TEXT_MAIN"
+                      className=" "
                     >
                       {icon}
                     </SvgBox>
@@ -63,10 +77,10 @@ export default function Home({ data }: any) {
           </ul>
         </div>
       </div>
-      <div className="right shrink-0">
+      <div className="right shrink-0 ">
         {
-          [<span className='text-3xl'>Hi,</span>, 'I\'m Zhongyi Sun.', 'Currently working as a Front-End developer.']
-            .map((it, index) => <motion.div className='text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
+          [<span className='text-3xl leading-loose'>Hi,</span>, 'I\'m Zhongyi Sun.', 'Currently working as a Front-End developer.']
+            .map((it, index) => <motion.div key={index} className='text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
         }
       </div>
     </div>,
@@ -101,7 +115,7 @@ export default function Home({ data }: any) {
             ? <SimplestLoading />
             : <>
           {paragraphs.map((it, index) => (
-            <motion.div {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>
+            <motion.div key={index} {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>
           ))}
             </>}
         </Container>
@@ -112,14 +126,24 @@ export default function Home({ data }: any) {
 // 基于时间的增量渲染（ISR）
 export async function getStaticProps() {
   //   const { loading, error, data } = useQuery<{ about: ABOUT }>(GET_ABOUT);
-  const data = await SericeSideGraphQLClient.request(GET_ABOUT);
-  return {
-    props: {
-      data,
-    },
-    // 重新生成页面的时间间隔为 1 小时
-    revalidate: 3600,
-  };
+  try {
+    const data = await SericeSideGraphQLClient.request(GET_ABOUT);
+    return {
+      props: {
+        data,
+      },
+      // 重新生成页面的时间间隔为 1 小时
+      revalidate: 3600,
+    };
+  }
+  catch (err) {
+    console.log('error', error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 }
 
 /**

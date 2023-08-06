@@ -21,6 +21,11 @@ export interface RecentPostInterface {
   artid?: string
   banner?: string
   description?: string
+  category?: {
+    catid: string
+    name: string
+  }
+
 }
 export const RECENT_POSTS = gql`
   query {
@@ -145,6 +150,26 @@ query{
       name
     }
     createdAt
+  }
+}
+`;
+
+export const QUERY_PISTLIST_BY_CATID = (catid: string) => gql`
+query {
+  postsList(catid:"${catid}"){
+    artid
+    title
+    catid
+    createdAt
+    description
+    tags{
+      name
+      tagid
+    }
+		category{
+      name,
+      catid
+    }
   }
 }
 `;

@@ -1,6 +1,7 @@
 import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import isMobileDevice from 'is-mobile';
+import { useRouter } from 'next/router';
 import type { CategoryInterface } from '@/apis/QueryList';
 import type { StandardProps } from '@/types';
 
@@ -14,14 +15,31 @@ interface CategoryItemProps {
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
-  const { name, relateCount, description } = category;
+  const { name, relateCount, description, catid } = category;
+  const router = useRouter();
+  const handleClick = () => {
+    router.push({ pathname: `/posts/${catid}`, query: { name } });
+  };
   return (
-    <div className="flex justify-between items-center mb-4 p-4 rounded-lg text-REMARK_TEXT  dark:text-DARK_REMARK_TEXT hover:bg-BG_MAIN_DEEP/40 bg-BG_MAIN_DEEP/20 hover:dark:text-DARK_TEXT_MAIN hover:text-TEXT_MAIN">
+    <div onClick={handleClick} className="flex justify-between items-center cursor-pointer
+    mb-4 p-4 rounded-lg
+    text-REMARK_TEXT
+    dark:text-DARK_REMARK_TEXT
+
+    hover:text-TEXT_MAIN
+    dark:hover:text-DARK_TEXT_MAIN
+
+    bg-BG_MAIN_DEEP/30
+    hover:bg-BG_MAIN_DEEP/50
+
+    dark:bg-DARK_BG_MAIN_DEEP/30
+    dark:hover:bg-DARK_BG_MAIN_DEEP/50
+    ">
       <div className="left">
-        <p className="cursor-pointer font-mono text-xl">
+        <p className=" font-mono text-xl">
           <span>{name} </span>
         </p>
-        <p className="my-0 cursor-pointer font-mono text-sm">{description}</p>
+        <p className="my-0  font-mono text-sm">{description}</p>
       </div>
       <div className="right">
         <span className="text-sm">{relateCount} </span>
@@ -39,9 +57,9 @@ const Categories = ({ categories }: StandardProps & CategoriesType) => {
         {(categories || []).map((category, index) => {
           const { catid } = category;
           const motionProps: HTMLMotionProps<'li'> = {
-            initial: { y: 10, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            transition: { delay: index * 0.1 },
+            initial: { y: 10 },
+            animate: { y: 0 },
+            transition: { delay: index * 0.06 },
           };
           return (
             <motion.li className="list-none" key={catid} {...(isMobile ? {} : motionProps)}>

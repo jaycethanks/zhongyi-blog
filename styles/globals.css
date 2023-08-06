@@ -16,7 +16,7 @@
   background: rgb(219, 219, 217);
 }
 .dark ::-webkit-scrollbar {
-  background: rgb(14, 20, 31);
+  /* background: rgb(14, 20, 31); */
 }
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.41);
