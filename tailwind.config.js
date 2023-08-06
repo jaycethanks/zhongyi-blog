@@ -9,18 +9,18 @@ module.exports = {
         '3xl': '1800px',
       },
       colors: {
-        BG_MAIN: 'rgb(255, 255, 255)',
-        BG_MAIN_DEEP: 'rgb(237, 236, 232)',
+        BG_MAIN: '#ffffff',
+        BG_MAIN_DEEP: '#f7f7f7',
         DARK_BG_MAIN: '#121212',
-        DARK_BG_MAIN_DEEP: '#1a1a1a',
-        TEXT_MAIN: 'rgb(30, 41, 59)',
+        DARK_BG_MAIN_DEEP: '#0f0f0f',
+        TEXT_MAIN: '#1d283a',
+        DARK_TEXT_MAIN: '#ddd',
         REMARK_TEXT: '#999999',
-        DARK_REMARK_TEXT: 'rgba(255, 255, 255, 0.41)',
-        DARK_TEXT_MAIN: '#777',
-        COLOR_MAIN: 'rgb(59, 130, 246)',
-        DARK_COLOR_MAIN: 'rgb(37, 99, 235)',
-        DIVIDER_LINE: 'rgb(226, 232, 240)',
-        DARK_DIVIDER_LINE: 'rgb(71, 85, 105)',
+        DARK_REMARK_TEXT: '#ffffff69',
+        COLOR_MAIN: '#3c83f6',
+        DARK_COLOR_MAIN: '#2463eb',
+        DIVIDER_LINE: '#e1e7ef',
+        DARK_DIVIDER_LINE: '#48566a',
         // White-hover-#555 dark-hover-#bbb
         // dark-emphasis-#fff dark-unemphasis
 

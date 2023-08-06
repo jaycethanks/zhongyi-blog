@@ -79,8 +79,8 @@ export default function Home({ data }: any) {
       </div>
       <div className="right shrink-0 ">
         {
-          [<span className='text-3xl leading-loose'>Hi,</span>, 'I\'m Zhongyi Sun.', 'Currently working as a Front-End developer.']
-            .map((it, index) => <motion.div key={index} className='text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
+          [<span className='text-3xl leading-loose'>Hi,</span>, 'I\'m Zhongyi Sun. From HuBei', 'Front-end developer in HangZhou currently.']
+            .map((it, index) => <motion.div key={index} className='leading-loose text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
         }
       </div>
     </div>,

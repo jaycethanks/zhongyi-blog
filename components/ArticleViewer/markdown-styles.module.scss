@@ -10,9 +10,9 @@ $contentColor: #555;
     //   color: red;
     // }
     .markdown-body {
-      $contentColor: #ffffff;
+      // $contentColor: #ffffff;
       
-      color: $contentColor;
+      // color: $contentColor;
     }
   }
 }
@@ -25,7 +25,7 @@ $contentColor: #555;
       font-weight: 400;
       font-size: 16px;
       overflow-x: hidden;
-      color: $contentColor;
+      // color: $contentColor;
     
       h1,
       h2,

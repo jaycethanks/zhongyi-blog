@@ -29,11 +29,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
     hover:text-TEXT_MAIN
     dark:hover:text-DARK_TEXT_MAIN
 
-    bg-BG_MAIN_DEEP/30
-    hover:bg-BG_MAIN_DEEP/50
+    bg-BG_MAIN_DEEP
+    hover:brightness-95
 
-    dark:bg-DARK_BG_MAIN_DEEP/30
-    dark:hover:bg-DARK_BG_MAIN_DEEP/50
+    dark:bg-DARK_BG_MAIN_DEEP
+    dark:hover:brightness-95
     ">
       <div className="left">
         <p className=" font-mono text-xl">
