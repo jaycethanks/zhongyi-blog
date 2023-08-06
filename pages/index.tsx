@@ -33,9 +33,9 @@ export default function Home({ data }: any) {
   const { avatar, links, msg } = data.about;
   const parsedLinks = JSON.parse(links) as LinkType[];
   const paragraphs = [
-    <div className={'flex gap-4'}>
+    <div className={'flex flex-col sm:flex-row items-center  sm:items-start sm:gap-12  gap-4'}>
       <div className="left shrink-0">
-        <div className="inline-block w-48 shrink-0">
+        <div className="inline-block  shrink-0">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
             <LazyImage height={150} width={150} src={avatar} />
           </motion.div>
@@ -79,8 +79,8 @@ export default function Home({ data }: any) {
       </div>
       <div className="right shrink-0 ">
         {
-          [<span className='text-3xl leading-loose'>Hi,</span>, 'I\'m Zhongyi Sun. From HuBei', 'Front-end developer in HangZhou currently.']
-            .map((it, index) => <motion.div key={index} className='leading-loose text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
+          [<span className='text-lg sm:text-3xl leading-loose'>Hi,</span>, 'I\'m Zhongyi Sun. From HuBei', 'Front-end developer in HangZhou currently.']
+            .map((it, index) => <motion.div key={index} className='leading-loose text-sm sm:text-xl font-semibold' {...{ ...motionsProps, transition: { delay: 0.01 * index } }}>{it} </motion.div>)
         }
       </div>
     </div>,

@@ -133,7 +133,7 @@ const NavBar = () => {
           {/* 返回 */}
           <Back>../</Back>
           </ul>
-          <ul className="flex h-full items-center justify-end gap-1 sm:gap-4">
+          <ul className="flex h-full items-center justify-end gap-3 sm:gap-4">
             <div>
               <NavItem href="/" name={<h1>/</h1>} title="Home Page" />
             </div>
