@@ -8,6 +8,9 @@
     "start": "next start -p 80",
     "lint": "next lint",
     "lint:fix": "eslint . --fix",
+    "analyze": "ANALYZE=true next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "docker:build": "docker stop zhongyi-blog; docker rm zhongyi-blog; docker rmi zhongyi-blog-img; docker build --build-arg NEXT_PUBLIC_USERID=f3e63961-5b62-4a77-9bb8-d7f3252fb694 --build-arg NEXT_PUBLIC_NGINX_SERVER=http://121.41.91.192:8989 --build-arg NEXT_PUBLIC_GRAPHQL_API_URL=http://121.41.91.192:4567/graphql -t zhongyi-blog-img --network zhongyi-blog-server_app-net .",
     "docker:run": "docker run -d -p 3030:3030 -e NEXT_PUBLIC_USERID=f3e63961-5b62-4a77-9bb8-d7f3252fb694 -e NEXT_PUBLIC_NGINX_SERVER=http://121.41.91.192:8989 -e NEXT_PUBLIC_GRAPHQL_API_URL=http://121.41.91.192:4567/graphql --name zhongyi-blog --network zhongyi-blog-server_app-net --restart=always zhongyi-blog-img",
     "docker:commit": "docker commit zhongyi-blog jaycethanks/zhongyi-blog:latest",
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@expo/webpack-config": "^18.1.2",
     "@laison/eslint-config": "^0.0.20",
+    "@next/bundle-analyzer": "^13.4.13",
     "@typescript-eslint/eslint-plugin": ">=5.57.0",
     "@typescript-eslint/parser": ">=5.57.0",
     "autoprefixer": "^10.4.13",
