@@ -111,7 +111,7 @@ export default function Post({ post }: PostType) {
         </Head>
         <ScrollToTop />
         <motion.div
-          className="fixed inline-block bottom-1 left-0 right-0 origin-left h-[2px] bg-COLOR_MAIN/80 dark:bg-DARK_COLOR_MAIN/80"
+          className="fixed inline-block top-0 left-0 right-0 origin-left h-[2px] bg-COLOR_MAIN/80 dark:bg-DARK_COLOR_MAIN/80"
           style={{ scaleX: scrollYProgress }}
         >
           {/* <span className='absolute right-0 bottom-1'><img className='h-12 w-12' src={mariogif.src} alt="" /></span> */}

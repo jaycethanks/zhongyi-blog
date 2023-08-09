@@ -82,7 +82,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
           },
           p({ node, children }) {
             // const { node } = paragraph
-            if ((node.children[0] as any).tagName === 'img') {
+            if (node.children[0] && (node.children[0] as any).tagName === 'img') {
               const image = node.children[0] as any;
               const metastring = image.properties.alt;
               const alt = metastring?.replace(/ *\{[^)]*\} */g, '') || ' '; // fix:图片加载失败的时候，不显示默认border https://stackoverflow.com/a/33470333/12261182
