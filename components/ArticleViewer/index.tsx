@@ -62,7 +62,6 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
         rehypePlugins={[rehypeRaw, rehypeSlug, rehypeToc]}
         remarkPlugins={[remarkEmoji, remarkGfm, remarkMermaidjs, remarkSlug]}
         components={{
-
           code({ inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match
@@ -92,7 +91,7 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
               const width = metaWidth ? metaWidth[1] : '768';
               const height = metaHeight ? metaHeight[1] : '432';
               const isPriority = metastring?.toLowerCase().match('{priority}');
-              const hasCaption = metastring?.toLowerCase().includes('{caption:');
+              const hasCaption = metastring?.toLowerCase().includes('{caption: ');
               const caption = metastring?.match(/{caption: (.*?)}/)?.pop();
 
               const [imgSrc, setImgSrc] = useState(image.properties.src);
@@ -167,10 +166,11 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 h-auto
                 cursor-pointer 
                 transition-colors duration-TRANSITION_DURATION
-                bg-BG_MAIN_DEEP/90
+                bg-BG_MAIN_DEEP/60
                 rounded-md
-                dark:bg-DARK_BG_MAIN_DEEP/90
-                text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
+                dark:bg-DARK_BG_MAIN_DEEP/60
+                text-black dark:text-white
+                backdrop-blur-sm
                 text-sm `}
                 // opacity-0
                 // hover:opacity-100

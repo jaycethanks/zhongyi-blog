@@ -62,12 +62,12 @@ const ScrollToTop: React.FC<StandardProps> = ({ className }) => {
           key={ifshowToTop.toString()}
           onClick={() => window.scrollTo(0, 0)}
           className="fixed p-2 right-4 sm:right-24 "
-          exit={{ bottom: 0, opacity: 0, rotate: -360, scale: 0 }}
+          exit={{ bottom: 0, opacity: 0, scale: 0 }}
           initial={{ bottom: 0, opacity: 0, scale: 0 }}
-          animate={{ bottom: isMobileDevice() ? 50 : 200, opacity: 1, rotate: 360, scale: 1 }}
+          animate={{ bottom: isMobileDevice() ? 50 : 50, opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className={`${className} cursor-pointer w-6 h-6 animate-bounce text-current opacity-70 hover:opacity-100`} >
+          <div className={`${className} cursor-pointer  w-8 h-8 p-1 animate-bounce text-current opacity-70 hover:opacity-100`} >
             <ScrollToTopOutlined />
           </div>
         </motion.div>
@@ -111,9 +111,11 @@ export default function Post({ post }: PostType) {
         </Head>
         <ScrollToTop />
         <motion.div
-          className="fixed top-0 left-0 right-0 origin-left h-1 bg-REMARK_TEXT dark:bg-DARK_REMARK_TEXT"
+          className="fixed inline-block bottom-1 left-0 right-0 origin-left h-[2px] bg-COLOR_MAIN/80 dark:bg-DARK_COLOR_MAIN/80"
           style={{ scaleX: scrollYProgress }}
-        />
+        >
+          {/* <span className='absolute right-0 bottom-1'><img className='h-12 w-12' src={mariogif.src} alt="" /></span> */}
+        </motion.div>
         {/* 正文 */}
         <Container title={post?.article?.title || ''}>
           <SpacerBar gap={6} />
