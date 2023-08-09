@@ -14,7 +14,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
 # 将npm 源设定为 淘宝源
 ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com/
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 RUN echo "开发环境依赖构建完成！"
 
