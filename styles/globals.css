@@ -59,3 +59,15 @@ html{
   background-color: #000;
   scroll-behavior: smooth;
 }
+
+
+/* global style for article viewer */
+:root{
+  --table-bg-color:#f6f6f6;
+  --quoteBlock-border-color:#ff1414
+}
+.dark {
+  --table-bg-color:#1a1a1a;
+  --quoteBlock-border-color:#6b0000
+
+}

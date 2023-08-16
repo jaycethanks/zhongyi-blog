@@ -25,7 +25,7 @@ const Heading: React.FC<PropsWithChildren & HeadingProps> = ({
       className={`${fontSize[level]} flex items-center justify-between font-medium leading-snug  tracking-wide text-inherit`}
     >
       <span
-        className={`select-none text-TEXT_MAIN dark:text-DARK_TEXT_MAIN ${className} transition-colors duration-TRANSITION_DURATION`}
+        className={`text-TEXT_MAIN dark:text-DARK_TEXT_MAIN ${className} transition-colors duration-TRANSITION_DURATION`}
       >
         {children}
       </span>

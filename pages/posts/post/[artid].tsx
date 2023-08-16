@@ -117,8 +117,7 @@ export default function Post({ post }: PostType) {
           {/* <span className='absolute right-0 bottom-1'><img className='h-12 w-12' src={mariogif.src} alt="" /></span> */}
         </motion.div>
         {/* 正文 */}
-        <Container title={post?.article?.title || ''}>
-          <SpacerBar gap={6} />
+        <Container className='p-4'>
           <motion.div className="list-none" {...motionsProps}>
             <ArticleViewer isLight={theme === 'light'} contentStr={post?.article?.content || ''} />
           </motion.div>
