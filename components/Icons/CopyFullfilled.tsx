@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IconProps {
-  className?: string;
+  className?: string
 }
 export default ({ className }: IconProps) => {
   return (

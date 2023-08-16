@@ -8,9 +8,9 @@ export interface ABOUT {
 export const GET_ABOUT = gql`
   query {
     about {
-       avatar
-       msg
-       links
+      avatar
+      msg
+      links
     }
   }
 `;
@@ -166,7 +166,7 @@ query {
       name
       tagid
     }
-		category{
+    category{
       name,
       catid
     }

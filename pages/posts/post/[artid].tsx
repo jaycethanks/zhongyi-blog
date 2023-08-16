@@ -10,7 +10,6 @@ import Layout from '@/components/common/Layout';
 import SericeSideGraphQLClient from '@/utils/SericeSideGraphQLClient';
 import type { PostDto } from '@/apis/QueryList';
 import { QUERY_BY_ID } from '@/apis/QueryList';
-import SpacerBar from '@/components/common/SpacerBar';
 import eventBus from '@/utils/useEventBus';
 import ArticleViewer from '@/components/ArticleViewer';
 import BackOutlined from '@/components/Icons/BackOutlined';

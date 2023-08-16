@@ -15,8 +15,8 @@ import { motion, useAnimationControls, useDragControls } from 'framer-motion';
 import { LocateMenu } from '../Icons/LocateMenu';
 import styles from './markdown-styles.module.scss';
 import tocStyle from './markdown-style.toc.module.scss';
-import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 import CodeCopyBtn from './copyButton';
+import { oneDark, oneLight } from '@/styles/react-syntax-highlighter';
 
 // 图片加载时的闪耀效果图
 function generateShimmer(w: number, h: number) {
@@ -38,12 +38,9 @@ function generateShimmer(w: number, h: number) {
   return `data:image/svg+xml;base64,${toBase64(shimmer(w, h))}`;
 }
 
-
-
-
 interface ArticleViewerType {
-  isLight: boolean; // 是否暗色主题
-  contentStr: string; // markdown 文本
+  isLight: boolean // 是否暗色主题
+  contentStr: string // markdown 文本
 }
 const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => {
   const dragControls = useDragControls();
@@ -92,7 +89,8 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
           components={{
             code({ inline, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '');
-              return !inline && match ? (
+              return !inline && match
+                ? (
                 <SyntaxHighlighter
                   {...props}
                   className="text-xs sm:text-sm"
@@ -101,11 +99,12 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                   language={match[1]}
                   PreTag="div"
                 />
-              ) : (
+                  )
+                : (
                 <code {...props} className={className}>
                   {children}
                 </code>
-              );
+                  );
             },
             p({ node, children }) {
               // const { node } = paragraph
@@ -122,8 +121,8 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 const caption = metastring?.match(/{caption: (.*?)}/)?.pop();
 
                 const [imgSrc, setImgSrc] = useState(image.properties.src);
-                const isValidSrc =
-                  /^(?:https?:\/\/|\/|data:image\/[a-z]+;base64,)[^\s]+\.(?:jpg|jpeg|gif|png|bmp)$/.test(imgSrc);
+                const isValidSrc
+                  = /^(?:https?:\/\/|\/|data:image\/[a-z]+;base64,)[^\s]+\.(?:jpg|jpeg|gif|png|bmp)$/.test(imgSrc);
 
                 return (
                   <>
@@ -140,11 +139,13 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                       onError={() => setImgSrc(generateShimmer(width, height))}
                       blurDataURL={generateShimmer(width, height)}
                     />
-                    {hasCaption ? (
+                    {hasCaption
+                      ? (
                       <div className="caption" aria-label={caption}>
                         {caption}
                       </div>
-                    ) : null}
+                        )
+                      : null}
                   </>
                 );
               }
@@ -215,10 +216,10 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                   <nav className="toc_nav">{children}</nav>
                 </motion.div>
 
-                // </AnimatePresence>
+              // </AnimatePresence>
               );
             },
-            pre: ({ children }) => (<pre className="relative"><CodeCopyBtn>{children}</CodeCopyBtn>{children}</pre>)
+            pre: ({ children }) => (<pre className="relative"><CodeCopyBtn>{children}</CodeCopyBtn>{children}</pre>),
           }}
         />
       </motion.div>
