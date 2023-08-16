@@ -171,12 +171,12 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 rounded-md
                 dark:bg-DARK_BG_MAIN_DEEP/90
                 text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
+                will-change-transform
                 text-sm `}
                 // opacity-0
                 // hover:opacity-100
                 // initial={{ opacity: 0 }}
                 drag
-                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
                 dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
                 dragConstraints={dragConstraints}
