@@ -166,9 +166,10 @@ const ArticleViewer: React.FC<ArticleViewerType> = ({ isLight, contentStr }) => 
                 h-auto
                 cursor-pointer 
                 transition-colors duration-TRANSITION_DURATION
-                bg-BG_MAIN_DEEP/60
+                bg-BG_MAIN_DEEP/50
+                dark:bg-DARK_BG_MAIN_DEEP/50
+                backdrop-blur-sm
                 rounded-md
-                dark:bg-DARK_BG_MAIN_DEEP/90
                 text-REMARK_TEXT dark:text-DARK_REMARK_TEXT
                 will-change-transform
                 text-sm `}
